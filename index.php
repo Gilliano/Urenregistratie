@@ -17,6 +17,8 @@
 </head>
 
 <body>
-
+	<header>
+		<?php include'pages/navbar.php';?>
+	</header>
 </body>
 </html>
