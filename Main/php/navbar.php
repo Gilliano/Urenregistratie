@@ -26,8 +26,8 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="urenregistratie.php"><img src='common/img/logo.png' style='height: 50px; margin-left: 3px; margin-top: -13px;'></a>
-                <a class="navbar-brand" href="urenregistratie.php" style="margin-top: 3px;">| Henk van den Broek<?php //print_r(ucfirst($_SESSION['Gebruiker'][1])) ?></a>
+                <a class="navbar-brand" href="../urenregistratie"><img src='../main/img/logo.png' style='height: 50px; margin-left: 3px; margin-top: -13px;'></a>
+                <a class="navbar-brand" href="../urenregistratie" style="margin-top: 3px;">| Henk van den Broek<?php //print_r(ucfirst($_SESSION['Gebruiker'][1])) ?></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,8 +39,8 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="uitloggen.php">Urenregistratie</a></li>
-                    <li><a href="uitloggen.php">Overzicht</a></li>
+                    <li><a href="../urenregistratie">Urenregistratie</a></li>
+                    <li><a href="../overzicht">Overzicht</a></li>
                     <li><a href="uitloggen.php" id="logout">Uitloggen</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
