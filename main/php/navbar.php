@@ -15,7 +15,7 @@
 }*/
 ?>
 <header>
-    <nav class="navbar navbar-default" style="padding-top: 18px; padding-bottom: 18px; border-radius: 0px;">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand afnd toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -26,8 +26,8 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="urenregistratie.php"><img src='common/img/logo.png' style='height: 50px; margin-left: 3px; margin-top: -13px;'></a>
-                <a class="navbar-brand" href="urenregistratie.php" style="margin-top: 3px;">| Henk van den Broek<?php //print_r(ucfirst($_SESSION['Gebruiker'][1])) ?></a>
+                <a class="navbar-brand" href="../urenregistratie"><img src='../main/img/logo.png'></a>
+                <a class="navbar-brand" id="gebruiker" href="../urenregistratie">| Henk van den Broek<?php //print_r(ucfirst($_SESSION['Gebruiker'][1])) ?></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -39,9 +39,9 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="uitloggen.php">Urenregistratie</a></li>
-                    <li><a href="uitloggen.php">Overzicht</a></li>
-                    <li><a href="uitloggen.php" id="logout">Uitloggen</a></li>
+                    <li><a href="../urenregistratie">Urenregistratie</a></li>
+                    <li><a href="../overzicht">Overzicht</a></li>
+                    <li><a href="../uitloggen" id="logout">Uitloggen</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
