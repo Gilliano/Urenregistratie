@@ -1,7 +1,9 @@
+1234
+
 <!DOCTYPE html>
 <html>
 <head>
-	<?php require_once'php/head.php'; ?>
+	<?php require_once'main/php/head.php'; ?>
 </head>
 
 <body>
