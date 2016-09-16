@@ -5,20 +5,20 @@
 
 	<!--Basic DLC-->
 	<link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<?php include 'php/main.php';?>
+	<link rel="stylesheet" type="text/css" href="Main/css/main.css">
+	<?php include 'Main/php/main.php';?>
 
 	<!--Bootstrap-->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/npm.js"></script>
+	<link rel="stylesheet" type="text/css" href="Main/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="Main/css/bootstrap-theme.min.css">
+	<script src="Main/js/bootstrap.min.js"></script>
+	<script src="Main/js/npm.js"></script>
 	
 </head>
 
 <body>
 	<header>
-		<?php include'pages/navbar.php';?>
+		<?php include'Main/php/navbar.php';?>
 	</header>
 </body>
 </html>

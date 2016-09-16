@@ -26,7 +26,7 @@
         <span class="icon-bar"></span>
       </button>
         
-        <a class="navbar-brand" href="urenregistratie.php"><img src='img/logo.png' style='height: 45px; margin-top: -13px;'></a>
+        <a class="navbar-brand" href="urenregistratie.php"><img src='Main/img/logo.png' style='height: 45px; margin-top: -13px;'></a>
         <a class="navbar-brand" href="urenregistratie.php">| Erwin Wernars<?php //print_r(ucfirst($_SESSION['Gebruiker'][1])) ?></a>
     </div>
 
@@ -40,7 +40,7 @@
             <li><a href="uitloggen.php">Overzicht</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a class="navbar-brand" href="urenregistratie.php"><img src='img/exit.png' style='height: 45px; margin-right: -15px; margin-top: -13px;'></a></li>
+            <li><a class="navbar-brand" href="urenregistratie.php"><img src='Main/img/exit.png' style='height: 45px; margin-right: -15px; margin-top: -13px;'></a></li>
         </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
