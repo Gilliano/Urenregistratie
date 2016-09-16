@@ -1,0 +1,31 @@
+.navbar-right a{
+    font-family: "Montserrat";
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1em;
+    color: rgba(59,59,59,.9);
+}
+.navbar-right a:hover{
+    color: #34b449 !important;
+}
+#logout{
+    font-family: "Montserrat";
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    font-style: normal;
+    margin-left: 1em;
+    padding: 1em 1.5em !important;
+    display: block;
+    background-color: #34b449;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    transition: background-color .1s 0s ease-in-out,color .1s 0s ease-in-out;
+    border-radius: 5px;
+}
+
