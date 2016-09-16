@@ -1,19 +1,17 @@
-<?php include_once 'common/php/settings.php'; ?>
-
 <!DOCTYPE html>
 
 <html lang="nl">
     <head>
         <meta name="viewport" content="width=device-width,user-scalable=yes">
-        <link href="common/css/bootstrap.css" rel="stylesheet">
+        <link href="../main/css/bootstrap.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,400italic,700normal,700italic,700"/>
-        <link href="common/css/navbar.css" rel="stylesheet">
+        <link href="../main/css/navbar.css" rel="stylesheet">
         <title> <?= $s_Title ?></title>
 
     </head>
     <body>
         <?php
-        include_once 'common/php/navbar.php';
+        include_once '../main/php/navbar.php';
         ?>
         <div class="container"> 
             
