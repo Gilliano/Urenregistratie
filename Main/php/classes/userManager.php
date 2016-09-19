@@ -71,12 +71,10 @@ class userManager {
     {
         $email = "";
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT email FROM medewerker WHERE idMedewerker = $userID");
+        $stmt = $conn->prepare("SELECT email FROM medewerker WHERE idMedewerker = ?");
+        $stmt->bindParam(1, $userID);
         $stmt->execute();
-        while($record = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-            $email = $record;
-        }
+        $email = $stmt->fetch(PDO::FETCH_ASSOC);
         
         return $email;
     }
