@@ -15,7 +15,7 @@ class userManager {
             $userInfo = $conn->prepare("SELECT * FROM medewerker");
             $userInfo->execute();
             while($user = $userInfo->fetch(PDO::FETCH_ASSOC)) {
-                echo $user['idMedewerker'];
+                echo $user['voornaam'];
             }
         }
 
