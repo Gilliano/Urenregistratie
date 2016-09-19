@@ -1,6 +1,6 @@
 <?php
 class database {
-    function connect() {
+    public static function connect() {
         $servername = "149.210.153.186";
         $username = "adsd4_teamnegg";
         $password = "th3BRPvf4";
