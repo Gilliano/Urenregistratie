@@ -1,15 +1,4 @@
 <?php
-/**
-* Begin datum: 30-01-2015
-* Laatst bewerkt: 03-02-2015
-*
-* Navigatie balk
-*
-* 
- * Bewerk log *
-* 03-02-2015 aangepast door Erwin Wernars
-* 02-02-2015 aangepast door Erwin Wernars
-*/
 /*if(empty($_SESSION['Gebruiker'])){
     header("location:index.php");
 }*/
@@ -25,9 +14,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
                 <a class="navbar-brand" href="../urenregistratie"><img src='../main/img/logo.png'></a>
-                <a class="navbar-brand" id="gebruiker" href="../urenregistratie">| Henk van den Broek<?php //print_r(ucfirst($_SESSION['Gebruiker'][1])) ?></a>
+                <span class="navbar-brand">| Henk van den Broek<?php //print_r(ucfirst($_SESSION['Gebruiker'][1])) ?></span>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
