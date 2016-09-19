@@ -21,18 +21,3 @@ class database {
 }
 
 ?>
-
-<?php
-//    $db_host = "149.210.153.186";
-//    $db_username = "adsd4";
-//    $db_pass = "NGf0c4raM";
-//    $db_name = "adsd4_negg";
-//
-//    try {
-//        $db = new PDO("mysql:host=$db_host;dbname=$db_name", $db_username, $db_pass);
-//        echo "succes";
-//    }
-//    catch (PDOExeption $e) {
-//        echo $e->getMessage();
-//    }
-?>
