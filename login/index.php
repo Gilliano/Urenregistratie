@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
                     <img class="loginLogo" src="../main/img/logo.png" alt="" />
                     <input type="text" name="email" placeholder="Email" required class="form-control input-lg" />
 
-                    <input type="password" class="form-control input-lg" id="password" placeholder="Password"/>
+                    <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password"/>
 
                     <input type="submit" name="login" value="Sign In" class="btn btn-lg btn-primary btn-block">
 
