@@ -37,11 +37,19 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Uren invulformulier</div>
                     <div class="panel-body">
-                        <form method="post" action="" name="urenformulier" enctype="multipart/form-data" oninput="ureninnovatief.value=parseInt(urentotaal.value)-parseInt(urenregulier.value)">
+                        <form method="post" action="" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
                             <table style="margin-left: auto; margin-right: auto;">
                                 <tr style="border-bottom: 1px solid #D9D9D9; border-top: 1px solid #D9D9D9">
+                                    <td width="200px" height="50px" style="padding-left: 10px;">Begintijd</td>
+                                    <td width="400px"><input type="time" name="begintijd" class="form-control" id="begintijd"/></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #D9D9D9; border-top: 1px solid #D9D9D9">
+                                    <td width="200px" height="50px" style="padding-left: 10px;">Eindtijd</td>
+                                    <td width="400px"><input type="time" name="eindtijd" class="form-control" id="eindtijd"/></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid #D9D9D9; border-top: 1px solid #D9D9D9">
                                     <td width="200px" height="50px" style="padding-left: 10px;">Totaal aantal uren gewerkt</td>
-                                    <td width="400px"><input type="number" name="urentotaal" class="form-control" id="urentotaal"/></td>
+                                    <td width="400px"><output readonly type="number" name="urentotaal" class="form-control" id="urentotaal"/></td>
                                 </tr>
                                 <tr style="border-bottom: 1px solid #D9D9D9; border-top: 1px solid #D9D9D9">
                                     <td width="200px" height="50px" style="padding-left: 10px;">Reguliere uren</td>
