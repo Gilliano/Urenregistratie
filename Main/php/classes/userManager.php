@@ -7,7 +7,7 @@
  */
 
 class userManager {
-        function login() {
+        public static function login() {
 
         $conn = database::connect();
 
