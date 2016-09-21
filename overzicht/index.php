@@ -1,3 +1,4 @@
+<?php session_start(); ?> <!-- DEBUG: This is already done in login page -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -21,16 +22,25 @@
         
         <!-- Data list -->
         <div class="container">
+            <div>
+                <!-- Goes to previous page -->
+                <button type="button" name="previousButton" class="pageButton">Previous page</button>
+                <label id="pageLabel"><?php echo $_SESSION['pagenumber']; ?></label>
+                <!-- TGoes to next page -->
+                <button type="button" name="nextButton" class="pageButton">Next page</button>
+                <!-- Apply the button eventHandlers -->
+                <script type="application/javascript" src="js/buttonHandlers.js"></script>
+            </div>
             <table id="datalist" class="table table-bordered">
                 <thead>
                     <th>
-                        <select class="form-control"> <!-- TODO: get mails from dbase -->
+                        <select class="form-control">
                             <?php echo createMailDropdown(); ?>
-<!--
-                            <option value="JohnDoe">JohnDoe@branchonline.nl</option>
-                            <option value="Berry">Berry@branchonline.nl</option>
-                            <option value="Anotherone">Anotherone@branchonline.nl</option>
--->
+                        </select>
+                    </th>
+                    <th>
+                        <select class="form-control">
+                            <?php echo createProjectDropdown(); ?>
                         </select>
                     </th>
                     <th>
@@ -49,15 +59,18 @@
                 <thead>
                     <tr>
                         <th style="text-align: center;">Email</th>
+                        <th style="text-align: center;">Project</th>
                         <th style="text-align: center;">Uren</th>
                         <th style="text-align: center;">Omschrijving</th>
                         <th style="text-align: center;">Innovatief</th>
                         <th style="text-align: center;">Goedgekeurd</th>    
                     </tr>
                 </thead>
-                <tbody>
-                    <?php echo createTable(); ?>
+                <tbody id="recordsTable">
+                    <?php echo createTable($_SESSION['pagenumber']); ?>
                 </tbody>
+                <!-- Apply the eventHandlers for editable classes -->
+                <script type="text/javascript" src="js/editableHandlers.js"></script>
             </table>
         </div>
     </body>

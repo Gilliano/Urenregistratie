@@ -50,7 +50,7 @@ class userManager {
     
         
     // Returns all email from table `medewerker`
-    function getAllEmails()
+    public static function getAllEmails()
     {
         $records = [];
         $conn = database::connect();
@@ -67,7 +67,7 @@ class userManager {
     // Returns email from table `medewerker`
     // for a specific ID
     // params: idMedewerker
-    function getEmailFromID($userID)
+    public static function getEmailFromID($userID)
     {
         $email = "";
         $conn = database::connect();
