@@ -31,7 +31,7 @@ class userManager {
                 //if results are correct set SESSIONS
                 $_SESSION['idMedewerker']   = $user['idMedewerker'];
                 $_SESSION['voornaam']       = $user['voornaam'];
-                $_SESSION['lastname']       = $user['tussenvoegsel'] . ' ' . $user['achternaam'];
+                $_SESSION['lastname']       = $user['tussenvoegsels'] . ' ' . $user['achternaam'];
                 $_SESSION['geboortedatum']  = $user['geboortedatum'];
                 $_SESSION['email']          = $user['email'];
                 $_SESSION['validated']      = $user['validated'];
@@ -50,6 +50,23 @@ class userManager {
         }
 
         return NULL;
+    }
+
+    public static function getNameFromID($idMedewerker) {
+        $conn = database::connect();
+        $userInfo = $conn->prepare("SELECT voornaam, tussenvoegsels, achternaam FROM medewerker WHERE idMedewerker=?");
+        $userInfo->bindParam(1, $idMedewerker);
+        $userInfo->execute();
+
+        $user = $userInfo->fetch(PDO::FETCH_ASSOC);
+
+        $userName = $user['voornaam'] . " ";
+        if ($user['tussenvoegsels'] != NULL) {
+            $userName .= $user['tussenvoegsels'] . " ";
+        }
+        $userName .= $user['achternaam'];
+
+        echo $userName;
     }
     
         
