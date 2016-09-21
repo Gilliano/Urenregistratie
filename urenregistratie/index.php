@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 
 <html lang="nl">
@@ -9,10 +10,16 @@
         <link href="css/urenregistratie.css" rel="stylesheet">
         <title>Branch</title>
 
+        <?php
+            //make sure everything we need in here
+            require_once '../main/php/head.php';
+        ?>
+
+
     </head>
     <body>
         <?php
-        include_once '../main/php/navbar.php';
+            include_once '../main/php/navbar.php';
         ?>
         <div class="container"> 
             <div class="col-md-8 col-md-offset-2">
