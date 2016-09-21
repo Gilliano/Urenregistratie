@@ -28,15 +28,17 @@ class userManager {
 
             //check if results are filled
             if(isset($user) AND !empty($user)) {
-                //if results are filled
-//                echo 'correct';
-//                echo '<br>';
-//                echo $user['voornaam'];
-//                echo '<br>';
-//                echo $user['tussenvoegsels'] . ' ' . $user['achternaam'];
+                //if results are correct set SESSIONS
+                $_SESSION['idMedewerker']   = $user['idMedewerker'];
+                $_SESSION['voornaam']       = $user['voornaam'];
+                $_SESSION['lastname']       = $user['tussenvoegsel'] . ' ' . $user['achternaam'];
+                $_SESSION['geboortedatum']  = $user['geboortedatum'];
+                $_SESSION['email']          = $user['email'];
+                $_SESSION['validated']      = $user['validated'];
+                $_SESSION['rol']            = $user['rol'];
+                $_SESSION['state']          = $user['state'];
 
-                //$_SESSION['firstname'] = $user['voornaam'];
-                //$_SESSION['lastname'] = $user['tussenvoegsel'] . ' ' . $user['achternaam'];
+                header('Location: ../urenregistratie/index.php');
 
                 return true;
 
@@ -46,6 +48,8 @@ class userManager {
             }
 
         }
+
+        return NULL;
     }
     
         
