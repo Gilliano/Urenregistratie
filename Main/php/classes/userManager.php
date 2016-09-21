@@ -29,11 +29,11 @@ class userManager {
             //check if results are filled
             if(isset($user) AND !empty($user)) {
                 //if results are filled
-                echo 'correct';
-                echo '<br>';
-                echo $user['voornaam'];
-                echo '<br>';
-                echo $user['tussenvoegsels'] . ' ' . $user['achternaam'];
+//                echo 'correct';
+//                echo '<br>';
+//                echo $user['voornaam'];
+//                echo '<br>';
+//                echo $user['tussenvoegsels'] . ' ' . $user['achternaam'];
 
                 //$_SESSION['firstname'] = $user['voornaam'];
                 //$_SESSION['lastname'] = $user['tussenvoegsel'] . ' ' . $user['achternaam'];

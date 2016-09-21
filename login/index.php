@@ -6,7 +6,9 @@
         //make sure everything we need in here
         require_once '../main/php/head.php';
         //Function for the login screen
-        $check = userManager::login();
+        userManager::login();
+        //Function for this page
+        require_once 'php/login.php';
     ?>
     <link href="css/login.css" rel="stylesheet">
 </head>
@@ -22,12 +24,8 @@
                     <input type="text" name="email" placeholder="Email" required class="form-control input-lg" />
 
                     <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password"/>
-                    <!-- If something is wrong, show message -->
-                    <?php if($check == false) { ?>
-                        <div class="alert alert-danger">
-                            Username and password do not match.
-                        </div>
-                    <?php } ?>
+                    <!-- If something is wrong after you submit, show message -->
+                    <?php echo errorMessage(); ?>
 
                     <input type="submit" name="login" value="Sign In" class="btn btn-lg btn-primary btn-block">
 
