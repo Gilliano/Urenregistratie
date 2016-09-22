@@ -15,7 +15,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="../urenregistratie"><img src='../main/img/logo.png'></a>
-                <span class="navbar-brand">| Henk van den Broek<?php //print_r(ucfirst($_SESSION['Gebruiker'][1])) ?></span>
+                <span class="navbar-brand">|    <?php echo userManager::getNameFromID($_SESSION['idMedewerker']); ?></span>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

@@ -1,8 +1,8 @@
 <?php
 // Start session if not started already
-if(session_status() == PHP_SESSION_NONE)
+if(session_status() == PHP_SESSION_NONE){
     session_start();
-
+}
 //classes
 include 'classes/database.php';
 include 'classes/userManager.php';

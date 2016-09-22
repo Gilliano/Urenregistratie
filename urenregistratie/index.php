@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-
 <html lang="nl">
     <head>
-        <meta name="viewport" content="width=device-width,user-scalable=yes">
-        <link href="../main/css/bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat:400,400italic,700normal,700italic,700"/>
-        <link href="../main/css/navbar.css" rel="stylesheet">
         <link href="css/urenregistratie.css" rel="stylesheet">
-        <title>Branch</title>
 
+        <?php
+            //make sure everything we need in here
+            require_once '../main/php/head.php';
+        ?>
     </head>
+
+    <?php
+    $projectManager = new projectManager();
+    $size = sizeof($projectManager->getAllProjectNames());
+    ?>
+
     <body>
         <?php
-        include_once '../main/php/navbar.php';
+            include_once '../main/php/navbar.php';
         ?>
         <div class="container"> 
             <div class="col-md-8 col-md-offset-2">
@@ -25,9 +29,11 @@
                                     <td>
                                         <select class="btn btn-default">
                                             <option selected disabled hidden>Kies een project</option>
-                                            <option class="btn btn-default">Mustard</option>
-                                            <option class="btn btn-default">Ketchup</option>
-                                            <option class="btn btn-default">Relish</option>
+                                            <?php
+                                            for ($i = 0; $i < $size; $i++) {
+                                                echo "<option class=\"btn btn-default\">" . $projectManager->getAllProjectNames()[$i]['projectnaam'] . "</option>";
+                                            }
+                                            ?>
                                         </select>
                                     </td>
                                 </tr>
