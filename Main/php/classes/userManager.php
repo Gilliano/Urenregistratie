@@ -7,6 +7,11 @@
  */
 
 class userManager {
+
+        function __construct() {
+            print "In BaseClass constructor\n";
+        }
+
         public static function login() {
 
         $conn = database::connect();
@@ -51,6 +56,15 @@ class userManager {
 
         return NULL;
     }
+
+    //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
+    public static function areYouLoggedIn() {
+        if(!isset($_SESSION['idMedewerker']) && empty($_SESSION['idMedewerker'])) {
+            header("location: ../login/");
+        }
+
+    }
+
 
     public static function getNameFromID($idMedewerker) {
         $conn = database::connect();
@@ -98,5 +112,11 @@ class userManager {
         $email = $stmt->fetch(PDO::FETCH_ASSOC);
         
         return $email;
+    }
+
+    public static function logout() {
+        session_unset();
+
+        header('Location: ../login');
     }
 }

@@ -26,6 +26,10 @@
 .navbar-right a:hover{
     color: #34b449 !important;
 }
+
+
+
+/* Logout button */
 #logout{
     font-family: "Montserrat";
     text-transform: uppercase;
@@ -43,3 +47,25 @@
     border-radius: 5px;
 }
 
+#logout:hover {
+    opacity: 0.7;
+}
+
+
+
+/* Logout popup */
+.modal.fade.logOut {
+    margin-top: 150px;
+}
+
+.modal-dialog.logOut {
+    width: 300px;
+}
+
+.modal-footer.logout-footer {
+    text-align: center;
+}
+
+.modal-footer.logout-footer .yes {
+    width: 100px;
+}
