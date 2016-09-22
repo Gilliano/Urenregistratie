@@ -1,19 +1,3 @@
-<!--
-To use these functions with JS(jQuery)
-follow this template
------------------------------------------
-var action = "FUNCTION_NAME";
-var param1 = "PARAM1";
-var ajaxurl = "../main/php/ajax.php";
-var data = {'action': action, 'params': {'CUSTOM_PARAM_NAME': param1}};
-$.post(ajaxurl, data, function(response){
-    // Do something with the response
-    // Response is everything that the FUNCTION
-    // has echoéd
-});
------------------------------------------
--->
-
 <?php
 include 'main.php';
 
@@ -28,7 +12,10 @@ if(isset($_POST['action']))
             setSessionVariable($_POST['params']);
             break;
         case 'getRecordsTable':
-            getRecordsTable();
+            getRecordsTable($_POST['params']);
+            break;
+        default:
+            echo $_POST['action']." not found!";
             break;
     }
 }
@@ -53,9 +40,18 @@ function setSessionVariable($params)
 }
 
 // Gets the html code for the new table
-function getRecordsTable()
+function getRecordsTable($params)
 {
     require_once("../../overzicht/php/overzicht.php");
+    switch($params['method'])
+    {
+        case "nextButton":
+            $_SESSION['pagenumber'] ++;
+            break;
+        case "previousButton":
+            $_SESSION['pagenumber'] -= $_SESSION['pagenumber'] > 1 ? 1 : 0;
+            break;
+    }
     echo createTable($_SESSION['pagenumber']); // From overzicht.php
     exit();
 }

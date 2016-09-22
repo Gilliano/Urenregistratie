@@ -1,6 +1,7 @@
 <?php
 $_SESSION['userrole'] = "admin"; // DEBUG: This should be done after login
-$_SESSION['pagenumber'] = 1;
+if(!isset($_SESSION['pagenumber']))
+    $_SESSION['pagenumber'] = 1;
 
 // Creates the complete table with all the records
 // from the database

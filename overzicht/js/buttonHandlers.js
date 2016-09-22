@@ -1,59 +1,33 @@
+// TODO: Make the AJAX connections into a class object
 // Onclick for the page buttons
 $(".pageButton").on("click", function(event){
+    // Quit if pagenumber = 1 when clicking previous button
+    if(parseInt($("#pageLabel").html()) <= 1 && $(this).attr('name') == "previousButton")
+        return;
+    
     global_this = this;
     
-    // Get page number from session variable
-    var action = "getSessionVariable";
-    var param1 = "pagenumber";
-    var ajaxurl = "../main/php/ajax.php";
-    var data = {'action': action, 'params': {'sessionVariable': param1}};
-    $.post(ajaxurl, data, function(response){
-        console.log("Current page number: " + response);
-        var pagenumber = parseInt(response);
-        
-        // Check if previous or next button
-        var buttonName = $(global_this).attr("name");
-        console.log("Clicked button: " + buttonName);
-        switch(buttonName){
-            case "previousButton":
-                pagenumber--;
-                break;
-            case "nextButton":
-                pagenumber++;
-                break;
-        }
+    // Disable pageButtons
+    $(".pageButton").each(function(){
+        this.disabled = true;
+    });
 
-        // Set new pagenumber session variable
-        var action = "setSessionVariable";
-        var param1 = "pagenumber";
-        var param2 = pagenumber;
-        var ajaxurl = "../main/php/ajax.php";
-        var data = {'action': action, 'params': {'sessionVariable': param1, 'value': param2}};
-        $.post(ajaxurl, data, function(response){
-            console.log(response);
-        });
-        console.log("New page number (should be): " + pagenumber);
-        
-        // Get the new table html code
-        var action = "getRecordsTable";
-        var ajaxurl = "../main/php/ajax.php";
-        var data = {'action': action};
-        $.post(ajaxurl, data, function(response){
+    // Load AJAX js "class"
+    $.getScript('../main/js/ajax.js', function(){
+        var ajaxObj = new AjaxObj("getRecordsTable", {'method' : $(global_this).attr('name')});
+        ajaxObj.callback = function(response){
             // Set the content of the recordsTable
             // to the new html code
             $("#recordsTable").replaceWith(response);
             // Update page label
-            $("#pageLabel").replaceWith(pagenumber);
-        });
-        
-        // FIXME: Returns 1 when it should return the
-        // new value set in "setSessionVariable"
-        var action = "getSessionVariable";
-        var param1 = "pagenumber";
-        var ajaxurl = "../main/php/ajax.php";
-        var data = {'action': action, 'params': {'sessionVariable': param1}};
-        $.post(ajaxurl, data, function(response){
-            console.log("New page number is really: " + response);
-        });
+            var old_labelValue = parseInt($("#pageLabel").html());
+            var incrementValue = $(global_this).attr('name') == "nextButton" ? 1 : -1;
+            $("#pageLabel").text(old_labelValue + incrementValue);
+            // Enable pageButtons
+            $(".pageButton").each(function(){
+                this.disabled = false;
+            });
+        };
+        ajaxObj.post();
     });
 });
