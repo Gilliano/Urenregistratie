@@ -5,6 +5,8 @@ if(!isset($_SESSION['pagenumber']))
 
 // Creates the complete table with all the records
 // from the database
+// TODO: Get the first (100 records)
+// and cache those for performance
 function createTable($pageNumber)
 {
     $records = urenManager::getAllRecords($pageNumber);
@@ -14,16 +16,14 @@ function createTable($pageNumber)
     foreach($records as $record)
     {
         $table_row .= "<tr>";
-        $table_row .= "<th class='col-xs-2'>".userManager::getEmailFromID($record['idMedewerker'])['email']."</th>";
+        $table_row .= "<th class='col-xs-2'>(id:".$record['idUur'].")".userManager::getEmailFromID($record['idMedewerker'])['email']."</th>";
         $table_row .= "<th class='col-xs-2'><select class='form-control'>";
         $projectnaam = projectManager::getProjectNameFromID($record['idProject'])['projectnaam'];
         $table_row .= "<option value=".$projectnaam.">".$projectnaam."</option>";
         foreach($projects as $project)
         {
             if ($project['projectnaam'] != $projectnaam)
-            {
                 $table_row .= "<option value=".$project['projectnaam'].">".$project['projectnaam']."</option>";   
-            }
         }
         $table_row .= "</select></th>";
         $table_row .= "<th class='col-xs-1'><input class='form-control editable $userrole' type='number' min='0' value='".$record['urengewerkt']."' readonly></th>";

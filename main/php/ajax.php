@@ -49,7 +49,7 @@ function getRecordsTable($params)
             $_SESSION['pagenumber'] ++;
             break;
         case "previousButton":
-            $_SESSION['pagenumber'] -= $_SESSION['pagenumber'] > 1 ? 1 : 0;
+            $_SESSION['pagenumber'] -= intval($_SESSION['pagenumber']) > 1 ? 1 : 0;
             break;
     }
     echo createTable($_SESSION['pagenumber']); // From overzicht.php

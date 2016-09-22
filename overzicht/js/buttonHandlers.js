@@ -18,7 +18,7 @@ $(".pageButton").on("click", function(event){
         ajaxObj.callback = function(response){
             // Set the content of the recordsTable
             // to the new html code
-            $("#recordsTable").replaceWith(response);
+            $("#recordsTable").html(response);
             // Update page label
             var old_labelValue = parseInt($("#pageLabel").html());
             var incrementValue = $(global_this).attr('name') == "nextButton" ? 1 : -1;
