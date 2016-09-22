@@ -12,6 +12,7 @@
     <?php
     $projectManager = new projectManager();
     $size = sizeof($projectManager->getAllCurrentProject());
+    print_r($projectManager->getAllCurrentProject());
     ?>
 
     <body>
@@ -30,8 +31,8 @@
                                         <select class="btn btn-default">
                                             <option selected disabled hidden>Kies een project</option>
                                             <?php
-                                            for ($i = 0; $i < $size; $i++) {
-                                                echo "<option class=\"btn btn-default\">" . $projectManager->getAllProjectNames()[$i]['projectnaam'] . "</option>";
+                                            foreach ($projectManager->getAllCurrentProject() as $value) {
+                                                echo "<option class=\"btn btn-default\">" . $value . "</option>";
                                             }
                                             ?>
                                         </select>

@@ -20,13 +20,12 @@ class projectManager
     {
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT * FROM project WHERE verwijderd = 0");
+        $stmt = $conn->prepare("SELECT projectnaam FROM project WHERE verwijderd = 0");
         $stmt->execute();
         while($record = $stmt->fetch(PDO::FETCH_ASSOC))
         {
-            array_push($records, $record);
+            array_push($records, $record['projectnaam']);
         }
-
         return $records;
     }
     
