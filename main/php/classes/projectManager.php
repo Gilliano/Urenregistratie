@@ -7,7 +7,7 @@ class projectManager
     {
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT * FROM project");
+        $stmt = $conn->prepare("SELECT projectnaam FROM project");
         $stmt->execute();
         while($record = $stmt->fetch(PDO::FETCH_ASSOC))
         {
