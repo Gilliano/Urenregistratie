@@ -11,7 +11,7 @@
 
     <?php
     $projectManager = new projectManager();
-    $size = sizeof($projectManager->getAllProjectNames());
+    $size = sizeof($projectManager->getAllCurrentProject());
     ?>
 
     <body>

@@ -16,6 +16,19 @@ class projectManager
         
         return $records;
     }
+    public static function getAllCurrentProject()
+    {
+        $records = [];
+        $conn = database::connect();
+        $stmt = $conn->prepare("SELECT * FROM project WHERE verwijderd = 0");
+        $stmt->execute();
+        while($record = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($records, $record);
+        }
+
+        return $records;
+    }
     
     // Returns project name from table `project`
     // params: idProject
