@@ -16,6 +16,7 @@ class projectManager
         
         return $records;
     }
+    // Returns all names from 'project' that isn't deleted.
     public static function getAllCurrentProject()
     {
         $records = [];
