@@ -6,7 +6,7 @@
     width: 600px;
 }
 .panel-body form table td select{
-    width: 600px;
+    width: 600px !important;
 }
 .panel-body form#urenformulier table tr{
     border-bottom: 1px solid #D9D9D9;
