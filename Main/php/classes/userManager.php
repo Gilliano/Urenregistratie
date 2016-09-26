@@ -61,7 +61,7 @@ class userManager {
     //// This funtion is used in the main.php
     public static function areYouLoggedIn() {
         $url = $_SERVER['REQUEST_URI'];
-        if(!strpos($url, 'login')) {
+        if(!strpos($url, '/login/')) {
             if(!isset($_SESSION['idMedewerker']) || empty($_SESSION['idMedewerker'])) {
                 header("location: ../login/");
             }
