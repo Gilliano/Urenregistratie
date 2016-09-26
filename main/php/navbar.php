@@ -1,13 +1,16 @@
 <?php
-/*if(empty($_SESSION['Gebruiker'])){
-    header("location:index.php");
-}*/
-
 //this is for the logout function, I dont know where to put it....
 if(isset($_POST['logout'])) {
     userManager::logout();
 }
 
+function adminTab() {
+    if($_SESSION['rol'] == 'admin') {
+        $tab = "<li><a href='../urenregistratie'>Management</a></li>";
+        return $tab;
+    }
+    return NULL;
+}
 ?>
 <header>
     <nav class="navbar navbar-default">
@@ -33,6 +36,7 @@ if(isset($_POST['logout'])) {
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
+                    <?php echo adminTab() ?>
                     <li><a href="../urenregistratie">Urenregistratie</a></li>
                     <li><a href="../overzicht">Overzicht</a></li>
                     <li><div id="logout" data-toggle="modal" data-target="#logOut">Uitloggen</div></li>
