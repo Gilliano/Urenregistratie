@@ -56,6 +56,10 @@
                                     <td class="description">Innovatieve uren</td>
                                     <td class="field"><output readonly type="number" name="ureninnovatief" class="form-control" id="ureninnovatief"/></td>
                                 </tr>
+                                <tr>
+                                    <td class="description">Omschrijving van de uren</td>
+                                    <td class="field"><input type="number" name="omschrijving" class="form-control" id="omschrijving"/></td>
+                                </tr>
                                 <!--submit-->
                                 <tr>
                                     <td class="submit"></td>
