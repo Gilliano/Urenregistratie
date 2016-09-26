@@ -1,10 +1,2 @@
-<!DOCTYPE html>
-<html>
-<head>
-index.php
-</head>
-
-<body>
-
-</body>
-</html>
+<?php
+header("location: login/");
