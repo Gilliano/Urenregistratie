@@ -1,5 +1,5 @@
 <?php
-include 'main.php';
+require_once 'main.php';
 
 if(isset($_POST['action']))
 {

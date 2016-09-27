@@ -12,7 +12,7 @@
 
 <!-- Navbar -->
 <link href="../main/css/navbar.css" rel="stylesheet">
-<?php include '../main/php/main.php';?>
+<?php require_once '../main/php/main.php';?>
 
 <!--Bootstrap-->
 <link rel="stylesheet" type="text/css" href="../main/css/bootstrap.min.css">

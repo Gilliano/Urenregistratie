@@ -8,11 +8,11 @@
 
 class userManager {
 
-        function __construct() {
-            print "In BaseClass constructor\n";
-        }
+    function __construct() {
+        print "In BaseClass constructor\n";
+    }
 
-        public static function login() {
+    public static function login() {
 
         $conn = database::connect();
 
@@ -46,12 +46,10 @@ class userManager {
                 header('Location: ../urenregistratie/index.php');
 
                 return true;
-
             } else {
                 //if fetch is empty then return a message
                 return false;
             }
-
         }
 
         return NULL;
