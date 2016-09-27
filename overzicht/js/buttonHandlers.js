@@ -1,4 +1,3 @@
-// TODO: Make the AJAX connections into a class object
 // Onclick for the page buttons
 $(".pageButton").on("click", function(event){
     // Quit if pagenumber = 1 when clicking previous button

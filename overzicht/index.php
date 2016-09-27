@@ -28,8 +28,6 @@
                 <label id="pageLabel"><?php echo $_SESSION['pagenumber']; ?></label>
                 <!-- TGoes to next page -->
                 <button type="button" name="nextButton" class="pageButton">Next page</button>
-                <!-- Apply the button eventHandlers -->
-                <script type="application/javascript" src="js/buttonHandlers.js"></script>
             </div>
             <table id="datalist" class="table table-bordered">
                 <thead>
@@ -69,9 +67,14 @@
                 <tbody id="recordsTable">
                     <?php echo createTable($_SESSION['pagenumber']); ?>
                 </tbody>
-                <!-- Apply the eventHandlers for editable classes -->
-                <script type="text/javascript" src="js/editableHandlers.js"></script>
             </table>
         </div>
+        
+        <!--  Apply main shit  -->
+        <?php require_once("../main/php/footer.php"); ?>
+        <!-- Apply the button eventHandlers -->
+        <script type="application/javascript" src="js/buttonHandlers.js"></script>
+        <!-- Apply the eventHandlers for editable classes -->
+        <script type="application/javascript" src="js/editableHandlers.js"></script>
     </body>
 </html>
