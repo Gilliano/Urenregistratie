@@ -1,6 +1,6 @@
 // Onclick event handler for controls
 // that have class 'editable'
-$(".editable").on("click", function(event) {
+$(".editable").on("click", function(event) {    
     // Get userrole from php
     var userrole = "guest"; // Default value
     var action = "getSessionVariable";

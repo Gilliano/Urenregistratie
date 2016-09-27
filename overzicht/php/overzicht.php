@@ -10,13 +10,13 @@ if(!isset($_SESSION['pagenumber']))
 function createTable($pageNumber)
 {
     $records = urenManager::getAllRecords($pageNumber);
-    $projects = projectManager::getAllProjectNames();
+    $projects = projectManager::getAllProjects();
     $table_row = "";
     $userrole = $_SESSION['userrole'];
     foreach($records as $record)
     {
         $table_row .= "<tr>";
-        $table_row .= "<th class='col-xs-2'>(id:".$record['idUur'].")".userManager::getEmailFromID($record['idMedewerker'])['email']."</th>";
+        $table_row .= "<th class='col-xs-2'>".userManager::getEmailFromID($record['idMedewerker'])['email']."</th>";
         $table_row .= "<th class='col-xs-2'><select class='form-control'>";
         $projectnaam = projectManager::getProjectNameFromID($record['idProject'])['projectnaam'];
         $table_row .= "<option value=".$projectnaam.">".$projectnaam."</option>";
@@ -54,7 +54,7 @@ function createMailDropdown()
 // the project filter dropdown
 function createProjectDropdown()
 {
-    $records = projectManager::getAllProjectNames();
+    $records = projectManager::getAllProjects();
     $option = "";
     foreach($records as $record)
     {
