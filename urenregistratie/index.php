@@ -12,6 +12,11 @@
     <?php
     $projectManager = new projectManager();
     $size = sizeof($projectManager::getAllCurrentProject());
+    $urenManager = new urenManager();
+    
+    if(isset($_POST['urenopslaan'])) {
+        $urenManager::addUren();
+    }
     ?>
 
     <body>
@@ -27,12 +32,10 @@
                             <table>
                                 <tr>
                                     <p>
-                                        <select class="selectpicker" data-width="700px" data-live-search="true" title="Kies een project...">
-                                            <?php
-                                            foreach ($projectManager::getAllCurrentProject() as $value) {
-                                                echo "<option>" . $value . "</option>";
-                                            }
-                                            ?>
+                                        <select class="selectpicker" name="project" data-width="700px" data-live-search="true" title="Kies een project...">
+                                            <?php for($i = 0; $i < $size; $i++) { ?>
+                                            <option value="<?= $projectManager::getAllCurrentProject()[$i]["idProject"]?>"><?= $projectManager::getAllCurrentProject()[$i]["projectnaam"]?></option>
+                                            <?php } ?>
                                         </select>
                                     </p>
                                 </tr>
@@ -54,11 +57,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
-                                    <td class="field"><output readonly type="number" name="ureninnovatief" class="form-control" id="ureninnovatief"/></td>
+                                    <td class="field"><input type="number" name="ureninnovatief" class="form-control" id="ureninnovatief" readonly/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
-                                    <td class="field"><input type="number" name="omschrijving" class="form-control" id="omschrijving"/></td>
+                                    <td class="field"><textarea name="omschrijving" class="form-control" id="omschrijving"/></textarea></td>
                                 </tr>
                                 <!--submit-->
                                 <tr>

@@ -3,11 +3,11 @@
 class projectManager
 {
     // Returns all names from `project` table
-    public static function getAllProjectNames()
+    public static function getAllProjects()
     {
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT projectnaam FROM project");
+        $stmt = $conn->prepare("SELECT * FROM project");
         $stmt->execute();
         while($record = $stmt->fetch(PDO::FETCH_ASSOC))
         {
@@ -21,11 +21,11 @@ class projectManager
     {
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT projectnaam FROM project WHERE verwijderd = 0");
+        $stmt = $conn->prepare("SELECT * FROM project WHERE verwijderd = 0");
         $stmt->execute();
         while($record = $stmt->fetch(PDO::FETCH_ASSOC))
         {
-            array_push($records, $record['projectnaam']);
+            array_push($records, $record);
         }
         return $records;
     }
