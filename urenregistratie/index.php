@@ -11,41 +11,31 @@
 
     <?php
     $projectManager = new projectManager();
-    $size = sizeof($projectManager->getAllCurrentProject());
+    $size = sizeof($projectManager::getAllCurrentProject());
     ?>
 
     <body>
         <?php
             include_once '../main/php/navbar.php';
         ?>
-        <div class="container"> 
+        <div class="container">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Kies een project</div>
-                    <div class="panel-body">
-                        <form method="post" action="" name="project" enctype="multipart/form-data">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <select class="btn btn-default">
-                                            <option selected disabled hidden>Kies een project</option>
-                                            <?php
-                                            foreach ($projectManager->getAllCurrentProject() as $value) {
-                                                echo "<option class=\"btn btn-default\">" . $value . "</option>";
-                                            }
-                                            ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">Uren invulformulier</div>
                     <div  class="panel-body">
                         <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
                             <table>
+                                <tr>
+                                    <p>
+                                        <select class="selectpicker" data-width="700px" data-live-search="true" title="Kies een project...">
+                                            <?php
+                                            foreach ($projectManager::getAllCurrentProject() as $value) {
+                                                echo "<option>" . $value . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </p>
+                                </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
                                     <td class="field"><input type="time" name="begintijd" class="form-control" id="begintijd"/></td>
@@ -66,6 +56,10 @@
                                     <td class="description">Innovatieve uren</td>
                                     <td class="field"><output readonly type="number" name="ureninnovatief" class="form-control" id="ureninnovatief"/></td>
                                 </tr>
+                                <tr>
+                                    <td class="description">Omschrijving van de uren</td>
+                                    <td class="field"><input type="number" name="omschrijving" class="form-control" id="omschrijving"/></td>
+                                </tr>
                                 <!--submit-->
                                 <tr>
                                     <td class="submit"></td>
@@ -80,6 +74,9 @@
     </body>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <!-- Latest compiled and minified JavaScript
+    <?php
+    //performance increasing not everything in the head, not necessary things in the footer.
+    require_once '../main/php/footer.php';
+    ?>
 </html>
