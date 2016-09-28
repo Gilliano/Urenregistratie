@@ -34,14 +34,14 @@ class urenManager
         
         if($ureninnovatief <= 0) {
             $innovatief = FALSE;
-            
+                   
             $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, timestamp, goedgekeurd) VALUES ($medewerker, $project, $urenregulier, TIME '$begintijd', TIME '$eindtijd', '$omschrijving', FALSE, CURRENT_TIMESTAMP, FALSE)");
             
             if($stmt->execute() === TRUE) {
-                echo "<div class='alert alert-success' id='error'>De uren zijn succesvol geregistreerd!</div>";
+                return "<div class='alert alert-success' id='error'>De uren zijn succesvol geregistreerd</div>";
             }
             else {
-                echo "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
+                return "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
             }
         }
         else {
@@ -53,18 +53,16 @@ class urenManager
                 $query = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, timestamp, goedgekeurd) VALUES ($medewerker, $project, $ureninnovatief, TIME '$begintijd', TIME '$eindtijd', '$omschrijving', $innovatief, CURRENT_TIMESTAMP, FALSE)");
                 
                 if($query->execute() === TRUE) {
-                    echo "<div class='alert alert-success' id='error'>De uren zijn succesvol geregistreerd!</div>";
+                    return "<div class='alert alert-success' id='error'>De uren zijn succesvol geregistreerd</div>";
                 }
                 else {
-                    echo "<div class='alert alert-danger' id='error'>De innovatieve uren konden niet geregistreerd worden.</div>";
+                    return "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
                 }
             }
             else {
-                echo "<div class='alert alert-danger' id='error'>Helaas.</div>";
+                return "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
             }
-        }
-        
-        
+        } 
     }
 }
 

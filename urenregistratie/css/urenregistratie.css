@@ -23,3 +23,16 @@
 .panel-body form#urenformulier tr td.submit{
     height: 50px;
 }
+
+.alert {
+    padding: 8px !important;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.panel-body form#urenformulier tr td.field {
+    width: 400px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

@@ -14,9 +14,6 @@
     $size = sizeof($projectManager::getAllCurrentProject());
     $urenManager = new urenManager();
     
-    if(isset($_POST['urenopslaan'])) {
-        $urenManager::addUren();
-    }
     ?>
 
     <body>
@@ -29,6 +26,11 @@
                     <div class="panel-heading">Uren invulformulier</div>
                     <div  class="panel-body">
                         <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                            <?php  
+                                    if(isset($_POST['urenopslaan'])) {
+                                        echo $urenManager::addUren();
+                                    } 
+                            ?>
                             <table>
                                 <tr>
                                     <p>
