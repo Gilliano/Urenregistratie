@@ -55,6 +55,28 @@ class userManager {
         return NULL;
     }
 
+    public static function register() {
+
+        $conn = database::connect();
+
+        if(isset($_POST['register'])) {
+
+            if($_POST['password'] == $_POST['repassword']) {
+                $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord) VALUES (?,?,?,?,?)";
+                $stmt = $conn->prepare($adduser);
+                $stmt->bindParam(1, $_POST['firstname']);
+                $stmt->bindParam(2, $_POST['insertion']);
+                $stmt->bindParam(3, $_POST['lastname']);
+                $stmt->bindParam(4, $_POST['email']);
+                $stmt->bindParam(5, $_POST['password']);
+                $stmt->execute();
+            } else {
+                header("location: ../login/index.php?error=error");
+            }
+
+        }
+    }
+
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
     public static function areYouLoggedIn() {

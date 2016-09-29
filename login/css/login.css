@@ -77,3 +77,27 @@ form[role=login] > div {
 .loginLogo {
     height: 100px;
 }
+
+.registerLogo {
+    height: 50px;
+}
+
+#createAccount {
+    margin-top: 0px;
+}
+
+.startmail {
+    padding-right: 0px;
+}
+
+.endmail {
+    font-size: 18px;
+    margin: 16px 0;
+    text-align: left !important;
+    padding-left: 0px;
+}
+
+.endmail p {
+    margin: 10px 0 10px;
+    text-align: left !important;
+}
