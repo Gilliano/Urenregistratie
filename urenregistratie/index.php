@@ -11,7 +11,7 @@
 
     <?php
     $projectManager = new projectManager();
-    $size = sizeof($projectManager::getAllCurrentProject());
+    $size = sizeof($projectManager::getAllCurrentProjects());
     $urenManager = new urenManager();
     
     ?>
@@ -36,7 +36,7 @@
                                     <p>
                                         <select class="selectpicker" name="project" data-width="700px" data-live-search="true" title="Kies een project...">
                                             <?php for($i = 0; $i < $size; $i++) { ?>
-                                            <option value="<?= $projectManager::getAllCurrentProject()[$i]["idProject"]?>"><?= $projectManager::getAllCurrentProject()[$i]["projectnaam"]?></option>
+                                            <option value="<?= $projectManager::getAllCurrentProjects()[$i]["idProject"]?>"><?= $projectManager::getAllCurrentProjects()[$i]["projectnaam"]?></option>
                                             <?php } ?>
                                         </select>
                                     </p>

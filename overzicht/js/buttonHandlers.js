@@ -1,32 +1,34 @@
-// Onclick for the page buttons
-$(".pageButton").on("click", function(event){
-    // Quit if pagenumber = 1 when clicking previous button
-    if(parseInt($("#pageLabel").html()) <= 1 && $(this).attr('name') == "previousButton")
-        return;
-    
-    global_this = this;
-    
-    // Disable pageButtons
-    $(".pageButton").each(function(){
-        this.disabled = true;
-    });
+/**
+ * Created by JohnDoe on 1-10-2016.
+ */
+$("#search_button").on("click", function(event){
+   $.getScript("../main/js/ajax.js", function(){
+       console.log("Starting search..");
 
-    // Load AJAX js "class"
-    $.getScript('../main/js/ajax.js', function(){
-        var ajaxObj = new AjaxObj("getRecordsTable", {'method' : $(global_this).attr('name')});
-        ajaxObj.callback = function(response){
-            // Set the content of the recordsTable
-            // to the new html code
-            $("#recordsTable").html(response);
-            // Update page label
-            var old_labelValue = parseInt($("#pageLabel").html());
-            var incrementValue = $(global_this).attr('name') == "nextButton" ? 1 : -1;
-            $("#pageLabel").text(old_labelValue + incrementValue);
-            // Enable pageButtons
-            $(".pageButton").each(function(){
-                this.disabled = false;
-            });
-        };
-        ajaxObj.post();
-    });
+       // Get records matching filters
+       var user = $("#users_list").val();
+       var project = "Samsung";//$("#projects_list").val(); //TODO: Change back to val()
+       var daterange = $("#daterange_picker").val();
+       daterange = daterange.split(" - ");
+       var date1 = daterange[0].split("/");
+       date1 = date1[2] + "-" + date1[1] + "-" + date1[0] + " 00:00:00"; // Date format = YYYY-MM-DD HH:MM:SS
+       var date2 = daterange[1].split("/");
+       date2 = date2[2] + "-" + date2[1] + "-" + date2[0] + " 23:59:59"; // Date format = YYYY-MM-DD HH:MM:SS
+
+       console.log("user: " + user + "\nProject: " + project + "\nDaterange: " + date1 + " - " + date2);
+       var ajaxObj = new AjaxObj("getUrenBetweenDate", {'userEmail': user, 'projectName': project, 'date1': date1, 'date2': date2});
+       ajaxObj.dataType = "json";
+       ajaxObj.callback = function(response){
+           // Fill the description list
+           var html = "";
+           response.forEach(function(item){
+                html += "<option class='context-menu-one' value='"+item.idUur+"'>"+item.omschrijving+"</option>";
+               //TODO: When clicked on option show modal with all info
+           });
+
+           $("#description_list").html(html);
+           $("#div_description_list").show();
+       };
+       ajaxObj.call();
+   });
 });

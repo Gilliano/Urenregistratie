@@ -1,14 +1,21 @@
-.editable {
-    background-color: #eee;
-    border-style: dotted;
+.daterangepicker {
+    top: auto;
+    left: auto;
 }
 
-.admin:focus, .admin:hover {
-    background-color: white;
-    border-style: solid;
+.row {
+    margin-bottom: 1rem;
+    margin-top: 5rem;
 }
 
-textarea {
-    resize: vertical;
-    min-height: 35px;
+#div_description_list {
+    display: none;
+}
+
+#description_list {
+    height: 30rem;
+}
+
+#search_button {
+    margin-top: 0.5rem;
 }
