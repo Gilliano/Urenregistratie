@@ -7,6 +7,8 @@
         require_once '../main/php/head.php';
         //Function for the login screen
         userManager::login();
+        //function to register
+        userManager::register();
         //Function for this page
         require_once 'php/login.php';
     ?>

@@ -36,3 +36,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+.bootstrap-select {
+    width: 700px \0;
+}
+/*IE9 and below*/
