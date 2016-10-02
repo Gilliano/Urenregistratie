@@ -1,18 +1,23 @@
 <?php
 require_once 'main.php';
 
-// Call method by string
 if(isset($_POST['action']))
 {
-    if(is_callable($_POST['action']))
+    switch($_POST['action'])
     {
-        if(isset($_POST['params']))
-            call_user_func($_POST['action'], $_POST['params']);
-        else
-            call_user_func($_POST['action']);
+        case 'getSessionVariable':
+            getSessionVariable($_POST['params']);
+            break;
+        case 'setSessionVariable':
+            setSessionVariable($_POST['params']);
+            break;
+        case 'getRecordsTable':
+            getRecordsTable($_POST['params']);
+            break;
+        default:
+            echo $_POST['action']." not found!";
+            break;
     }
-    else
-        echo $_POST['action']." not found!";
 }
 
 // Returns the userrole for this session
@@ -49,52 +54,5 @@ function getRecordsTable($params)
     }
     echo createTable($_SESSION['pagenumber']); // From overzicht.php
     exit();
-}
-
-// Gets the record(s) from the cache
-// params['id']: id of the record to return
-// note: if id is not set, whole cache
-// will be returned
-function getRecordsCache($params)
-{
-    if($params['id'] != null)
-    {
-        foreach($_SESSION['records_cache'] as $record)
-        {
-            if($record['idUur'] == $params['id'])
-            {
-                echo json_encode($record);
-                return;
-            }
-        }
-        echo "No records found";
-    }
-    else
-        echo json_encode($_SESSION['records_cache']);
-}
-
-// Gets all projects
-function getProjects($params)
-{
-    echo json_encode(projectManager::getAllCurrentProjects());
-}
-
-// Gets all users
-function getUsers()
-{
-    echo json_encode(userManager::getAllUsers());
-}
-
-// Returns uren records between date
-function getUrenBetweenDate($params)
-{
-    // Get ID's for names/emails
-    if(isset($params['userEmail']))
-        $params['userID'] = userManager::getIDFromEmail($params['userEmail'])['idMedewerker'];
-    if(isset($params['projectName']))
-        $params['projectID'] = projectManager::getProjectIDFromName($params['projectName'])['idProject'];
-
-    $records = urenManager::getRecordsForUserProjectDaterange($params['userID'], $params['projectID'], $params['date1'], $params['date2']);
-    echo json_encode($records);
 }
 ?>

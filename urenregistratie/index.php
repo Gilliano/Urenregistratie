@@ -20,11 +20,11 @@
         <div class="container">
             <div class="col-md-12" style="text-align: center;">
                 <p>
-                    <input type="checkbox" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#logOut">
+                    <input type="checkbox" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
                 </p>
 
             </div>
-            <div class="col-md-8 col-md-offset-2" id="main-formulier">
+            <div class="col-md-8 col-md-offset-2" id="mainFormulier">
                 <div class="panel panel-default">
                     <div class="panel-heading">Uren invulformulier</div>
                     <div  class="panel-body">
@@ -34,6 +34,7 @@
                                         echo urenManager::addUren();
                                     }
                             ?>
+
                             <table>
 <!--                                <tr>-->
 <!--                                    <p style="text-align: center;">-->
@@ -88,7 +89,7 @@
         <!-- This is a pop-up. When switch to advanced mode this screen will been show -->
         <div class="container">
             <!-- Modal -->
-            <div class="modal fade logOut" id="modalFormulier" role="dialog">
+            <div class="modal fade modalFormulier" id="modalFormulier" role="dialog">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
@@ -145,7 +146,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <div class="modal-footer logout-footer">
+                        <div class="modal-footer">
                             <input type="submit" name="urenopslaan" class="opslaan btn btn-success" value="Bevestigen">
                             <input type="submit" name="urenopslaan" class="opslaan btn btn-danger" data-dismiss="modal" value="Annuleren">
                         </div>
@@ -156,19 +157,21 @@
         </div>
     </body>
     <?php
+
     //performance increasing not everything in the head, not necessary things in the footer.
     require_once '../main/php/footer.php';
     ?>
+
     <script src="js/bootstrap-switch.js"></script>
     <script>
         $("[name='mode']").bootstrapSwitch();
 
         $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state) {
-            if(state === true){
+                if(state === true){
                 $('#modalFormulier').modal('toggle');
-                $( "#main-formulier" ).hide();
+                $('#mainFormulier').hide();
             }else{
-                $( "#main-formulier" ).show();
+                $( "#mainFormulier" ).show();
             }
         });
 

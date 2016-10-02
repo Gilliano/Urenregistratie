@@ -2,7 +2,6 @@
 
 class urenManager
 {
-    // TODO: Remove? (because old 'overzicht' layout has changed)
     // Returns all records from table `uur`
     public static function getAllRecords($pageNumber)
     {
@@ -22,33 +21,9 @@ class urenManager
         
         return $records;
     }
-
-    // Returns uur record(s)
-    // where idMedewerker = $userID
-    // and idProject = $projectID
-    // and begintijd is between $date1 and $date2
-    // NOTE: date format is string('YYYY-MM-DD HH:MM:SS')
-    public static function getRecordsForUserProjectDaterange($userID, $projectID, $date1, $date2)
-    {
-        error_log("$userID, $projectID, $date1, $date2");
-
-        $records = [];
-        $conn = database::connect();
-        $stmt = $conn->prepare("SELECT idUur, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, timestamp, goedgekeurd FROM uur WHERE idMedewerker = ? AND idProject = ? AND begintijd BETWEEN ? AND ? ORDER BY begintijd DESC;");
-        $stmt->bindParam(1, $userID, PDO::PARAM_INT);
-        $stmt->bindParam(2, $projectID, PDO::PARAM_INT);
-        $stmt->bindParam(3, $date1, PDO::PARAM_STR);
-        $stmt->bindParam(4, $date2, PDO::PARAM_STR);
-        $stmt->execute();
-
-        $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $records;
-    }
     
     static function addUren() {
         $conn = database::connect();
-        // TODO: Rebuild this with ajax?
         $medewerker = $_SESSION['idMedewerker'];
         $project = $_POST['project'];
         $urenregulier = $_POST['urenregulier'];

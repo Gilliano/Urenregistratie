@@ -1,13 +1,14 @@
-.daterangepicker {
-    top: auto;
-    left: auto;
+.editable {
+    background-color: #eee;
+    border-style: dotted;
 }
 
-.row {
-    margin-bottom: 1rem;
-    margin-top: 5rem;
+.admin:focus, .admin:hover {
+    background-color: white;
+    border-style: solid;
 }
 
+<<<<<<< HEAD
 #description_row {
     display: none;
 }
@@ -31,4 +32,9 @@
 
 #save_button {
     width: 100%;
+=======
+textarea {
+    resize: vertical;
+    min-height: 35px;
+>>>>>>> parent of 1124438... Basic functionality works (only 2nd filter not yet (project 1 = samsung) and context menu for description items doesnt do anything yet)
 }

@@ -1,39 +1,35 @@
 <?php
+$_SESSION['userrole'] = "admin"; // DEBUG: This should be done after login
 if(!isset($_SESSION['pagenumber']))
     $_SESSION['pagenumber'] = 1;
 
 // Creates the complete table with all the records
 // from the database
-// FEATURE: Get the first (100 records) and cache those for performance
+// TODO: Get the first (100 records)
+// and cache those for performance
 function createTable($pageNumber)
 {
-    $_SESSION['records_cache'] = []; // Initialize the cache
     $records = urenManager::getAllRecords($pageNumber);
-    $_SESSION['records_cache'] = $records; // Fill cache
-    $projects = projectManager::getAllCurrentProjects();
+    $projects = projectManager::getAllProjects();
     $table_row = "";
-    $userrole = $_SESSION['rol'];
+    $userrole = $_SESSION['userrole'];
     foreach($records as $record)
     {
         $table_row .= "<tr>";
-        $table_row .= "<td class='col-xs-2'>".userManager::getEmailFromID($record['idMedewerker'])['email']."</td>";
-        $table_row .= "<td class='col-xs-2'><select class='form-control'>";
+        $table_row .= "<th class='col-xs-2'>".userManager::getEmailFromID($record['idMedewerker'])['email']."</th>";
+        $table_row .= "<th class='col-xs-2'><select class='form-control'>";
         $projectnaam = projectManager::getProjectNameFromID($record['idProject'])['projectnaam'];
         $table_row .= "<option value=".$projectnaam.">".$projectnaam."</option>";
-        if ($userrole == "admin")
+        foreach($projects as $project)
         {
-            foreach($projects as $project)
-            {
-                if ($project['projectnaam'] != $projectnaam)
-                    $table_row .= "<option value=".$project['projectnaam'].">".$project['projectnaam']."</option>";
-            }
+            if ($project['projectnaam'] != $projectnaam)
+                $table_row .= "<option value=".$project['projectnaam'].">".$project['projectnaam']."</option>";   
         }
-        $table_row .= "</select></td>";
-        $table_row .= "<td class='col-xs-1'><input class='form-control editable $userrole' type='number' min='0' value='".$record['urengewerkt']."' readonly></td>";
-        $table_row .= "<td class='col-xs-3'><textarea class='form-control editable $userrole' rows='1' readonly>".$record['omschrijving']."</textarea></td>";
-        $table_row .= "<td class='col-xs-1' style='text-align: center; vertical-align: middle;'><input class='checkbox-inline editable $userrole' type='checkbox' name='innovative' value='Innovatief' checked=".($record['innovatief'] == 1 ? "true" : "false")."></td>";
-        $table_row .= "<td class='col-xs-1' style='text-align: center; vertical-align: middle;'><input class='checkbox-inline editable $userrole' type='checkbox' name='validated' value='Goedgekeurd' checked=".($record['goedgekeurd'] == 1 ? "true" : "false")."></td>";
-        $table_row .= "<td class='col-xs-1'><button type='button' class='btn-info btn-sm editButton' value=".$record['idUur'].">Edit</button></td>"; // Modal button
+        $table_row .= "</select></th>";
+        $table_row .= "<th class='col-xs-1'><input class='form-control editable $userrole' type='number' min='0' value='".$record['urengewerkt']."' readonly></th>";
+        $table_row .= "<th class='col-xs-3'><textarea class='form-control editable $userrole' rows='1' readonly>".$record['omschrijving']."</textarea></th>";
+        $table_row .= "<th class='col-xs-1' style='text-align: center; vertical-align: middle;'><input class='checkbox-inline editable $userrole' type='checkbox' name='innovative' value='Innovatief' checked=".($record['innovatief'] == 1 ? "true" : "false")."></th>";
+        $table_row .= "<th class='col-xs-1' style='text-align: center; vertical-align: middle;'><input class='checkbox-inline editable $userrole' type='checkbox' name='validated' value='Goedgekeurd' checked=".($record['goedgekeurd'] == 1 ? "true" : "false")."></th>"; 
         $table_row .= "</tr>";
     }
     
@@ -44,7 +40,7 @@ function createTable($pageNumber)
 // the mail filter dropdown
 function createMailDropdown()
 {    
-    $records = userManager::getAllUsers();
+    $records = userManager::getAllEmails();
     $option = "";
     foreach($records as $record)
     {
