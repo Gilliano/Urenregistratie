@@ -59,6 +59,10 @@ class userManager {
 
         $conn = database::connect();
 
+        if(isset($_POST['password'])) {
+            $_POST['password'] = sha1($_POST['password']);
+        }
+
         if(isset($_POST['register'])) {
 
             if($_POST['password'] == $_POST['repassword']) {
