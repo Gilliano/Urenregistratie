@@ -60,14 +60,15 @@
                     <button id="search_button" type="button" class="btn btn-primary">Zoeken</button>
                 </div>
             </div>
-            <div class="row">
+            <div id="description_row" class="row">
                 <!-- Step 4: Description list -->
                 <div id="div_description_list" class="col-sm-6 col-sm-offset-3">
                     <label for="description_list">Omschrijvingen</label><br>
                     <select id="description_list" class="form-control" multiple="multiple">
                         <option class="context-menu-one">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae bibendum libero.</option>
                         <option class="context-menu-one">Proin sed aliquam lectus.</option>
-                    </select>
+                    </select><br>
+                    <button id="save_button" type="button" class="btn btn-success">Opslaan</button>
                 </div>
             </div>
         </div>

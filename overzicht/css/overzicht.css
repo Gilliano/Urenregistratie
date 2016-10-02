@@ -8,7 +8,7 @@
     margin-top: 5rem;
 }
 
-#div_description_list {
+#description_row {
     display: none;
 }
 
@@ -16,6 +16,19 @@
     height: 30rem;
 }
 
+.validated {
+    background-color: rgb(53,180,73);
+    color: white;
+}
+
+.validated:checked {
+    background: linear-gradient(#004800, #004800);
+}
+
 #search_button {
     margin-top: 0.5rem;
+}
+
+#save_button {
+    width: 100%;
 }

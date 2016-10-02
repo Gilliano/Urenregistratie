@@ -1,6 +1,7 @@
 /**
  * Created by JohnDoe on 1-10-2016.
  */
+// Handler for search button
 $("#search_button").on("click", function(event){
    $.getScript("../main/js/ajax.js", function(){
        console.log("Starting search..");
@@ -22,13 +23,19 @@ $("#search_button").on("click", function(event){
            // Fill the description list
            var html = "";
            response.forEach(function(item){
-                html += "<option class='context-menu-one' value='"+item.idUur+"'>"+item.omschrijving+"</option>";
-               //TODO: When clicked on option show modal with all info
+               var validateClass = item.goedgekeurd==1?'validated':'';
+               html += "<option class='context-menu-one "+validateClass+"' value='"+item.idUur+"'>"+item.omschrijving+"</option>";
            });
 
            $("#description_list").html(html);
-           $("#div_description_list").show();
+           $("#description_row").show();
        };
        ajaxObj.call();
    });
+});
+
+// Handler for save button
+$("#save_button").on("click", function(event){
+    // TODO: Save all 'changed' records
+    alert("TODO: Save all 'changed' records");
 });
