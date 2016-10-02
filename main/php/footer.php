@@ -13,6 +13,5 @@
 <script src="../main/js/npm.js"></script>
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="../main/js/bootstrap-select.js"></script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 
