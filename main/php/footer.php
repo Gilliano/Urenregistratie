@@ -5,8 +5,8 @@
  * Time: 19:29
  */
 ?>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) V2.1.4 -->
+<script src="../main/js/jquery.min.js"></script>
 
 <!--Bootstrap-->
 <script src="../main/js/bootstrap.min.js"></script>
