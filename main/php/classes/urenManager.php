@@ -52,7 +52,6 @@ class urenManager
         if(isset($_POST['project']) && isset($_POST['urenregulier']) && isset($_POST['ureninnovatief']) && isset($_POST['begintijd']) && isset($_POST['eindtijd']) && isset($_POST['omschrijving'])) {
             
             $conn = database::connect();
-            // TODO: Rebuild this with ajax?
             $medewerker = $_SESSION['idMedewerker'];
             $project = $_POST['project'];
             $datum = $_POST['datum'];
