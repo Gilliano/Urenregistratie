@@ -42,6 +42,11 @@
                                     </select>
                                 </td>
                             </tr>
+ 						</tr>
+                        <tr>
+                            <td class="description">Datum</td>
+                            <td class="field"><input type="date" name="datum" class="form-control" id="datum"/></td>
+                        </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
                                 <td class="field"><input type="time" name="begintijd" class="form-control" id="begintijd" required/></td>
