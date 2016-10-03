@@ -112,16 +112,13 @@ class userManager {
     
         
     // Returns all email from table `medewerker`
-    public static function getAllEmails()
+    public static function getAllUsers()
     {
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT email FROM medewerker");
+        $stmt = $conn->prepare("SELECT * FROM medewerker");
         $stmt->execute();
-        while($record = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-            array_push($records, $record);
-        }
+        $records = $stmt->fetchAll();
         
         return $records;
     }
@@ -136,9 +133,21 @@ class userManager {
         $stmt = $conn->prepare("SELECT email FROM medewerker WHERE idMedewerker = ?");
         $stmt->bindParam(1, $userID);
         $stmt->execute();
-        $email = $stmt->fetch(PDO::FETCH_ASSOC);
+        $email = $stmt->fetch();
         
         return $email;
+    }
+
+    public static function getIDFromEmail($userEmail)
+    {
+        $userID = -1;
+        $conn = database::connect();
+        $stmt = $conn->prepare("SELECT idMedewerker FROM medewerker WHERE email = ?");
+        $stmt->bindParam(1, $userEmail, PDO::PARAM_STR);
+        $stmt->execute();
+        $userID = $stmt->fetch();
+
+        return $userID;
     }
 
     public static function logout() {
