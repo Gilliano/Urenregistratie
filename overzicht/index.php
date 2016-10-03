@@ -1,4 +1,3 @@
-<?php session_start(); ?> <!-- DEBUG: This is already done in login page -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +10,11 @@
         <?php require_once('../main/php/head.php'); ?>
         <!-- PHP code for overzicht page -->
         <?php require_once('php/overzicht.php'); ?>
-        
+
+        <!-- Date Range picker -->
+        <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
+        <!-- Context Menu -->
+        <link rel="stylesheet" type="text/css" href="css/jquery.contextMenu.min.css">
         <!-- Overizcht -->
         <link href="css/overzicht.css" rel="stylesheet">
     </head>
@@ -20,9 +23,8 @@
             <?php include_once '../main/php/navbar.php'; ?>
         </header>
         
-        <!-- Data list -->
+        <!-- Container -->
         <div class="container">
-<<<<<<< HEAD
             <div class="row">
                 <!-- Step 1: Users list -->
                 <div class="col-sm-3 col-sm-offset-1">
@@ -68,61 +70,22 @@
                     </select><br>
                     <button id="save_button" type="button" class="btn btn-success">Opslaan</button>
                 </div>
-=======
-            <div>
-                <!-- Goes to previous page -->
-                <button type="button" name="previousButton" class="pageButton">Previous page</button>
-                <label id="pageLabel"><?php echo $_SESSION['pagenumber']; ?></label>
-                <!-- TGoes to next page -->
-                <button type="button" name="nextButton" class="pageButton">Next page</button>
->>>>>>> parent of 1124438... Basic functionality works (only 2nd filter not yet (project 1 = samsung) and context menu for description items doesnt do anything yet)
             </div>
-            <table id="datalist" class="table table-bordered">
-                <thead>
-                    <th>
-                        <select class="form-control">
-                            <?php echo createMailDropdown(); ?>
-                        </select>
-                    </th>
-                    <th>
-                        <select class="form-control">
-                            <?php echo createProjectDropdown(); ?>
-                        </select>
-                    </th>
-                    <th>
-                        <input class="form-control" type="number" name="hours_filter" min="0">
-                    </th>
-                    <th>
-                        <textarea class="form-control" type="text" name="description_filter" rows=1 style="height: 35px;">gewerkt aan</textarea>
-                    </th>
-                    <th style="text-align: center; vertical-align: middle;">
-                        <input class="checkbox-inline" type="checkbox" name="innovative_filter" value="Innovatief">
-                    </th>
-                    <th style="text-align: center; vertical-align: middle;">
-                        <input class="checkbox-inline" type="checkbox" name="validated_filter" value="Goedgekeurd">
-                    </th>
-                </thead>
-                <thead>
-                    <tr>
-                        <th style="text-align: center;">Email</th>
-                        <th style="text-align: center;">Project</th>
-                        <th style="text-align: center;">Uren</th>
-                        <th style="text-align: center;">Omschrijving</th>
-                        <th style="text-align: center;">Innovatief</th>
-                        <th style="text-align: center;">Goedgekeurd</th>    
-                    </tr>
-                </thead>
-                <tbody id="recordsTable">
-                    <?php echo createTable($_SESSION['pagenumber']); ?>
-                </tbody>
-            </table>
         </div>
-        
-        <!--  Apply main shit  -->
+
+        <!--  Apply main scripts  -->
         <?php require_once("../main/php/footer.php"); ?>
-        <!-- Apply the button eventHandlers -->
-        <script type="application/javascript" src="js/buttonHandlers.js"></script>
-        <!-- Apply the eventHandlers for editable classes -->
-        <script type="application/javascript" src="js/editableHandlers.js"></script>
+        <!-- Initializer script -->
+        <script type="text/javascript" src="js/initialization.js"></script>
+        <!-- Button handlers -->
+        <script type="text/javascript" src="js/buttonHandlers.js"></script>
+        <!-- Utilities -->
+        <script type="text/javascript" src="js/utilities.js"></script>
+        <!-- Date Range picker prerequisites -->
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        <!-- Include Date Range picker -->
+        <script type="text/javascript" src="js/daterangepicker.js"></script>
+        <!-- Include Context Menu -->
+        <script type="text/javascript" src="js/jquery.contextMenu.min.js"></script>
     </body>
 </html>
