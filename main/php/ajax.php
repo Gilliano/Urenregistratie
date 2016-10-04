@@ -97,4 +97,11 @@ function getUrenBetweenDate($params)
     $records = urenManager::getRecordsForUserProjectDaterange($params['userID'], $params['projectID'], $params['date1'], $params['date2']);
     echo json_encode($records);
 }
+
+// Saves the uur record(s) into the database
+function saveUurRecord($params)
+{
+    foreach(urenManager::UpdateUren($params) as $result)
+        echo $result . "\n";
+}
 ?>

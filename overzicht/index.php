@@ -19,21 +19,24 @@
         <link href="css/overzicht.css" rel="stylesheet">
     </head>
     <body>
+        <!-- Alerts -->
+        <div id="noRecordsFound" class="alert alert-info">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Info</strong> No records found with the current filters...
+        </div>
+
         <header>
             <?php include_once '../main/php/navbar.php'; ?>
         </header>
-        
+
         <!-- Container -->
         <div class="container">
-            <div class="row">
+            <div id="filter_row" class="row">
                 <!-- Step 1: Users list -->
                 <div class="col-sm-3 col-sm-offset-1">
                     <label for="users_list">Gebruikers</label><br>
                     <select id="users_list" class="selectpicker" data-live-search="true">
-                        <option>User 1</option>
-                        <option>User 2</option>
-                        <option>User 3</option>
-                        <option>User 4</option>
+                        <option>Loading...</option>
                     </select>
                 </div>
 
@@ -41,10 +44,7 @@
                 <div class="col-sm-3">
                     <label for="projects_list">Projecten</label><br>
                     <select id="projects_list" class="selectpicker" data-live-search="true">
-                        <option>Project 1</option>
-                        <option>Project 2</option>
-                        <option>Project 3</option>
-                        <option>Project 4</option>
+                        <option>Loading...</option>
                     </select>
                 </div>
 

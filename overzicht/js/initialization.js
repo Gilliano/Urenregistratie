@@ -27,6 +27,11 @@ $(document).ready(function(){
         //         htmlList += "<option value=" + item.projectnaam + ">" + item.projectnaam + "</option>";
         //     });
         // };
+        // DEBUG: Hardcoded version of the above code
+        var htmlList = "";
+        htmlList += "<option value='Apple'>Apple</option>";
+        htmlList += "<option value='Samsung'>Samsung</option>";
+        $("#projects_list").html(htmlList);
 
         // Step 3: Initialize date range picker
         $("#daterange_picker").daterangepicker({
@@ -76,6 +81,7 @@ $(document).ready(function(){
                                 $("#description_list :selected").each(function(i, selected){
                                     // Add 'validated' class
                                     $(selected).addClass("validated");
+                                    cache_new_records[$(selected).val()].goedgekeurd = "1";
                                 });
                                 break;
                             case "invalidate":
@@ -84,7 +90,16 @@ $(document).ready(function(){
                                 $("#description_list :selected").each(function(i, selected){
                                     // Remove class 'validated'
                                     $(selected).removeClass("validated");
+                                    cache_new_records[$(selected).val()].goedgekeurd = "0";
                                 });
+                                break;
+                            case "log": // DEBUG: Logs current item info in console
+                                console.log("\n---BEGIN---");
+                                $("#description_list :selected").each(function(i, selected){
+                                    console.log(cache_new_records[$(selected).val()]);
+                                    console.log(cache_old_records[$(selected).val()]);
+                                });
+                                console.log("---END---");
                                 break;
                         }
                     },
@@ -113,6 +128,7 @@ $(document).ready(function(){
                     options.items.multiple = {name: "Kan niet kiezen", disabled: true}; // TODO: Rename to something better
 
                 options.items.view = {name: "Bekijken", disabled: $("#description_list :selected").length>1 ? true : false}; // TODO: Show modal
+                options.items.log = {name: "Log"}; // DEBUG: Logs current item info in console
                 options.items.sep1 = "---------";
                 options.items.cancel = {name: "Cancel"};
 
@@ -120,6 +136,7 @@ $(document).ready(function(){
             }
         });
 
+        $("#filter_row").show();
         console.log("Initialized!");
     });
 });
