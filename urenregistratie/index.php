@@ -14,6 +14,7 @@
         echo urenManager::addUren();
     }
     $arraySize = sizeof(projectManager::getAllCurrentProjects());
+    $date = date("Y-m-d");
     ?>
 
     <body>
@@ -45,15 +46,15 @@
  						</tr>
                         <tr>
                             <td class="description">Datum</td>
-                            <td class="field"><input type="date" name="datum" class="form-control" id="datum"/></td>
+                            <td class="field"><input type="date" name="datum" class="form-control" id="datum" value="<?= $date ?>"/></td>
                         </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
-                                <td class="field"><input type="time" name="begintijd" class="form-control" id="begintijd" required/></td>
+                                <td class="field"><input type="time" name="begintijd" step="1800" class="form-control" id="begintijd" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Eindtijd</td>
-                                <td class="field"><input type="time" name="eindtijd" class="form-control" id="eindtijd" required/></td>
+                                <td class="field"><input type="time" name="eindtijd" step="1800" class="form-control" id="eindtijd" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Totaal aantal uren gewerkt</td>

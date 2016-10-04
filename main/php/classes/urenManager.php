@@ -49,20 +49,14 @@ class urenManager
     static function addUren() {
         
         //Check if input fields are filled
-        if(isset($_POST['project']) && isset($_POST['urenregulier']) && isset($_POST['ureninnovatief']) && isset($_POST['begintijd']) && isset($_POST['eindtijd']) && isset($_POST['omschrijving'])) {
+        if(isset($_POST['project']) && isset($_POST['urenregulier']) && isset($_POST['ureninnovatief']) && isset($_POST['datum']) && isset($_POST['begintijd']) && isset($_POST['eindtijd']) && isset($_POST['omschrijving'])) {
             
             $conn = database::connect();
             $medewerker = $_SESSION['idMedewerker'];
             $project = $_POST['project'];
-            
-            if(isset($_POST['datum'])) {
-                $datum = $_POST['datum'];
-            }
-            else {
-                $datum = date("Y-m-d");
-            }
             $urenregulier = $_POST['urenregulier'];
             $ureninnovatief = $_POST['ureninnovatief'];
+            $datum = $_POST['datum'];
             $Btijd = $datum . " " . $_POST['begintijd'];
             $date = date_create("$Btijd");
             $begintijd = date_format($date,"Y-m-d H:i:s");
