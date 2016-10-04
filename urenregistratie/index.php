@@ -31,8 +31,6 @@
                     <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
                         <table>
                             <tr>
-                                <td class="description">Project</td>
-                                <td class="field">
                                 <?php
                                 if(isset($_POST['urenopslaan'])) {
                                     echo urenManager::addUren();
