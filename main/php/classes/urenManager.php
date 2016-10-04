@@ -65,11 +65,13 @@ class urenManager
             $eindtijd = date_format($dag,"Y-m-d H:i:s");
             $omschrijving = $_POST['omschrijving'];
             $goedgekeurd = FALSE;
+            $berekening = (strtotime($eindtijd) - strtotime($begintijd)) / 3600;
+            return $berekening;
 
             if($ureninnovatief <= 0) {
                 $innovatief = FALSE;
 
-                $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief,  goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bindParam(1, $medewerker, PDO::PARAM_INT);
                 $stmt->bindParam(2, $project, PDO::PARAM_INT);
                 $stmt->bindParam(3, $urenregulier, PDO::PARAM_INT);
