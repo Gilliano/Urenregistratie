@@ -69,7 +69,7 @@ class urenManager
             if($ureninnovatief <= 0) {
                 $innovatief = FALSE;
 
-                $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief,  goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bindParam(1, $medewerker, PDO::PARAM_INT);
                 $stmt->bindParam(2, $project, PDO::PARAM_INT);
                 $stmt->bindParam(3, $urenregulier, PDO::PARAM_INT);
