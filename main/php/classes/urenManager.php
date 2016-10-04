@@ -47,10 +47,10 @@ class urenManager
     }
     
     static function addUren() {
-        
+
         //Check if input fields are filled
-        if(isset($_POST['project']) && isset($_POST['urenregulier']) && isset($_POST['ureninnovatief']) && isset($_POST['datum']) && isset($_POST['begintijd']) && isset($_POST['eindtijd']) && isset($_POST['omschrijving'])) {
-            
+        if(isset($_POST['project']) && isset($_POST['urenregulier']) && isset($_POST['ureninnovatief']) && isset($_POST['begintijd']) && isset($_POST['eindtijd']) && isset($_POST['omschrijving'])) {
+
             $conn = database::connect();
             $medewerker = $_SESSION['idMedewerker'];
             $project = $_POST['project'];
@@ -126,6 +126,49 @@ class urenManager
         else {
             return "<div class='alert alert-danger' id='error'>Vul alle invoervelden in!</div>";
         }
-}
+    }
+
+    // Updates the record in `uur` tabel
+    // foreach element in param array
+    // parameters: Array which contains
+    // all the changed records (as an
+    // associative array that reflects the
+    // `uur` tabel columns=>values)
+    public static function UpdateUren($records_array)
+    {
+        $conn = database::connect();
+        $stmts = [];
+        foreach($records_array as $record)
+        {
+            // Create the query as string
+            $query = "UPDATE uur SET ";
+            $values = [];
+            $index = 1; // Index is used for tracking the position in the $record array
+            foreach ($record as $key => $value)
+            {
+                $query .= $key." = ?"; // Add "Keyname = ?" to the query string
+                $query .= $index == count($record) ? " WHERE idUur = ?;" : ", "; // Decide what to do when we reach the end
+                array_push($values, $value); // Put the values for the keys in the list
+                $index++; // Increase the index
+            }
+
+            // Create the statement with the query string
+            $stmt = $conn->prepare($query);
+
+            // Bind all params to the statement
+            for($i = 1; $i <= count($values); $i++)
+                $stmt->bindParam($i, $values[$i-1]);
+            $stmt->bindParam(count($values) + 1, $record["idUur"], PDO::PARAM_INT); // Set WHERE idUur value
+
+            // Put the statement in the list
+            array_push($stmts, $stmt);
+        }
+
+        $results = [];
+        foreach ($stmts as $stmt)
+            array_push($results, $stmt->execute() ? "Succes" : "Failed"); // Add the execute() results to the list
+
+        return $results;
+    }
 }
 ?>
