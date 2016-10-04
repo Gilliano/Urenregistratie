@@ -168,37 +168,4 @@
     //performance increasing not everything in the head, not necessary things in the footer.
     require_once '../main/php/footer.php';
     ?>
-
-    <script src="js/bootstrap-switch.js"></script>
-    <script>
-        $("[name='mode']").bootstrapSwitch();
-
-        $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state) {
-            if(state === true){
-                $('#modalFormulier').modal('toggle');
-                $('#mainFormulier').hide();
-
-                $("#modalContent").html('<div class="panel panel-default modalPanel">' +
-                    '<div class="panel-heading" data-toggle="collapse" href="#collapse1">Hoi</div>' +
-                    '<div  class="panel-body collapse" id="collapse1">' +
-                    '<form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">' +
-                    '<table>' +
-                    '<tr>' +
-                    '<td class="description">Begintijd</td>' +
-                    '<td class="field"><input type="time" name="begintijd" class="form-control" id="begintijd" required/></td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td class="description">Eindtijd</td>' +
-                    '<td class="field"><input type="time" name="eindtijd" class="form-control" id="eindtijd" required/></td>' +
-                '</tr>');
-            }else{
-                //$("#mainFormulier").show();
-                //$(".modalPanel").hide();
-            }
-        });
-
-        $('#modalFormulier').on('hide.bs.modal', function () {
-            $("[name='mode']").bootstrapSwitch('toggleState');
-        })
-    </script>
 </html>
