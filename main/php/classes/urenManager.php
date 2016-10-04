@@ -54,7 +54,13 @@ class urenManager
             $conn = database::connect();
             $medewerker = $_SESSION['idMedewerker'];
             $project = $_POST['project'];
-            $datum = $_POST['datum'];
+            
+            if(isset($_POST['datum'])) {
+                $datum = $_POST['datum'];
+            }
+            else {
+                $datum = date("Y-m-d");
+            }
             $urenregulier = $_POST['urenregulier'];
             $ureninnovatief = $_POST['ureninnovatief'];
             $Btijd = $datum . " " . $_POST['begintijd'];
