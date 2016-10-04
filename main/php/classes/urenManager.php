@@ -65,8 +65,6 @@ class urenManager
             $eindtijd = date_format($dag,"Y-m-d H:i:s");
             $omschrijving = $_POST['omschrijving'];
             $goedgekeurd = FALSE;
-            $berekening = (strtotime($eindtijd) - strtotime($begintijd)) / 3600;
-            return $berekening;
 
             if($ureninnovatief <= 0) {
                 $innovatief = FALSE;
@@ -92,7 +90,7 @@ class urenManager
                 $uren = FALSE;
                 $innovatief = TRUE;
 
-                $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief,  goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bindParam(1, $medewerker, PDO::PARAM_INT);
                 $stmt->bindParam(2, $project, PDO::PARAM_INT);
                 $stmt->bindParam(3, $urenregulier, PDO::PARAM_INT);
@@ -106,7 +104,7 @@ class urenManager
                     $query = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                     $query->bindParam(1, $medewerker, PDO::PARAM_INT);
                     $query->bindParam(2, $project, PDO::PARAM_INT);
-                    $query->bindParam(3, $urenregulier, PDO::PARAM_INT);
+                    $query->bindParam(3, $ureninnovatief, PDO::PARAM_INT);
                     $query->bindParam(4, $begintijd, PDO::PARAM_STR);
                     $query->bindParam(5, $eindtijd, PDO::PARAM_STR);
                     $query->bindParam(6, $omschrijving, PDO::PARAM_STR);

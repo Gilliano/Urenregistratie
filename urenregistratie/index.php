@@ -31,13 +31,14 @@
                     <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
                         <table>
                             <tr>
+                                <?php
+                                if(isset($_POST['urenopslaan'])) {
+                                    echo urenManager::addUren();
+                                }
+                                ?>
                                 <td class="description">Project</td>
                                 <td class="field">
-                                    <?php
-                                    if(isset($_POST['urenopslaan'])) {
-                                        echo urenManager::addUren();
-                                    }
-                                    ?>
+
                                     <select class="selectpicker" name="project" data-width="" data-live-search="true" title="Kies een project..." required>
                                         <?php for($i = 0; $i < $arraySize; $i++) { ?>
                                             <option value="<?= projectManager::getAllCurrentProjects()[$i]["idProject"]?>"><?= projectManager::getAllCurrentProjects()[$i]["projectnaam"]?></option>
