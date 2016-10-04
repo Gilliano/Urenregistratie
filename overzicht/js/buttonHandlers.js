@@ -5,11 +5,18 @@
 var cache_old_records;
 var cache_new_records;
 
+// For hiding alerts
+$(document).on('click', '.alert .close', function(){
+    $(this).closest('.alert').hide()
+});
+
 // Handler for search button
 $("#search_button").on("click", function(event){
     $("#search_button").prop("disabled",true);
     $("#description_row").hide();
-    $("#noRecordsFound").hide();
+    $(".alert").each(function(item){
+        $(item).hide();
+    });
 
     $.getScript("../main/js/ajax.js", function(){
        console.log("Starting search..");
@@ -74,7 +81,12 @@ $("#save_button").on("click", function(event){
     $.getScript("../main/js/ajax.js", function(){
         var ajaxObj = new AjaxObj("saveUurRecord", changed_records); // TODO: Is this really safe??
         ajaxObj.callback = function(response){
-            console.log(response);
+            //console.log(response);
+            if(jQuery.inArray("Failed", response) != -1)
+                $("#recordSavedFailed").show();
+            else
+                $("#recordSavedSucces").show();
+            cache_old_records = $.extend(true, [], cache_new_records);
         };
         ajaxObj.call();
     });

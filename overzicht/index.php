@@ -21,8 +21,16 @@
     <body>
         <!-- Alerts -->
         <div id="noRecordsFound" class="alert alert-info">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <a href="#" class="close" aria-label="close">&times;</a>
             <strong>Info</strong> No records found with the current filters...
+        </div>
+        <div id="recordSavedSucces" class="alert alert-success">
+            <a href="#" class="close" aria-label="close">&times;</a>
+            <strong>Succes</strong> Succesfully saved the changes!
+        </div>
+        <div id="recordSavedFailed" class="alert alert-danger">
+            <a href="#" class="close" aria-label="close">&times;</a>
+            <strong>Failed</strong> Some records could not be saved! <!-- TODO: Make more detailed -->
         </div>
 
         <header>
