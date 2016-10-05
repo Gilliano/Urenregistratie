@@ -74,9 +74,9 @@ function getRecordsCache($params)
 }
 
 // Gets all projects
-function getProjects($params)
+function getAllProjects()
 {
-    echo json_encode(projectManager::getAllCurrentProjects());
+    echo json_encode(projectManager::getAllProjects());
 }
 
 // Gets all users

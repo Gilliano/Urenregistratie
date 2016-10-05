@@ -1,37 +1,37 @@
 /**
  * Created by JohnDoe on 29-9-2016.
  */
+// TODO: Change for non-admins
 $(document).ready(function(){
     console.log("Initializing...");
 
     $.getScript("../main/js/ajax.js", function() {
         // Step 1: Initialize users list
-        var ajaxObj = new AjaxObj("getUsers");
-        ajaxObj.dataType = "json";
-        ajaxObj.callback = function (response) {
-            var htmlList = "";
-            response.forEach(function(item){
-                htmlList += "<option value=" + item.email + ">" + item.email + "</option>"; // FEATURE: Set data-tokens equal to user's project names
-            });
-            $("#users_list").html(htmlList);
-            $(".selectpicker").selectpicker('refresh');
-        };
-        ajaxObj.call();
+        var ajaxObj = new AjaxObj("getUsers", {}, false, "json");
+        var htmlList = "";
+        ajaxObj.result.forEach(function(item){
+            // TODO: Only allow your own name if not admin
+            htmlList += "<option value=" + item.email + ">" + item.email + "</option>"; // FEATURE: Set data-tokens equal to user's project names
+        });
+        $("#users_list").html(htmlList);
+        $(".selectpicker").selectpicker('refresh');
+        console.log("Users list complete!"); // DEBUG
 
         // TODO: Step 2: Initialize projects list
-        // ajaxObj.action = "getProjects";
-        // ajaxObj.params = {'userID': }
-        // ajaxObj.callback = function(response){
-        //     var htmlList = "";
-        //     response.forEach(function(item){
-        //         htmlList += "<option value=" + item.projectnaam + ">" + item.projectnaam + "</option>";
-        //     });
-        // };
+        ajaxObj = new AjaxObj("getAllProjects", {}, false, "json");
+        htmlList = "";
+        ajaxObj.result.forEach(function(item){
+            var deleted = item.verwijderd == 1 ? " (deleted)" : "";
+            htmlList += "<option value=" + item.projectnaam + ">" + item.projectnaam + deleted + "</option>";
+        });
+
         // DEBUG: Hardcoded version of the above code
-        var htmlList = "";
-        htmlList += "<option value='Apple'>Apple</option>";
-        htmlList += "<option value='Samsung'>Samsung</option>";
+        // var htmlList = "";
+        // htmlList += "<option value='Apple'>Apple</option>";
+        // htmlList += "<option value='Samsung'>Samsung</option>";
         $("#projects_list").html(htmlList);
+        $(".selectpicker").selectpicker('refresh');
+        console.log("Projects list complete!"); // DEBUG
 
         // Step 3: Initialize date range picker
         $("#daterange_picker").daterangepicker({
@@ -67,6 +67,7 @@ $(document).ready(function(){
                 "endDate": ""
             },
         });
+        console.log("Daterange picker complete!"); // DEBUG
 
         // Step 4: Descriptions list
         $.contextMenu({
@@ -135,6 +136,7 @@ $(document).ready(function(){
                 return options;
             }
         });
+        console.log("Context menu complete!"); // DEBUG
 
         $("#filter_row").show();
         console.log("Initialized!");
