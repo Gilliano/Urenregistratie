@@ -19,21 +19,21 @@
         <link href="css/overzicht.css" rel="stylesheet">
     </head>
     <body>
-        <!-- Alerts -->
-        <div id="noRecordsFound" class="alert alert-info">
-            <a href="#" class="close" aria-label="close">&times;</a>
-            <strong>Info</strong> No records found with the current filters...
-        </div>
-        <div id="recordSavedSucces" class="alert alert-success">
-            <a href="#" class="close" aria-label="close">&times;</a>
-            <strong>Succes</strong> Succesfully saved the changes!
-        </div>
-        <div id="recordSavedFailed" class="alert alert-danger">
-            <a href="#" class="close" aria-label="close">&times;</a>
-            <strong>Failed</strong> Some records could not be saved! <!-- TODO: Make more detailed -->
-        </div>
-
         <header>
+            <!-- Alerts -->
+            <div id="noRecordsFound" class="alert alert-info">
+                <a href="#" class="close" aria-label="close">&times;</a>
+                <strong>Info</strong> No records found with the current filters...
+            </div>
+            <div id="recordSavedSucces" class="alert alert-success">
+                <a href="#" class="close" aria-label="close">&times;</a>
+                <strong>Succes</strong> Succesfully saved the changes!
+            </div>
+            <div id="recordSavedFailed" class="alert alert-danger">
+                <a href="#" class="close" aria-label="close">&times;</a>
+                <strong>Failed</strong> Some records could not be saved! <!-- TODO: Make more detailed -->
+            </div>
+
             <?php include_once '../main/php/navbar.php'; ?>
         </header>
 
@@ -44,7 +44,7 @@
                 <div class="col-sm-3 col-sm-offset-1">
                     <label for="users_list">Gebruikers</label><br>
                     <select id="users_list" class="selectpicker" data-live-search="true">
-                        <option>Loading...</option>
+                        <!-- <option>Loading...</option> -->
                     </select>
                 </div>
 
@@ -52,7 +52,7 @@
                 <div class="col-sm-3">
                     <label for="projects_list">Projecten</label><br>
                     <select id="projects_list" class="selectpicker" data-live-search="true">
-                        <option>Loading...</option>
+                        <!-- <option>Loading...</option> -->
                     </select>
                 </div>
 
@@ -70,6 +70,7 @@
             </div>
             <div id="description_row" class="row">
                 <!-- Step 4: Description list -->
+                <div class="loader col-sm-2 col-sm-offset-5"></div>
                 <div id="div_description_list" class="col-sm-6 col-sm-offset-3">
                     <label for="description_list">Omschrijvingen</label><br>
                     <select id="description_list" class="form-control" multiple="multiple">

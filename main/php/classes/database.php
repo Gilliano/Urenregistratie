@@ -1,7 +1,7 @@
 <?php
 class database {
     public static function connect() {
-        $servername = "149.210.153.186";
+        $servername = "149.210.153.186"; //37.97.223.88
         $username = "adsd4_teamnegg";
         $password = "th3BRPvf4";
         $dbname = "adsd4_negg";

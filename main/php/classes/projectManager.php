@@ -2,7 +2,6 @@
 
 class projectManager
 {
-    // TODO: Delete this one, and use current instead?
     // Returns all names from `project` table
     public static function getAllProjects()
     {
@@ -10,7 +9,7 @@ class projectManager
         $conn = database::connect();
         $stmt = $conn->prepare("SELECT * FROM project");
         $stmt->execute();
-        $stmt->fetchAll();
+        $records = $stmt->fetchAll();
         
         return $records;
     }

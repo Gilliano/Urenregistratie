@@ -34,7 +34,7 @@ class urenManager
 
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT idUur, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, timestamp, goedgekeurd FROM uur WHERE idMedewerker = ? AND idProject = ? AND begintijd BETWEEN ? AND ? ORDER BY begintijd DESC;");
+        $stmt = $conn->prepare("SELECT idUur, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, timestamp, goedgekeurd FROM uur WHERE idMedewerker = ? AND idProject = ? AND begintijd BETWEEN ? AND ? ORDER BY begintijd ASC;");
         $stmt->bindParam(1, $userID, PDO::PARAM_INT);
         $stmt->bindParam(2, $projectID, PDO::PARAM_INT);
         $stmt->bindParam(3, $date1, PDO::PARAM_STR);
