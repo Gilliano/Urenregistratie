@@ -11,6 +11,7 @@
 
     <?php
     $arraySize = sizeof(projectManager::getAllCurrentProjects());
+    $alleMedewerkers = sizeof(userManager::getAllUsers());
     $date = date("Y-m-d");
     ?>
 
@@ -21,14 +22,14 @@
     <div class="container">
         <div class="col-md-12" style="text-align: center;">
             <p>
-                <input type="checkbox" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
+                <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
             </p>
         </div>
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default" id="mainFormulier">
                 <div class="panel-heading">Uren invulformulier</div>
                 <div  class="panel-body">
-                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                    <form method="post" action=""  id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
                         <table>
                             <tr>
                                 <?php
@@ -108,9 +109,12 @@
                                     <td class="description">Medewerkers</td>
                                     <td class="field">
                                         <select class="selectpicker" multiple name="medewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
-                                            <?php for($i = 0; $i < $arraySize; $i++) { ?>
-                                                <option value="<?= projectManager::getAllCurrentProjects()[$i]["idProject"]?>"><?= projectManager::getAllCurrentProjects()[$i]["projectnaam"]?></option>
-                                            <?php } ?>
+                                            <?php for($i = 0; $i < $alleMedewerkers; $i++) { ?>
+                                                <?php if(empty(userManager::getAllUsers()[$i]["tussenvoegsel"])) { ?>
+                                                <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " "  . userManager::getAllUsers()[$i]["achternaam"]?></option>
+                                            <?php } else{  ?>
+                                            <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " " . userManager::getAllUsers()[$i]["tussenvoegsel"] . " " . userManager::getAllUsers()[$i]["achternaam"]?></option>
+                                            <?php } } ?>
                                         </select>
                                     </td>
                                 </tr>
