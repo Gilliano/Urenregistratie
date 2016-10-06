@@ -8,6 +8,10 @@
     left: auto;
 }
 
+#daterange_picker {
+    width: 20rem;
+}
+
 .row {
     margin-bottom: 1rem;
     margin-top: 5rem;
@@ -38,6 +42,24 @@
     width: 100%;
 }
 
+.edit_modal {
+    width: auto;
+    margin-top: 0;
+}
+
+.edit_modal input[type="number"] {
+    width: 7rem;
+}
+
+.edit_modal input[type="checkbox"] {
+    height: 0;
+}
+
+.edit_modal textarea {
+    resize: vertical;
+    width: 30rem;
+}
+
 /* Loader */
 .loader {
     display: none;
@@ -47,6 +69,14 @@
     width: 120px;
     height: 120px;
     animation: spin 2s linear infinite;
+}
+
+#edit_modal_closeButton {
+    float: left;
+}
+
+#edit_modal_saveButton {
+    float: right;
 }
 
 @keyframes spin {

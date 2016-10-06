@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Step 3: Date range picker -->
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <label for="daterange_picker">Datum: van .. tot</label><br>
                     <input id="daterange_picker" type="text" class="form-control" name="daterange"/>
                 </div>
@@ -74,10 +74,25 @@
                 <div id="div_description_list" class="col-sm-6 col-sm-offset-3">
                     <label for="description_list">Omschrijvingen</label><br>
                     <select id="description_list" class="form-control" multiple="multiple">
-                        <option class="context-menu-one">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae bibendum libero.</option>
-                        <option class="context-menu-one">Proin sed aliquam lectus.</option>
                     </select><br>
                     <button id="save_button" type="button" class="btn btn-success">Opslaan</button>
+                </div>
+            </div>
+            <div id="edit_modal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Record aanpassen</h4>
+                        </div>
+                        <div class="modal-body">
+                        </div>
+                        <div class="modal-footer">
+                            <button id="edit_modal_closeButton" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button id="edit_modal_saveButton" type="button" class="btn btn-success">Save</button> <!-- TODO: Make buttonHandler (js) -->
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

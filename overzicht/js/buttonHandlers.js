@@ -27,11 +27,9 @@ $("#search_button").on("click", function(event){
         var user = $("#users_list").val();
         var project = $("#projects_list").val();
         var daterange = $("#daterange_picker").val();
-        daterange = daterange.split(" - ");
-        var date1 = daterange[0].split("/");
-        date1 = date1[2] + "-" + date1[1] + "-" + date1[0] + " 00:00:00"; // Date format = YYYY-MM-DD HH:MM:SS
-        var date2 = daterange[1].split("/");
-        date2 = date2[2] + "-" + date2[1] + "-" + date2[0] + " 23:59:59"; // Date format = YYYY-MM-DD HH:MM:SS
+        daterange = daterange.split(" t/m ");
+        var date1 = daterange[0] + " 00:00:00";
+        var date2 = daterange[1] + " 23:59:59";
 
         var ajaxObj = new AjaxObj("getUrenBetweenDate", {'userEmail': user, 'projectName': project, 'date1': date1, 'date2': date2}, false, "json");
         var response = ajaxObj.result;
