@@ -95,7 +95,6 @@
 
 
 
-
     <!-- This is a pop-up. When switch to advanced mode this screen will been show -->
     <div class="container">
         <!-- Modal -->
@@ -115,12 +114,13 @@
                                     <td class="description">Medewerkers</td>
                                     <td class="field">
                                         <select class="selectpicker" multiple name="medewerker" id="medewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
+<!--                                            dit kost te veel werk en de pagina moet erg lang laden vergeleken met de rest, graag even optimaliseren!-->
                                             <?php for($i = 0; $i < $alleMedewerkers; $i++) { ?>
                                                 <?php if(empty(userManager::getAllUsers()[$i]["tussenvoegsel"])) { ?>
-                                                <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " "  . userManager::getAllUsers()[$i]["achternaam"]?></option>
-                                            <?php } else{  ?>
-                                            <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " " . userManager::getAllUsers()[$i]["tussenvoegsel"] . " " . userManager::getAllUsers()[$i]["achternaam"]?></option>
-                                            <?php } } ?>
+                                                    <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " "  . userManager::getAllUsers()[$i]["achternaam"]?></option>
+                                                <?php } else{  ?>
+                                                    <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " " . userManager::getAllUsers()[$i]["tussenvoegsel"] . " " . userManager::getAllUsers()[$i]["achternaam"]?></option>
+                                                <?php } } ?>
                                         </select>
                                     </td>
                                 </tr>
@@ -169,6 +169,7 @@
 
             </div>
         </div>
+
     </div>
     </body>
     <?php
