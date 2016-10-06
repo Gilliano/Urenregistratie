@@ -29,7 +29,7 @@
             <div class="panel panel-default" id="mainFormulier">
                 <div class="panel-heading">Uren invulformulier</div>
                 <div  class="panel-body">
-                    <form method="post" action=""  id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
                         <table>
                             <tr>
                                 <?php
@@ -87,9 +87,15 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8 col-md-offset-2" id="modalContent">
 
+    <!-- Here comes the jQuery model output -->
+    <div class="col-md-8 col-md-offset-2" id="modalContent">
     </div>
+
+
+
+
+
     <!-- This is a pop-up. When switch to advanced mode this screen will been show -->
     <div class="container">
         <!-- Modal -->
@@ -108,7 +114,7 @@
                                 <tr>
                                     <td class="description">Medewerkers</td>
                                     <td class="field">
-                                        <select class="selectpicker" multiple name="medewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
+                                        <select class="selectpicker" multiple name="medewerker" id="medewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
                                             <?php for($i = 0; $i < $alleMedewerkers; $i++) { ?>
                                                 <?php if(empty(userManager::getAllUsers()[$i]["tussenvoegsel"])) { ?>
                                                 <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " "  . userManager::getAllUsers()[$i]["achternaam"]?></option>
@@ -121,7 +127,7 @@
                                 <tr>
                                     <td class="description">Project</td>
                                     <td class="field">
-                                        <select class="selectpicker" name="project" data-width="" data-live-search="true" title="Kies een project...">
+                                        <select class="selectpicker" name="project" id="project" data-width="" data-live-search="true" title="Kies een project...">
                                             <?php for($i = 0; $i < $arraySize; $i++) { ?>
                                                 <option value="<?= projectManager::getAllCurrentProjects()[$i]["idProject"]?>"><?= projectManager::getAllCurrentProjects()[$i]["projectnaam"]?></option>
                                             <?php } ?>
@@ -170,37 +176,8 @@
     //performance increasing not everything in the head, not necessary things in the footer.
     require_once '../main/php/footer.php';
     ?>
-
+    <!-- Load the bootstrap switch -->
     <script src="js/bootstrap-switch.js"></script>
-    <script>
-        $("[name='mode']").bootstrapSwitch();
-
-        $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state) {
-            if(state === true){
-                $('#modalFormulier').modal('toggle');
-                $('#mainFormulier').hide();
-
-                $("#modalContent").html('<div class="panel panel-default modalPanel">' +
-                    '<div class="panel-heading" data-toggle="collapse" href="#collapse1">Hoi</div>' +
-                    '<div  class="panel-body collapse" id="collapse1">' +
-                    '<form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">' +
-                    '<table>' +
-                    '<tr>' +
-                    '<td class="description">Begintijd</td>' +
-                    '<td class="field"><input type="time" name="begintijd" class="form-control" id="begintijd" required/></td>' +
-                '</tr>' +
-                '<tr>' +
-                '<td class="description">Eindtijd</td>' +
-                    '<td class="field"><input type="time" name="eindtijd" class="form-control" id="eindtijd" required/></td>' +
-                '</tr>');
-            }else{
-                //$("#mainFormulier").show();
-                //$(".modalPanel").hide();
-            }
-        });
-
-        $('#modalFormulier').on('hide.bs.modal', function () {
-            $("[name='mode']").bootstrapSwitch('toggleState');
-        })
-    </script>
+    <!-- Load the modal -->
+    <script src="js/modal.js"></script>
 </html>
