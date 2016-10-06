@@ -5,37 +5,34 @@ $("[name='mode']").bootstrapSwitch();
 $('#modalFormulier').on('hide.bs.modal', function () {
     $("[name='mode']").bootstrapSwitch('toggleState');
 })
+var array = [];
+var changed = 0;
+var newHTML;
 
-$(function changeliveinputs() {
-    var array = [];
-    var changed = 0;
-    var newHTML;
 
-    function inputchanged() {
-        if(changed === 1) {
-            newHTML = $.map(array, function (array) {
-                return (array + ' - ');
-            });
-            $(".modalHeader").html(newHTML.join(""));
-            changed == 0;
-        }
+function inputchanged() {
+    if(changed === 1) {
+        newHTML = $.map(array, function (array) {
+            return (array + ' - ');
+        });
+        $(".modalHeader").html(newHTML.join(""));
+        changed == 0;
     }
+}
 
-    $("#medewerker").on("change paste keyup", function() {
-        // check if input is changed
-        changed = 1;
-        // fill the array
-        array[0] = $("#medewerker option:selected").text();
-        inputchanged();
-    });
-    $("#project").on("change paste keyup", function() {
-        // check if input is changed
-        changed = 1;
-        // fill the array
-        array[1] = $("#project option:selected").text();
-        inputchanged();
-    });
-
+$("#medewerker").on("change paste keyup", function() {
+    // check if input is changed
+    changed = 1;
+    // fill the array
+    array[0] = $("#medewerker option:selected").text();
+    inputchanged();
+});
+$("#project").on("change paste keyup", function() {
+    // check if input is changed
+    changed = 1;
+    // fill the array
+    array[1] = $("#project option:selected").text();
+    inputchanged();
 });
 
 //what to do if the bootstrapswitch changed
