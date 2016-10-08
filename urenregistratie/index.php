@@ -137,11 +137,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="begintijd" id="begintijd" class="form-control" id="begintijd" required/></td>
+                                    <td class="field"><input type="time" name="begintijd" id="begintijd" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="eindtijd" id="eindtijd" class="form-control" id="eindtijd" required/></td>
+                                    <td class="field"><input type="time" name="eindtijd" id="eindtijd" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
@@ -149,11 +149,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="urenregulier" id="urenregulier" class="form-control" id="urenregulier" required/></td>
+                                    <td class="veld"><input type="number" name="urenregulier" id="urenregulier" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
-                                    <td class="field"><input type="number" name="ureninnovatief" id="ureninnovatief" class="form-control" id="ureninnovatief" readonly/></td>
+                                    <td class="field"><input type="number" name="ureninnovatief" id="ureninnovatief" class="form-control" readonly/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
