@@ -120,7 +120,7 @@
                                                 <?php if(empty($allUsers[$i]["tussenvoegsel"])) { ?>
                                                     <option value="<?= $allUsers[$i]["idMedewerker"] ?>"><?= $allUsers[$i]["voornaam"] . " "  . $allUsers[$i]["achternaam"]?></option>
                                                 <?php } else{  ?>
-                                                    <option value="<?= $allUsers[$i]["idMedewerker"] ?>"><?= $allUsers[$i]["voornaam"] . " " . $allUsers()[$i]["tussenvoegsel"] . " " . $allUsers[$i]["achternaam"]?></option>
+                                                    <option value="<?= $allUsers[$i]["idMedewerker"] ?>"><?= $allUsers[$i]["voornaam"] . " " . $allUsers[$i]["tussenvoegsel"] . " " . $allUsers[$i]["achternaam"]?></option>
                                                 <?php } } ?>
                                         </select>
                                     </td>
