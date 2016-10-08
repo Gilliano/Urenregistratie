@@ -61,11 +61,14 @@ class userManager {
 
         if(isset($_POST['password'])) {
             $_POST['password'] = sha1($_POST['password']);
+            $_POST['repassword'] = sha1($_POST['repassword']);
+            $_POST['email'] = $_POST['email'] . '@branchonline.nl';
         }
 
-        if(isset($_POST['register'])) {
+        if(isset($_POST['user_register'])) {
 
             if($_POST['password'] == $_POST['repassword']) {
+
                 $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord) VALUES (?,?,?,?,?)";
                 $stmt = $conn->prepare($adduser);
                 $stmt->bindParam(1, $_POST['firstname']);
@@ -75,10 +78,13 @@ class userManager {
                 $stmt->bindParam(5, $_POST['password']);
                 $stmt->execute();
             } else {
-                header("location: ../login/index.php?error=error");
+                return false;
             }
 
+            return NULL;
+
         }
+        return NULL;
     }
 
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
