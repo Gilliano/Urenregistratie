@@ -10,6 +10,8 @@
     </head>
 
     <?php
+    $allCurrentProjects = projectManager::getAllCurrentProjects();
+    $allUsers = userManager::getAllUsers();
     $arraySize = sizeof(projectManager::getAllCurrentProjects());
     $alleMedewerkers = sizeof(userManager::getAllUsers());
     $date = date("Y-m-d");
@@ -42,7 +44,7 @@
 
                                     <select class="selectpicker" name="project" data-width="" data-live-search="true" title="Kies een project..." required>
                                         <?php for($i = 0; $i < $arraySize; $i++) { ?>
-                                            <option value="<?= projectManager::getAllCurrentProjects()[$i]["idProject"]?>"><?= projectManager::getAllCurrentProjects()[$i]["projectnaam"]?></option>
+                                            <option value="<?= $allCurrentProjects[$i]["idProject"]?>"><?= $allCurrentProjects[$i]["projectnaam"]?></option>
                                         <?php } ?>
                                     </select>
                                 </td>
@@ -54,27 +56,27 @@
                         </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
-                                <td class="field"><input type="time" name="begintijd" step="1800" class="form-control" id="begintijd" required/></td>
+                                <td class="field"><input type="time" name="begintijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Eindtijd</td>
-                                <td class="field"><input type="time" name="eindtijd" step="1800" class="form-control" id="eindtijd" required/></td>
+                                <td class="field"><input type="time" name="eindtijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Totaal aantal uren gewerkt</td>
-                                <td class="field"><output readonly type="number" name="urentotaal" class="form-control" id="urentotaal"/></td>
+                                <td class="field"><output readonly type="number" name="urentotaal" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
-                                <td class="veld"><input type="number" name="urenregulier" class="form-control" id="urenregulier" required/></td>
+                                <td class="veld"><input type="number" name="urenregulier" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Innovatieve uren</td>
-                                <td class="field"><input type="number" name="ureninnovatief" class="form-control" id="ureninnovatief" readonly/></td>
+                                <td class="field"><input type="number" name="ureninnovatief" class="form-control" readonly/></td>
                             </tr>
                             <tr>
                                 <td class="description">Omschrijving van de uren</td>
-                                <td class="field"><textarea name="omschrijving" class="form-control" id="omschrijving" required/></textarea></td>
+                                <td class="field"><textarea name="omschrijving" class="form-control" required/></textarea></td>
                             </tr>
                             <!--submit-->
                             <tr>
@@ -114,12 +116,11 @@
                                     <td class="description">Medewerkers</td>
                                     <td class="field">
                                         <select class="selectpicker" multiple name="medewerker" id="medewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
-<!--                                            dit kost te veel werk en de pagina moet erg lang laden vergeleken met de rest, graag even optimaliseren!-->
                                             <?php for($i = 0; $i < $alleMedewerkers; $i++) { ?>
-                                                <?php if(empty(userManager::getAllUsers()[$i]["tussenvoegsel"])) { ?>
-                                                    <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " "  . userManager::getAllUsers()[$i]["achternaam"]?></option>
+                                                <?php if(empty($allUsers[$i]["tussenvoegsel"])) { ?>
+                                                    <option value="<?= $allUsers[$i]["idMedewerker"] ?>"><?= $allUsers[$i]["voornaam"] . " "  . $allUsers[$i]["achternaam"]?></option>
                                                 <?php } else{  ?>
-                                                    <option value="<?= userManager::getAllUsers()[$i]["idMedewerker"] ?>"><?= userManager::getAllUsers()[$i]["voornaam"] . " " . userManager::getAllUsers()[$i]["tussenvoegsel"] . " " . userManager::getAllUsers()[$i]["achternaam"]?></option>
+                                                    <option value="<?= $allUsers[$i]["idMedewerker"] ?>"><?= $allUsers[$i]["voornaam"] . " " . $allUsers()[$i]["tussenvoegsel"] . " " . $allUsers[$i]["achternaam"]?></option>
                                                 <?php } } ?>
                                         </select>
                                     </td>
@@ -129,34 +130,34 @@
                                     <td class="field">
                                         <select class="selectpicker" name="project" id="project" data-width="" data-live-search="true" title="Kies een project...">
                                             <?php for($i = 0; $i < $arraySize; $i++) { ?>
-                                                <option value="<?= projectManager::getAllCurrentProjects()[$i]["idProject"]?>"><?= projectManager::getAllCurrentProjects()[$i]["projectnaam"]?></option>
+                                                <option value="<?= $allCurrentProjects[$i]["idProject"]?>"><?= $allCurrentProjects[$i]["projectnaam"]?></option>
                                             <?php } ?>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field" style="width: 400px;"><input type="time" name="begintijd" class="form-control" id="begintijd" required/></td>
+                                    <td class="field"><input type="time" name="begintijd" id="begintijd" class="form-control" id="begintijd" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="eindtijd" class="form-control" id="eindtijd" required/></td>
+                                    <td class="field"><input type="time" name="eindtijd" id="eindtijd" class="form-control" id="eindtijd" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
-                                    <td class="field"><output readonly type="number" name="urentotaal" class="form-control" id="urentotaal"/></td>
+                                    <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control" id="urentotaal"/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="urenregulier" class="form-control" id="urenregulier" required/></td>
+                                    <td class="veld"><input type="number" name="urenregulier" id="urenregulier" class="form-control" id="urenregulier" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
-                                    <td class="field"><input type="number" name="ureninnovatief" class="form-control" id="ureninnovatief" readonly/></td>
+                                    <td class="field"><input type="number" name="ureninnovatief" id="ureninnovatief" class="form-control" id="ureninnovatief" readonly/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
-                                    <td class="field"><textarea name="omschrijving" class="form-control" id="omschrijving" required/></textarea></td>
+                                    <td class="field"><textarea name="omschrijving" id="omschrijving" class="form-control" id="omschrijving" required/></textarea></td>
                                 </tr>
                             </table>
                         </form>
@@ -180,5 +181,5 @@
     <!-- Load the bootstrap switch -->
     <script src="js/bootstrap-switch.js"></script>
     <!-- Load the modal -->
-    <script src="js/modal.js"></script>
+    <script src="js/modalHandler.js"></script>
 </html>
