@@ -6,29 +6,32 @@ $(document).ready(function(){
     console.log("Initializing...");
 
     $.getScript("../main/js/ajax.js", function() {
+        // Get current userrole
+        var ajaxObj = new AjaxObj("getSessionVariable", {'sessionVariable': "rol"}, false);
+        userrole = ajaxObj.result;
+        ajaxObj = new AjaxObj("getSessionVariable", {'sessionVariable': "email"}, false);
+        usermail = ajaxObj.result;
+
         // Step 1: Initialize users list
-        var ajaxObj = new AjaxObj("getUsers", {}, false, "json");
+        ajaxObj = new AjaxObj("getUsers", {}, false, "json");
         var htmlList = "";
         ajaxObj.result.forEach(function(item){
-            // TODO: Only allow your own name if not admin
-            htmlList += "<option value=" + item.email + ">" + item.email + "</option>"; // FEATURE: Set data-tokens equal to user's project names
+            // Only allow your own name if not admin
+            if(userrole === "medewerker" && item.email == usermail)
+                htmlList += "<option value=" + item.email + ">" + item.email + "</option>"; // FEATURE: Set data-tokens equal to user's project names
         });
         $("#users_list").html(htmlList);
         $(".selectpicker").selectpicker('refresh');
         console.log("Users list complete!"); // DEBUG
 
-        // TODO: Step 2: Initialize projects list
+        // Step 2: Initialize projects list
+        // TODO: Only show the projects that the user is assigned to
         ajaxObj = new AjaxObj("getAllProjects", {}, false, "json");
         htmlList = "";
         ajaxObj.result.forEach(function(item){
             var deleted = item.verwijderd == 1 ? " (deleted)" : "";
             htmlList += "<option value=" + item.projectnaam + ">" + item.projectnaam + deleted + "</option>";
         });
-
-        // DEBUG: Hardcoded version of the above code
-        // var htmlList = "";
-        // htmlList += "<option value='Apple'>Apple</option>";
-        // htmlList += "<option value='Samsung'>Samsung</option>";
         $("#projects_list").html(htmlList);
         $(".selectpicker").selectpicker('refresh');
         console.log("Projects list complete!"); // DEBUG
@@ -151,6 +154,8 @@ function viewEditModal(selectedItem){
     // Show modal with record info
     var index = $("#description_list :selected").val();
     var record = cache_new_records[index];
+    //var readonly = userrole === "medewerker" ? "readonly" : "";
+    var disabled = userrole === "medewerker" ? "disabled" : ""; // For checkboxed
     var modalHtml = "";
     modalHtml += "<input id=edit_modal_itemID type='hidden' value='" + index + "'>";
     $.each(record, function(key, value){ // Different type of input for different info type
@@ -161,28 +166,28 @@ function viewEditModal(selectedItem){
         }
         switch (key) {
             case "idUur":
-                modalHtml += "<input id=edit_modal_" + key + " type='hidden' value='" + value + "'>";
+                modalHtml += "<input id=edit_modal_" + key + " type='hidden' value='" + value + "' disabled>";
                 break;
             case "urengewerkt":
-                modalHtml += "<input id=edit_modal_" + key + " type='number' class='form-control edit_modal' value='" + value + "'>";
+                modalHtml += "<input id=edit_modal_" + key + " type='number' class='form-control edit_modal' value='" + value + "' "+disabled+"/>";
                 break;
             case "begintijd":
             case "eindtijd":
-                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' value='"+value+"'/>";
+                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' value='"+value+"' "+disabled+"/>";
                 break;
             case "omschrijving":
-                modalHtml += "<textarea id=edit_modal_"+key+" rows=2 class='form-control edit_modal'>"+value+"</textarea>";
+                modalHtml += "<textarea id=edit_modal_"+key+" rows=2 class='form-control edit_modal' "+disabled+">"+value+"</textarea>";
                 break;
             case "timestamp":
-                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' readonly value='"+value+"'/>";
+                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' readonly value='"+value+"' "+disabled+"/>";
                 break;
             case "innovatief":
             case "goedgekeurd":
                 var checked = value=="1"?'checked':'';
-                modalHtml += "<input id=edit_modal_"+key+" type='checkbox' class='form-control edit_modal checkbox' "+checked+">";
+                modalHtml += "<input id=edit_modal_"+key+" type='checkbox' class='form-control edit_modal checkbox' "+checked+" "+disabled+">";
                 break;
             default:
-                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' value='"+value+"'/>";
+                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' value='"+value+"' "+disabled+"/>";
                 break;
         }
         modalHtml += "</div></div>";
