@@ -104,83 +104,7 @@ $(document).ready(function(){
                                 console.log("---END---");
                                 break;
                             case "view":
-                                // Show modal with record info
-                                var record = cache_new_records[$("#description_list :selected").val()];
-                                var modalHtml = "";
-                                $.each(record, function(key, value){ // TODO: Different type of input for different info type
-                                    if(key != "idUur") {
-                                        modalHtml += "<div class='form-group row edit_modal'>";
-                                        modalHtml += "<label for=edit_modal_" + key + " class='col-xs-2 col-form-label'>" + key + ": " + "</label>";
-                                        modalHtml += "<div class='col-xs-10'>";
-                                        switch (key) {
-                                            case "urengewerkt":
-                                                modalHtml += "<input id=edit_modal_" + key + " type='number' class='form-control edit_modal' value='" + value + "'>";
-                                                break;
-                                            case "begintijd":
-                                            case "eindtijd":
-                                                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' value='"+value+"'/>";
-                                                break;
-                                            case "omschrijving":
-                                                modalHtml += "<textarea id=edit_modal_"+key+" rows=2 class='form-control edit_modal'>"+value+"</textarea>";
-                                                break;
-                                            case "timestamp":
-                                                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' readonly value='"+value+"'/>";
-                                                modalHtml += "<p>(Time of uploaded. ?Will change automatically when changes are saved?)</p>";
-                                                break;
-                                            case "innovatief":
-                                            case "goedgekeurd":
-                                                var checked = value=="1"?'checked':'';
-                                                modalHtml += "<input id=edit_modal_"+key+" type='checkbox' class='form-control edit_modal checkbox' "+checked+">";
-                                                break;
-                                            default:
-                                                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' value='"+value+"'/>";
-                                                break;
-                                        }
-                                        modalHtml += "</div></div>";
-                                    }
-                                });
-
-                                $("#edit_modal").find(".modal-body").html(modalHtml);
-
-                                // Setup daterangepicker for the 'begintijd' and 'eindtijd'
-                                $(".edit_modal_datetime").daterangepicker({
-                                    singleDatePicker: true,
-                                    showDropdowns: true,
-                                    showWeekNumbers: true,
-                                    timePicker: true,
-                                    timePicker24Hour: true,
-                                    timePickerIncrement: 15,
-                                    opens: "left",
-                                    locale: {
-                                        format: "YYYY-MM-DD hh:mm:ss",
-                                        daysOfWeek: [
-                                            "Ma",
-                                            "Di",
-                                            "Wo",
-                                            "Do",
-                                            "Vr",
-                                            "Za",
-                                            "Zo"
-                                        ],
-                                        "monthNames": [
-                                            "Januari",
-                                            "Februari",
-                                            "Maart",
-                                            "April",
-                                            "Mei",
-                                            "Juni",
-                                            "July",
-                                            "Augustus",
-                                            "September",
-                                            "Oktober",
-                                            "November",
-                                            "December"
-                                        ],
-                                        "startDate": $(this).val()
-                                    },
-                                });
-
-                                $("#edit_modal").modal('show');
+                                viewEditModal($(this));
                                 break;
                         }
                     },
@@ -222,3 +146,87 @@ $(document).ready(function(){
         console.log("Initialized!");
     });
 });
+
+function viewEditModal(selectedItem){
+    // Show modal with record info
+    var index = $("#description_list :selected").val();
+    var record = cache_new_records[index];
+    var modalHtml = "";
+    modalHtml += "<input id=edit_modal_itemID type='hidden' value='" + index + "'>";
+    $.each(record, function(key, value){ // Different type of input for different info type
+        if(key != "idUur"){ // Ignore this for 'idUur' cuz its 'hidden'
+            modalHtml += "<div class='form-group row edit_modal'>";
+            modalHtml += "<label for=edit_modal_" + key + " class='col-xs-2 col-form-label'>" + key + ": " + "</label>";
+            modalHtml += "<div class='col-xs-10'>";
+        }
+        switch (key) {
+            case "idUur":
+                modalHtml += "<input id=edit_modal_" + key + " type='hidden' value='" + value + "'>";
+                break;
+            case "urengewerkt":
+                modalHtml += "<input id=edit_modal_" + key + " type='number' class='form-control edit_modal' value='" + value + "'>";
+                break;
+            case "begintijd":
+            case "eindtijd":
+                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' value='"+value+"'/>";
+                break;
+            case "omschrijving":
+                modalHtml += "<textarea id=edit_modal_"+key+" rows=2 class='form-control edit_modal'>"+value+"</textarea>";
+                break;
+            case "timestamp":
+                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' readonly value='"+value+"'/>";
+                break;
+            case "innovatief":
+            case "goedgekeurd":
+                var checked = value=="1"?'checked':'';
+                modalHtml += "<input id=edit_modal_"+key+" type='checkbox' class='form-control edit_modal checkbox' "+checked+">";
+                break;
+            default:
+                modalHtml += "<input id=edit_modal_"+key+" type='text' class='form-control edit_modal' value='"+value+"'/>";
+                break;
+        }
+        modalHtml += "</div></div>";
+    });
+
+    $("#edit_modal").find(".modal-body").html(modalHtml);
+
+    // Setup daterangepicker for the 'begintijd' and 'eindtijd'
+    $(".edit_modal_datetime").daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true,
+        showWeekNumbers: true,
+        timePicker: true,
+        timePicker24Hour: true,
+        timePickerIncrement: 15,
+        opens: "left",
+        locale: {
+            format: "YYYY-MM-DD hh:mm:ss",
+            daysOfWeek: [
+                "Ma",
+                "Di",
+                "Wo",
+                "Do",
+                "Vr",
+                "Za",
+                "Zo"
+            ],
+            "monthNames": [
+                "Januari",
+                "Februari",
+                "Maart",
+                "April",
+                "Mei",
+                "Juni",
+                "July",
+                "Augustus",
+                "September",
+                "Oktober",
+                "November",
+                "December"
+            ],
+            "startDate": $(selectedItem).val()
+        },
+    });
+
+    $("#edit_modal").modal('show');
+}

@@ -89,7 +89,7 @@
                         </div>
                         <div class="modal-footer">
                             <button id="edit_modal_closeButton" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button id="edit_modal_saveButton" type="button" class="btn btn-success">Save</button> <!-- TODO: Make buttonHandler (js) -->
+                            <button id="edit_modal_changeButton" type="button" class="btn btn-success">Change</button> <!-- TODO: Make buttonHandler (js) -->
                         </div>
                     </div>
 

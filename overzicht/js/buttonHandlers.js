@@ -21,8 +21,6 @@ $("#search_button").on("click", function(event){
     });
 
     $.getScript("../main/js/ajax.js", function(){
-        console.log("Starting search..");
-
         // Get records matching filters
         var user = $("#users_list").val();
         var project = $("#projects_list").val();
@@ -41,7 +39,7 @@ $("#search_button").on("click", function(event){
         var html = "";
         response.forEach(function(item, index){
             var validateClass = item.goedgekeurd==1?'validated':'';
-            html += "<option class='context-menu-one "+validateClass+"' value='"+index+"'>"+item.omschrijving+"</option>";
+            html += "<option name='description_item' class='context-menu-one "+validateClass+"' value='"+index+"'>"+item.urengewerkt+" uren gewerkt"+" | "+item.omschrijving+"</option>";
         });
 
         if(html.length > 0){
@@ -53,6 +51,15 @@ $("#search_button").on("click", function(event){
             $(".loader").fadeOut();
             $("#noRecordsFound").fadeIn();
         }
+
+        // Setup dubble click handler for option items
+        $('#description_list').find('option').each(function(){
+            $(this).dblclick(function (event) {
+                // alert($(event.target).val());
+                viewEditModal($(event.target));
+            });
+        });
+
         $("#search_button").prop("disabled",false);
    });
 });
@@ -84,4 +91,34 @@ $("#save_button").on("click", function(event){
             cache_old_records = $.extend(true, [], cache_new_records);
         }); // TODO: Is this really safe??
     });
+});
+
+// Handler for modal save button
+$("#edit_modal_changeButton").on("click", function(event){
+    var currentRecord = jQuery.grep(cache_new_records, function(element, index){ return (element.idUur == $("#edit_modal_idUur").val()); })[0];
+
+    $("[id^='edit_modal_']").each(function(index, item){
+        if(!$(item).is("button") && $(item).attr('type') !== "hidden" && !$(item).is("[readonly]")){  // Ignore buttons, hidden inputs and readonly's
+            // Update local record
+            var propertyName = $(item).attr('id').replace('edit_modal_', '');
+            var value = $(item).val();
+            if ($("#"+$(item).attr('id')).attr('type') === "checkbox"){
+                if ($("#"+$(item).attr('id')).is(":checked")) // For checkboxes
+                    value = "1";
+                else
+                    value = "0";
+            }
+            currentRecord[propertyName] = value;
+        }
+    });
+
+    // Update selected list item with new values
+    var itemID = $("[id='edit_modal_itemID']").val(); // List item id
+    var listItem_handle = $("option[name='description_item'][value='"+itemID+"']");
+    listItem_handle.html(currentRecord.omschrijving); // list item text
+    if(currentRecord.goedgekeurd == 1)
+        $(listItem_handle).addClass("validated");
+    else
+        $(listItem_handle).removeClass("validated");
+    $("#edit_modal").modal('toggle');
 });
