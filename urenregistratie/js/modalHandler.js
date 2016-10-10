@@ -6,11 +6,9 @@ var newHTML;
 //if any input is changed then shows it directly on the webpage behind the modal.
 function inputchanged() {
     newHTML = $.map(array, function (array) {
-        return (array);
+        return(array);
     });
     $(".modalHeader").html(newHTML.join(" "));
-    $(".begintijd").val(array[2]);
-    $(".eindtijd").val(array[4]);
 }
 
 //check if any input is changed.
@@ -27,15 +25,35 @@ $("#project").on("change paste keyup", function() {
 $("#begintijd").on("change paste keyup", function() {
     // fill the array
     array[2] = $(this).val();
+
     inputchanged();
+    $(".begintijd").val(array[2]);
 });
 $("#eindtijd").on("change paste keyup", function() {
     // fill the array
     array[3] = "-";
     array[4] = $(this).val();
-    inputchanged();
-});
+    array[5] = $("#urentotaal").val();
 
+    inputchanged();
+    $(".eindtijd").val(array[4]);
+    $(".urentotaal").val(array[5]);
+});
+$("#urenregulier").on("change paste keyup", function() {
+    array[6] = $(this).val();
+    array[7] = $("#ureninnovatief").val();
+
+    inputchanged();
+    $(".urenregulier").val(array[6]);
+    $(".ureninnovatief").val(array[7]);
+
+});
+$("#omschrijving").on("change paste keyup", function() {
+    array[8] = $(this).val();
+
+    inputchanged();
+    $(".omschrijving").val(array[8]);
+});
 
 //what to do if the bootstrapswitch changed
 $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state) {
@@ -64,6 +82,22 @@ $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state
             '<tr>' +
                 '<td class="description">Eindtijd</td>' +
                 '<td class="field"><input type="time" name="eindtijd" class="form-control eindtijd" required/></td>' +
+            '</tr>' +
+            '<tr>' +
+                '<td class="description">Totaal aantal uren gewerkt</td>' +
+                '<td class="field"><output readonly type="number" name="urentotaal" class="form-control urentotaal"/></td>' +
+            '</tr>' +
+            '<tr>' +
+                '<td class="description">Reguliere uren</td>' +
+                '<td class="veld"><input type="number" name="urenregulier" class="form-control urenregulier" required/></td>' +
+            '</tr>' +
+            '<tr>' +
+                '<td class="description">Innovatieve uren</td>' +
+                '<td class="field"><input type="number" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
+            '</tr>' +
+            '<tr>' +
+                '<td class="description">Omschrijving van de uren</td>' +
+                '<td class="field"><textarea name="omschrijving" id="omschrijving" class="form-control omschrijving" required/></textarea></td>' +
             '</tr>');
 
     }else{

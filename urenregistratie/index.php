@@ -22,7 +22,7 @@
     include_once '../main/php/navbar.php';
     ?>
     <div class="container">
-        <div class="col-md-12" style="text-align: center;">
+        <div class="col-md-12 switch">
             <p>
                 <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
             </p>
@@ -145,7 +145,7 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
-                                    <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control" id="urentotaal"/></td>
+                                    <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control"/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
@@ -157,7 +157,7 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
-                                    <td class="field"><textarea name="omschrijving" id="omschrijving" class="form-control" id="omschrijving" required/></textarea></td>
+                                    <td class="field"><textarea name="omschrijving" id="omschrijving"  class="form-control" required/></textarea></td>
                                 </tr>
                             </table>
                         </form>
