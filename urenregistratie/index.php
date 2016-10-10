@@ -31,7 +31,7 @@
             <div class="panel panel-default" id="mainFormulier">
                 <div class="panel-heading">Uren invulformulier</div>
                 <div  class="panel-body">
-                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
                         <table>
                             <tr>
                                 <?php
@@ -56,15 +56,15 @@
                         </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
-                                <td class="field"><input type="time" name="begintijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onkeyup="realTimeWaarde()" name="begintijd" id="begintijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Eindtijd</td>
-                                <td class="field"><input type="time" name="eindtijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onkeyup="realTimeWaarde()" name="eindtijd" id="eindtijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Totaal aantal uren gewerkt</td>
-                                <td class="field"><output readonly type="number" name="urentotaal" class="form-control"/></td>
+                                <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
@@ -182,4 +182,6 @@
     <script src="js/bootstrap-switch.js"></script>
     <!-- Load the modal -->
     <script src="js/modalHandler.js"></script>
+    <!-- Load hour calculating -->
+    <script src="js/urenAfronden.js"></script>
 </html>
