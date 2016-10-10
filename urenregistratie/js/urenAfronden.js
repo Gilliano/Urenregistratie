@@ -12,17 +12,23 @@ function aantalUren(begintijd, eindtijd){
     var totale_seconden = eindtijd_seconden - begintijd_seconden;
     // de totale seconden worden omgezet in uren
     var eind = (totale_seconden / 3600);
-    //hier maken we een decimaal van de eindcijfer in dit geval 1 getal achter de komma
-    var eindcijfer = parseFloat(eind.toFixed(1));
 
-    if(eindcijfer < 0 ) {
+
+    //hier maken we een decimaal van de eindcijfer in dit geval 1 getal achter de komma
+    var uren = parseFloat(eind.toFixed(1));
+    var uren = uren.toString();
+
+    if(uren < 0 ) {
         return "begintijd is groter dan eindtijd!";
     }
-    else if(eindcijfer == 0){
+    else if(uren == 0){
         return "U mag geen 0 uren hebben";
     }
     else{
-        return eindcijfer;
+        uren = uren.replace(".",",");
+        return uren;
+
+
     }
 
 }
