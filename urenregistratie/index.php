@@ -11,9 +11,11 @@
 
     <?php
     $allCurrentProjects = projectManager::getAllCurrentProjects();
+    $arraySize = sizeof($allCurrentProjects);
+
     $allUsers = userManager::getAllUsers();
-    $arraySize = sizeof(projectManager::getAllCurrentProjects());
     $alleMedewerkers = sizeof(userManager::getAllUsers());
+
     $date = date("Y-m-d");
     ?>
 
@@ -115,7 +117,7 @@
                                 <tr>
                                     <td class="description">Medewerkers</td>
                                     <td class="field">
-                                        <select class="selectpicker" multiple name="medewerker" id="medewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
+                                        <select class="selectpicker" multiple name="medewerker" id="teamMedewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
                                             <?php for($i = 0; $i < $alleMedewerkers; $i++) { ?>
                                                 <?php if(empty($allUsers[$i]["tussenvoegsel"])) { ?>
                                                     <option value="<?= $allUsers[$i]["idMedewerker"] ?>"><?= $allUsers[$i]["voornaam"] . " "  . $allUsers[$i]["achternaam"]?></option>
@@ -128,7 +130,7 @@
                                 <tr>
                                     <td class="description">Project</td>
                                     <td class="field">
-                                        <select class="selectpicker" name="project" id="project" data-width="" data-live-search="true" title="Kies een project...">
+                                        <select class="selectpicker" name="project" id="teamProject" data-width="" data-live-search="true" title="Kies een project...">
                                             <?php for($i = 0; $i < $arraySize; $i++) { ?>
                                                 <option value="<?= $allCurrentProjects[$i]["idProject"]?>"><?= $allCurrentProjects[$i]["projectnaam"]?></option>
                                             <?php } ?>
@@ -137,27 +139,27 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="begintijd" id="begintijd" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="begintijd" id="teamBegintijd" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="eindtijd" id="eindtijd" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="eindtijd" id="teamEindtijd" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
-                                    <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control"/></td>
+                                    <td class="field"><output readonly type="number" name="urentotaal" id="teamUrentotaal" class="form-control"/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="urenregulier" id="urenregulier" class="form-control" required/></td>
+                                    <td class="veld"><input type="number" name="urenregulier" id="teamUrenregulier" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
-                                    <td class="field"><input type="number" name="ureninnovatief" id="ureninnovatief" class="form-control" readonly/></td>
+                                    <td class="field"><input type="number" name="ureninnovatief" id="teamUreninnovatief" class="form-control" readonly/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
-                                    <td class="field"><textarea name="omschrijving" id="omschrijving"  class="form-control" required/></textarea></td>
+                                    <td class="field"><textarea name="omschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
                                 </tr>
                             </table>
                         </form>
