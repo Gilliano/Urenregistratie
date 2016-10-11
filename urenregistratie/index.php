@@ -24,7 +24,7 @@
     <div class="container">
         <div class="col-md-12 switch">
             <p>
-                <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
+<!--                <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">-->
             </p>
         </div>
         <div class="col-md-8 col-md-offset-2">

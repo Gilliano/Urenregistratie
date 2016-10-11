@@ -29,7 +29,37 @@ $("button[name='gebruiker_wijzig']").on("click", function(event){
 
 
 $("#save_button").on("click", function(event){
-    //record updaten in database
+    //get an array from the data from the table
+    //console.log($('#gebruiker_wijzig_form').serializeArray('firstname'));
 
-    //table live updates
+    var data = $('#gebruiker_wijzig_form').serializeArray('firstname');
+
+    $.getScript('../main/js/ajax.js', function () {
+
+
+
+
+        var firstname = data[0].value;
+        var insertion = data[1].value;
+        var lastname  = data[2].value;
+        var email  = data[3].value;
+        var valide  = data[4].value;
+        var rol  = data[5].value;
+        var state  = data[6].value;
+
+
+        var ajaxobj = new AjaxObj('wijzigGebruiker',
+            {   'firstname': firstname,
+                'insertion': insertion,
+                'lastname': lastname,
+                'email': email,
+                'valide': valide,
+                'rol': rol,
+                'state': state
+            }, false, '');
+
+        alert(ajaxobj.result);
+    });
+    //ajax object  maken
+
 });

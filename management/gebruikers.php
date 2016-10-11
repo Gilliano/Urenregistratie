@@ -84,7 +84,7 @@
                     <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="post" style="margin: auto" role="login">
+                    <form method="post" id="gebruiker_wijzig_form" style="margin: auto" role="login">
                         <h4 class="modal-title">Registreren</h4>
                         <input type="text" name="firstname" placeholder="Voornaam" autocomplete="false" required class="form-control input-lg firstname" />
 
