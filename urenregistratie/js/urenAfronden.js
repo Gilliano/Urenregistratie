@@ -6,16 +6,14 @@ function aantalUren(begintijd, eindtijd){
 
     // Uren afronden specifiek op halve en hele uren
     if(b[1] < 15) {
-        b[0] = parseInt(b[0]);
-        b[0] = b[0].toString();
+
         b[1] = "00";
         var b = b.toString();
         b = b.replace(",", ":");
         document.getElementById("begintijd").value = b;
     }
     else if(b[1] >= 15 && b[1] <= 44) {
-        b[0] = parseInt(b[0]);
-        b[0] = b[0].toString();
+
         b[1] = "30";
         var b = b.toString();
         b = b.replace(",", ":");
@@ -33,16 +31,12 @@ function aantalUren(begintijd, eindtijd){
 
     // Hetzelfde als bovenstaande if statements maar dan voor eindtijd
     if(e[1] < 15) {
-        e[0] = parseInt(e[0]);
-        e[0] = e[0].toString();
         e[1] = "00";
         var e = e.toString();
         e = e.replace(",", ":");
         document.getElementById("eindtijd").value = e;
     }
     else if(e[1] >= 15 && e[1] <= 44) {
-        e[0] = parseInt(e[0]);
-        e[0] = e[0].toString();
         e[1] = "30";
         var e = e.toString();
         e = e.replace(",", ":");
@@ -93,4 +87,15 @@ function realTimeWaarde() {
         var eindtijd = document.getElementById("eindtijd");
         var totaal = aantalUren(begintijd.value, eindtijd.value);
         document.getElementById("urentotaal").innerHTML = totaal;
+}
+
+function urenInnovatief() {
+    var totaaluren = document.getElementById("urentotaal").value;
+    totaaluren = totaaluren.replace(",",".");
+    totaaluren = parseFloat(totaaluren);
+    var urenregulier = document.getElementById("urenregulier").value;
+    var ureninnovatief = totaaluren - urenregulier;
+    ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
+    innovatief = document.getElementById("ureninnovatief").value = ureninnovatief;
+    ureninnovatief = ureninnovatief.replace(".", ",");
 }

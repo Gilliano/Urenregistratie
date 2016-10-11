@@ -33,7 +33,7 @@
             <div class="panel panel-default" id="mainFormulier">
                 <div class="panel-heading">Uren invulformulier</div>
                 <div  class="panel-body">
-                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data"">
                         <table>
                             <tr>
                                 <?php
@@ -70,11 +70,11 @@
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
-                                <td class="veld"><input type="number" name="urenregulier" class="form-control" required/></td>
+                                <td class="field"><input type="number" onkeyup="urenInnovatief()" id="urenregulier" name="urenregulier" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Innovatieve uren</td>
-                                <td class="field"><input type="number" name="ureninnovatief" class="form-control" readonly/></td>
+                                <td class="field"><input type="number" id="ureninnovatief" name="ureninnovatief" class="form-control" readonly/></td>
                             </tr>
                             <tr>
                                 <td class="description">Omschrijving van de uren</td>
