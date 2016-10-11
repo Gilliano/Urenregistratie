@@ -110,7 +110,7 @@
                         <h4 class="modal-title">Team uren invullen</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
                             <table>
                                 <tr>
                                     <td class="description">Medewerkers</td>
@@ -137,11 +137,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="begintijd" id="begintijd" class="form-control" required/></td>
+                                    <td class="field"><input type="time" onchange="realTimeWaarde()" name="begintijd" id="begintijd" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="eindtijd" id="eindtijd" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" onchange="realTimeWaarde()" name="eindtijd" id="eindtijd" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
