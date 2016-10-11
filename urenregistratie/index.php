@@ -112,7 +112,7 @@
                         <h4 class="modal-title">Team uren invullen</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(teamUrentotaal.value=parseFloat(teamEindtijd.value)-parseFloat(teamBegintijd.value))(teamUreninnovatief.value=parseFloat(teamUrentotaal.value)-parseFloat(teamUrenregulier.value))">
                             <table>
                                 <tr>
                                     <td class="description">Medewerkers</td>
@@ -139,23 +139,23 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="begintijd" id="teamBegintijd" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="eindtijd" id="teamEindtijd" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
-                                    <td class="field"><output readonly type="number" name="urentotaal" id="teamUrentotaal" class="form-control"/></td>
+                                    <td class="field"><output readonly type="number" name="teamUrentotaal" id="teamUrentotaal" class="form-control"/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="urenregulier" id="teamUrenregulier" class="form-control" required/></td>
+                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
-                                    <td class="field"><input type="number" name="ureninnovatief" id="teamUreninnovatief" class="form-control" readonly/></td>
+                                    <td class="field"><input type="number" name="teamUreninnovatief" id="teamUreninnovatief" class="form-control" readonly/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>

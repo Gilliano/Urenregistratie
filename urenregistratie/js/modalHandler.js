@@ -2,13 +2,15 @@
 $("[name='mode']").bootstrapSwitch();
 
 var array = [];
+var headerData = [];
 var newHTML;
 //if any input is changed then shows it directly on the webpage behind the modal.
-function inputchanged() {
-    newHTML = $.map(array, function (array) {
-        return(array);
-    });
-    $(".modalHeader").html(newHTML.join(" "));
+function setValuesOnWeb() {
+    // newHTML = $.map(array, function (array) {
+    //     return(array);
+    // });
+    headerData = array.slice(0,5);
+    $(".modalHeader").html(headerData.join(" "));
 
     $(".medewerker").val(array[0]);
     $(".project").val(array[1]);
@@ -24,18 +26,18 @@ function inputchanged() {
 $("#teamMedewerker").on("change paste keyup", function() {
     // fill the array
     array[0] = $("#teamMedewerker option:selected").text();
-    inputchanged();
+    setValuesOnWeb();
 });
 $("#teamProject").on("change paste keyup", function() {
     // fill the array
     array[1] = $("#teamProject option:selected").text();
-    inputchanged();
+    setValuesOnWeb();
 });
 $("#teamBegintijd").on("change paste keyup", function() {
     // fill the array
     array[2] = $(this).val();
 
-    inputchanged();
+    setValuesOnWeb();
 });
 $("#teamEindtijd").on("change paste keyup", function() {
     // fill the array
@@ -43,18 +45,18 @@ $("#teamEindtijd").on("change paste keyup", function() {
     array[4] = $(this).val();
     array[5] = $("#teamUrentotaal").val();
 
-    inputchanged();
+    setValuesOnWeb();
 });
 $("#teamUrenregulier").on("change paste keyup", function() {
     array[6] = $(this).val();
     array[7] = $("#teamUreninnovatief").val();
 
-    inputchanged();
+    setValuesOnWeb();
 });
 $("#teamOmschrijving").on("change paste keyup", function() {
     array[8] = $(this).val();
 
-    inputchanged();
+    setValuesOnWeb();
 });
 
 //what to do if the bootstrapswitch changed
