@@ -31,24 +31,23 @@ http://www.bootstrapzen.com/item/135/simple-login-form-logo/
 
 
 body {
-    background: url(http://i.imgur.com/GHr12sH.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-}
-
-.login-form {
-    margin-top: 60px;
+    /*background-color: #f6fff6;*/
+    background-color: white;
 }
 
 form[role=login] {
+    max-width: 500px;
     color: #5d5d5d;
-    background: #f2f2f2;
+    background: #f8f8f8;
     padding: 26px;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
+    /*box-shadow: 4px 4px 5px 0px rgba(50, 50, 50, 0.2);*/
+    -webkit-box-shadow: 4px 4px 10px 5px rgba(50, 50, 50, 0.1);
+    -moz-box-shadow:    4px 4px 10px 5px rgba(50, 50, 50, 0.1);
+    box-shadow:         4px 4px 10px 5px rgba(50, 50, 50, 0.1);
 }
 form[role=login] img {
     display: block;
@@ -100,4 +99,15 @@ form[role=login] > div {
 .endmail p {
     margin: 10px 0 10px;
     text-align: left !important;
+}
+
+/* Gebruikers tab */
+
+.gebruikers_wijzigen tr td {
+    vertical-align: middle !important;
+    min-width: 50px;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

@@ -55,6 +55,38 @@ class userManager {
         return NULL;
     }
 
+    public static function register() {
+
+        $conn = database::connect();
+
+        if(isset($_POST['password'])) {
+            $_POST['password'] = sha1($_POST['password']);
+            $_POST['repassword'] = sha1($_POST['repassword']);
+            $_POST['email'] = $_POST['email'] . '@branchonline.nl';
+        }
+
+        if(isset($_POST['user_register'])) {
+
+            if($_POST['password'] == $_POST['repassword']) {
+
+                $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord) VALUES (?,?,?,?,?)";
+                $stmt = $conn->prepare($adduser);
+                $stmt->bindParam(1, $_POST['firstname']);
+                $stmt->bindParam(2, $_POST['insertion']);
+                $stmt->bindParam(3, $_POST['lastname']);
+                $stmt->bindParam(4, $_POST['email']);
+                $stmt->bindParam(5, $_POST['password']);
+                $stmt->execute();
+            } else {
+                return false;
+            }
+
+            return NULL;
+
+        }
+        return NULL;
+    }
+
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
     public static function areYouLoggedIn() {
@@ -86,16 +118,13 @@ class userManager {
     
         
     // Returns all email from table `medewerker`
-    public static function getAllEmails()
+    public static function getAllUsers()
     {
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT email FROM medewerker");
+        $stmt = $conn->prepare("SELECT * FROM medewerker");
         $stmt->execute();
-        while($record = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-            array_push($records, $record);
-        }
+        $records = $stmt->fetchAll();
         
         return $records;
     }
@@ -110,9 +139,21 @@ class userManager {
         $stmt = $conn->prepare("SELECT email FROM medewerker WHERE idMedewerker = ?");
         $stmt->bindParam(1, $userID);
         $stmt->execute();
-        $email = $stmt->fetch(PDO::FETCH_ASSOC);
+        $email = $stmt->fetch();
         
         return $email;
+    }
+
+    public static function getIDFromEmail($userEmail)
+    {
+        $userID = -1;
+        $conn = database::connect();
+        $stmt = $conn->prepare("SELECT idMedewerker FROM medewerker WHERE email = ?");
+        $stmt->bindParam(1, $userEmail, PDO::PARAM_STR);
+        $stmt->execute();
+        $userID = $stmt->fetch();
+
+        return $userID;
     }
 
     public static function logout() {

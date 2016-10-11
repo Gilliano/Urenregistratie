@@ -1,0 +1,11 @@
+/* For firefox */
+::-moz-selection {
+    background: rgb(53,180,73);
+    color: white;
+}
+
+/* For others */
+::selection {
+    background: rgb(53,180,73);
+    color: white;
+}

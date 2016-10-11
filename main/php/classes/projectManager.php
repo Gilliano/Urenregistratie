@@ -9,24 +9,19 @@ class projectManager
         $conn = database::connect();
         $stmt = $conn->prepare("SELECT * FROM project");
         $stmt->execute();
-        while($record = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-            array_push($records, $record);
-        }
+        $records = $stmt->fetchAll();
         
         return $records;
     }
     // Returns all names from 'project' that isn't deleted.
-    public static function getAllCurrentProject()
+    public static function getAllCurrentProjects()
     {
         $records = [];
         $conn = database::connect();
         $stmt = $conn->prepare("SELECT * FROM project WHERE verwijderd = 0");
         $stmt->execute();
-        while($record = $stmt->fetch(PDO::FETCH_ASSOC))
-        {
-            array_push($records, $record);
-        }
+        $records = $stmt->fetchAll();
+
         return $records;
     }
     
@@ -37,12 +32,28 @@ class projectManager
         $projectnaam = "";
         $conn = database::connect();
         $stmt = $conn->prepare("SELECT projectnaam FROM project WHERE idProject = ?");
-        $stmt->bindParam(1, $id);
+        $stmt->bindParam(1, $id, PDO::PARAM_INT);
         $stmt->execute();
-        $projectnaam = $stmt->fetch(PDO::FETCH_ASSOC);
+        $projectnaam = $stmt->fetch();
         
         return $projectnaam;
     }
+
+    // Returns project name from table `project`
+    // params: projectnaam
+    public static function getProjectIDFromName($projectName)
+    {
+        $projectID = -1;
+        $conn = database::connect();
+        $stmt = $conn->prepare("SELECT idProject FROM project WHERE projectnaam = ?");
+        $stmt->bindParam(1, $projectName, PDO::PARAM_STR);
+        $stmt->execute();
+        $projectID = $stmt->fetch();
+
+        return $projectID;
+    }
+
+    // TODO: Function to get all projects that match userID
 }
 
 ?>

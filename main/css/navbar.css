@@ -1,15 +1,19 @@
+.navbar {
+    margin-bottom: 0px !important;
+}
+
 .navbar-default{
     padding-top: 18px;
     padding-bottom: 18px;
     border-radius: 0px;
 }
 .navbar-brand#gebruiker{
-    margin-top: 3px;
+    margin-top: 1px;
 }
 .navbar-brand img{
     height: 50px;
     margin-left: 3px;
-    margin-top: -17px;
+    margin-top: -15px;
 }
 
 .navbar-right a{

@@ -6,7 +6,7 @@ if(isset($_POST['logout'])) {
 
 function adminTab() {
     if($_SESSION['rol'] == 'admin') {
-        $tab = "<li><a href='../urenregistratie'>Management</a></li>";
+        $tab = "<li><a href='../management?page=dashboard'>Management</a></li>";
         return $tab;
     }
     return NULL;
@@ -24,7 +24,7 @@ function adminTab() {
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="../urenregistratie"><img src='../main/img/logo.png'></a>
-                <span class="navbar-brand">| <?= userManager::getNameFromID($_SESSION['idMedewerker']); ?></span>
+                <span class="navbar-brand" id="gebruiker">| <?= userManager::getNameFromID($_SESSION['idMedewerker']); ?></span>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
