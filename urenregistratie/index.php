@@ -56,15 +56,15 @@
                         </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
-                                <td class="field"><input type="time" onkeyup="realTimeWaarde()" name="begintijd" id="begintijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onkeyup="realTimeWaarde()" name="begintijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Eindtijd</td>
-                                <td class="field"><input type="time" onkeyup="realTimeWaarde()" name="eindtijd" id="eindtijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onkeyup="realTimeWaarde()" name="eindtijd"  step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Totaal aantal uren gewerkt</td>
-                                <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control"/></td>
+                                <td class="field"><output readonly type="number" name="urentotaal" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
