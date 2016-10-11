@@ -4,10 +4,6 @@ function aantalUren(begintijd, eindtijd){
     var b = begintijd.split(':');
     var e = eindtijd.split(':');
 
-    //de tijden worden veranderd naar seconden
-    var begintijd_seconden = b[0] * 3600  +  b[1] * 60;
-    var eindtijd_seconden = (+e[0]) * 3600  +  (+e[1]) * 60;
-
     // Uren afronden specifiek op halve en hele uren
     if(b[1] < 15) {
         b[0] = parseInt(b[0]);
@@ -63,32 +59,38 @@ function aantalUren(begintijd, eindtijd){
         document.getElementById("eindtijd").value = e;
     }
 
+        var Btijd = b.split(':');
+        var Etijd = e.split(':');
 
-    //eindtijd min begintijd
-    var totale_seconden = eindtijd_seconden - begintijd_seconden;
-    // de totale seconden worden omgezet in uren
-    var eind = (totale_seconden / 3600);
+        //de tijden worden veranderd naar seconden
+        var begintijd_seconden = Btijd[0] * 3600  +  Btijd[1] * 60;
+        var eindtijd_seconden = Etijd[0] * 3600  +  Etijd[1] * 60;
 
-    //hier maken we een decimaal van de eindcijfer in dit geval 1 getal achter de komma
-    var uren = parseFloat(eind.toFixed(1));
-    var uren = uren.toString();
+        //eindtijd min begintijd
+        var totale_seconden = eindtijd_seconden - begintijd_seconden;
+        // de totale seconden worden omgezet in uren
+        var eind = (totale_seconden / 3600);
 
-    if(uren < 0 ) {
-        return "begintijd is groter dan eindtijd!";
-    }
-    else if(uren == 0){
-        return "U mag geen 0 uren hebben";
-    }
-    else{
-        uren = uren.replace(".",",");
-        return uren;
-    }
+        //hier maken we een decimaal van de eindcijfer in dit geval 1 getal achter de komma
+        var uren = parseFloat(eind.toFixed(1));
+        var uren = uren.toString();
 
+        if(uren < 0 ) {
+            return "begintijd is groter dan eindtijd!";
+        }
+        else if(uren == 0){
+            return "U mag geen 0 uren hebben";
+        }
+        else{
+            uren = uren.replace(".",",");
+            return uren;
+        }
 }
 
 //zet de waarde in realtime in de div id="return" haalt de waarde begintijd en eindtijd op van de input velden
 function realTimeWaarde() {
-    var begintijd = document.getElementById("begintijd");
-    var eindtijd = document.getElementById("eindtijd");
-    document.getElementById("urentotaal").innerHTML = aantalUren(begintijd.value, eindtijd.value);
+        var begintijd = document.getElementById("begintijd");
+        var eindtijd = document.getElementById("eindtijd");
+        var totaal = aantalUren(begintijd.value, eindtijd.value);
+        document.getElementById("urentotaal").innerHTML = totaal;
 }

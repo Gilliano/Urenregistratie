@@ -104,4 +104,13 @@ function saveUurRecord($params)
     foreach(urenManager::UpdateUren($params) as $result)
         echo $result . "\n";
 }
-?>
+
+function wijzigGebruiker($params) {
+    echo $params['firstname'];
+    echo $params['insertion'];
+    echo $params['lastname'];
+    echo $params['email'];
+    echo $params['valide'];
+    echo $params['rol'];
+    echo $params['state'];
+}
