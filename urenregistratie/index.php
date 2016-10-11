@@ -24,7 +24,7 @@
     <div class="container">
         <div class="col-md-12 switch">
             <p>
-                <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
+<!--                <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">-->
             </p>
         </div>
         <div class="col-md-8 col-md-offset-2">
@@ -56,15 +56,15 @@
                         </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
-                                <td class="field"><input type="time" onkeyup="realTimeWaarde()" name="begintijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onblur="realTimeWaarde()" name="begintijd" id="begintijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Eindtijd</td>
-                                <td class="field"><input type="time" onkeyup="realTimeWaarde()" name="eindtijd"  step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onblur="realTimeWaarde()" name="eindtijd" id="eindtijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Totaal aantal uren gewerkt</td>
-                                <td class="field"><output readonly type="number" name="urentotaal" class="form-control"/></td>
+                                <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
