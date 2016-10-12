@@ -1,7 +1,6 @@
 /**
  * Created by JohnDoe on 29-9-2016.
  */
-// TODO: Change for non-admins
 $(document).ready(function(){
     console.log("Initializing...");
 
@@ -9,23 +8,26 @@ $(document).ready(function(){
         // Get current userrole
         var ajaxObj = new AjaxObj("getSessionVariable", {'sessionVariable': "rol"}, false);
         userrole = ajaxObj.result;
-        ajaxObj = new AjaxObj("getSessionVariable", {'sessionVariable': "email"}, false);
-        usermail = ajaxObj.result;
+        ajaxObj = new AjaxObj("getSessionVariable", {'sessionVariable': "idMedewerker"}, false);
+        userid = ajaxObj.result;
 
         // Step 1: Initialize users list
         ajaxObj = new AjaxObj("getUsers", {}, false, "json");
         var htmlList = "";
         ajaxObj.result.forEach(function(item){
+            var user_name = item.voornaam + " " + (typeof item.tussenvoegsel != 'undefined'?item.tussenvoegsel:"") + " " + item.achternaam;
             // Only allow your own name if not admin
-            if(userrole === "medewerker" && item.email == usermail)
-                htmlList += "<option value=" + item.email + ">" + item.email + "</option>"; // FEATURE: Set data-tokens equal to user's project names
+            if(userrole === "medewerker" && item.idMedewerker == userid)
+                htmlList += "<option value=" + item.email + ">" + user_name + "</option>"; // FEATURE: Set data-tokens equal to user's project names
+            else if(userrole === "admin")
+                htmlList += "<option value=" + item.email + ">" + user_name + "</option>"; // FEATURE: Set data-tokens equal to user's project names
         });
         $("#users_list").html(htmlList);
         $(".selectpicker").selectpicker('refresh');
         console.log("Users list complete!"); // DEBUG
 
         // Step 2: Initialize projects list
-        // TODO: Only show the projects that the user is assigned to
+        // Only show the projects that the user is assigned to
         ajaxObj = new AjaxObj("getAllProjects", {}, false, "json");
         htmlList = "";
         ajaxObj.result.forEach(function(item){
@@ -113,6 +115,8 @@ $(document).ready(function(){
                     },
                     items: {}
                 };
+
+                // Check what items are selected
                 var validFound = false;
                 var invalidFound = false;
                 $("#description_list :selected").each(function(i, selected){
@@ -124,16 +128,23 @@ $(document).ready(function(){
                         invalidFound = true;
                 });
 
-                if ($("#description_list :selected").length >= 1 && ((!validFound && invalidFound) ||
-                    (validFound && !invalidFound)))
-                {
-                    if (validFound)
+                // If multiple items are selected
+                // and they consist of 'validated' and 'not validated' items
+                // then the option you get is "Goedkeuren"
+                if ($("#description_list :selected").length > 1 && (validFound || invalidFound)) {
+                    if (validFound && !invalidFound)
                         options.items.invalidate = {name: "Afkeuren"};
-                    else if(invalidFound)
+                    else if(!validFound && invalidFound)
+                        options.items.validate = {name: "Goedkeuren"};
+                    else if(validFound && invalidFound)
                         options.items.validate = {name: "Goedkeuren"};
                 }
-                else
-                    options.items.multiple = {name: "Kan niet kiezen", disabled: true}; // TODO: Rename to something better
+                else{
+                    if ($("#description_list :selected").hasClass("validated"))
+                        options.items.invalidate = {name: "Afkeuren"};
+                    else
+                        options.items.validate = {name: "Goedkeuren"};
+                }
 
                 options.items.view = {name: "Bekijken", disabled: $("#description_list :selected").length>1 ? true : false}; // TODO: Show modal
                 options.items.log = {name: "Log"}; // DEBUG: Logs current item info in console
@@ -159,17 +170,28 @@ function viewEditModal(selectedItem){
     var modalHtml = "";
     modalHtml += "<input id=edit_modal_itemID type='hidden' value='" + index + "'>";
     $.each(record, function(key, value){ // Different type of input for different info type
-        if(key != "idUur"){ // Ignore this for 'idUur' cuz its 'hidden'
+        // Ignore this for id's because they are hidden
+        if(key != "idUur" &&
+            key != "idMedewerker" &&
+            key != "idProject")
+        {
             modalHtml += "<div class='form-group row edit_modal'>";
-            modalHtml += "<label for=edit_modal_" + key + " class='col-xs-2 col-form-label'>" + key + ": " + "</label>";
-            modalHtml += "<div class='col-xs-10'>";
+            modalHtml += "<label for=edit_modal_" + key + " class='col-xs-3 col-form-label'>" + key + ": " + "</label>";
+            modalHtml += "<div class='col-xs-9'>";
         }
         switch (key) {
             case "idUur":
+            case "idMedewerker":
+            case "idProject":
                 modalHtml += "<input id=edit_modal_" + key + " type='hidden' value='" + value + "' disabled>";
+                break;
+            case "medewerkerNaam":
+            case "projectNaam":
+                modalHtml += "<input id=edit_modal_" + key + " type='text' class='form-control edit_modal' readonly value='" + value + "' "+disabled+"/>";
                 break;
             case "urengewerkt":
                 modalHtml += "<input id=edit_modal_" + key + " type='number' class='form-control edit_modal' value='" + value + "' "+disabled+"/>";
+                // TODO: Make readonly and calc time with 'begintijd' & 'eindtijd'
                 break;
             case "begintijd":
             case "eindtijd":

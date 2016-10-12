@@ -43,7 +43,7 @@
                 <!-- Step 1: Users list -->
                 <div class="col-sm-3 col-sm-offset-1">
                     <label for="users_list">Gebruikers</label><br>
-                    <select id="users_list" class="selectpicker" data-live-search="true">
+                    <select id="users_list" class="selectpicker" data-live-search="true" multiple>
                         <!-- <option>Loading...</option> -->
                     </select>
                 </div>
@@ -51,7 +51,7 @@
                 <!-- Step 2: Projects list -->
                 <div class="col-sm-3">
                     <label for="projects_list">Projecten</label><br>
-                    <select id="projects_list" class="selectpicker" data-live-search="true">
+                    <select id="projects_list" class="selectpicker" data-live-search="true" multiple>
                         <!-- <option>Loading...</option> -->
                     </select>
                 </div>

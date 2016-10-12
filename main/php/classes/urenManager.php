@@ -28,17 +28,43 @@ class urenManager
     // and idProject = $projectID
     // and begintijd is between $date1 and $date2
     // NOTE: date format is string('YYYY-MM-DD HH:MM:SS')
-    public static function getRecordsForUserProjectDaterange($userID, $projectID, $date1, $date2)
+    public static function getRecordsForUserProjectDaterange($userIDs, $projectIDs, $date1, $date2)
     {
-        error_log("$userID, $projectID, $date1, $date2");
-
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT idUur, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, timestamp, goedgekeurd FROM uur WHERE idMedewerker = ? AND idProject = ? AND begintijd BETWEEN ? AND ? ORDER BY begintijd ASC;");
-        $stmt->bindParam(1, $userID, PDO::PARAM_INT);
-        $stmt->bindParam(2, $projectID, PDO::PARAM_INT);
-        $stmt->bindParam(3, $date1, PDO::PARAM_STR);
-        $stmt->bindParam(4, $date2, PDO::PARAM_STR);
+
+        $query = "SELECT CONCAT(medewerker.voornaam,' ',COALESCE(medewerker.tussenvoegsels,''),' ',medewerker.achternaam) as 'medewerkerNaam', ";
+        $query .= "project.projectnaam as 'projectNaam', uur.* ";
+        $query .= "FROM uur INNER JOIN medewerker ON uur.idMedewerker=medewerker.idMedewerker ";
+        $query .= "INNER JOIN project ON uur.idProject=project.idProject WHERE ";
+        $index = 0;
+        $values = [];
+        foreach($userIDs as $userID)
+        {
+            $query .= $index == 0 ? "(" : "";
+            $query .= "uur.idMedewerker = ?";
+            $query .= $index == count($userIDs)-1 ? ") AND " : " OR ";
+            $index++;
+            array_push($values, $userID);
+        }
+        $index = 0;
+        foreach($projectIDs as $projectID)
+        {
+            $query .= $index == 0 ? "(" : "";
+            $query .= "uur.idProject = ?";
+            $query .= $index == count($projectIDs)-1 ? ") AND " : " OR ";
+            $index++;
+            array_push($values, $projectID);
+        }
+        $query .= "(begintijd BETWEEN ? AND ?) ORDER BY begintijd ASC";
+
+        $stmt = $conn->prepare($query);
+
+        for($i = 1; $i <= count($values); $i++)
+            $stmt->bindParam($i, $values[$i-1], PDO::PARAM_INT);
+        $stmt->bindParam(count($values) + 1, $date1, PDO::PARAM_STR);
+        $stmt->bindParam(count($values) + 2, $date2, PDO::PARAM_STR);
+
         $stmt->execute();
 
         $records = $stmt->fetchAll(PDO::FETCH_ASSOC);

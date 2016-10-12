@@ -22,14 +22,14 @@ $("#search_button").on("click", function(event){
 
     $.getScript("../main/js/ajax.js", function(){
         // Get records matching filters
-        var user = $("#users_list").val();
-        var project = $("#projects_list").val();
+        var users = $("#users_list").val();
+        var projects = $("#projects_list").val();
         var daterange = $("#daterange_picker").val();
         daterange = daterange.split(" t/m ");
         var date1 = daterange[0] + " 00:00:00";
         var date2 = daterange[1] + " 23:59:59";
 
-        var ajaxObj = new AjaxObj("getUrenBetweenDate", {'userEmail': user, 'projectName': project, 'date1': date1, 'date2': date2}, false, "json");
+        var ajaxObj = new AjaxObj("getUrenBetweenDate", {'userEmails': users, 'projectNames': projects, 'date1': date1, 'date2': date2}, false, "json");
         var response = ajaxObj.result;
         // Cache response
         cache_old_records = $.extend(true, [], response);
@@ -74,7 +74,10 @@ $("#save_button").on("click", function(event){
     cache_new_records.forEach(function(item,index){
         for(var propertyname in item){
             if(item[propertyname] !== cache_old_records[index][propertyname]) {
-                changed_records.push(item);
+                var new_item = item;
+                delete new_item['medewerkerNaam'];
+                delete new_item['projectNaam'];
+                changed_records.push(new_item);
                 break;
             }
         }
