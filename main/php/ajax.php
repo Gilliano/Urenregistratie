@@ -89,12 +89,27 @@ function getUsers()
 function getUrenBetweenDate($params)
 {
     // Get ID's for names/emails
-    if(isset($params['userEmail']))
-        $params['userID'] = userManager::getIDFromEmail($params['userEmail'])['idMedewerker'];
-    if(isset($params['projectName']))
-        $params['projectID'] = projectManager::getProjectIDFromName($params['projectName'])['idProject'];
+    if(isset($params['userEmails']))
+    {
+        $params['userIDs'] = [];
+        foreach($params['userEmails'] as $userEmail)
+        {
+            $userID = userManager::getIDFromEmail($userEmail)['idMedewerker'];
+            array_push($params['userIDs'], $userID);
+        }
+    }
 
-    $records = urenManager::getRecordsForUserProjectDaterange($params['userID'], $params['projectID'], $params['date1'], $params['date2']);
+    if(isset($params['projectNames']))
+    {
+        $params['projectIDs'] = [];
+        foreach($params['projectNames'] as $projectName)
+        {
+            $projectID = projectManager::getProjectIDFromName($projectName)['idProject'];
+            array_push($params['projectIDs'], $projectID);
+        }
+    }
+
+    $records = urenManager::getRecordsForUserProjectDaterange($params['userIDs'], $params['projectIDs'], $params['date1'], $params['date2']);
     echo json_encode($records);
 }
 
