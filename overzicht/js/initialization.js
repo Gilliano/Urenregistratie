@@ -8,18 +8,19 @@ $(document).ready(function(){
         // Get current userrole
         var ajaxObj = new AjaxObj("getSessionVariable", {'sessionVariable': "rol"}, false);
         userrole = ajaxObj.result;
-        ajaxObj = new AjaxObj("getSessionVariable", {'sessionVariable': "email"}, false);
-        usermail = ajaxObj.result;
+        ajaxObj = new AjaxObj("getSessionVariable", {'sessionVariable': "idMedewerker"}, false);
+        userid = ajaxObj.result;
 
         // Step 1: Initialize users list
         ajaxObj = new AjaxObj("getUsers", {}, false, "json");
         var htmlList = "";
         ajaxObj.result.forEach(function(item){
+            var user_name = item.voornaam + " " + (typeof item.tussenvoegsel != 'undefined'?item.tussenvoegsel:"") + " " + item.achternaam;
             // Only allow your own name if not admin
-            if(userrole === "medewerker" && item.email == usermail)
-                htmlList += "<option value=" + item.email + ">" + item.email + "</option>"; // FEATURE: Set data-tokens equal to user's project names
+            if(userrole === "medewerker" && item.idMedewerker == userid)
+                htmlList += "<option value=" + item.email + ">" + user_name + "</option>"; // FEATURE: Set data-tokens equal to user's project names
             else if(userrole === "admin")
-                htmlList += "<option value=" + item.email + ">" + item.email + "</option>"; // FEATURE: Set data-tokens equal to user's project names
+                htmlList += "<option value=" + item.email + ">" + user_name + "</option>"; // FEATURE: Set data-tokens equal to user's project names
         });
         $("#users_list").html(htmlList);
         $(".selectpicker").selectpicker('refresh');
