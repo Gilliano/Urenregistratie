@@ -11,10 +11,10 @@
 
     <?php
     $allCurrentProjects = projectManager::getAllCurrentProjects();
-    $arraySize = sizeof($allCurrentProjects);
+    $projectsArraySize = sizeof($allCurrentProjects);
 
     $allUsers = userManager::getAllUsers();
-    $alleMedewerkers = sizeof(userManager::getAllUsers());
+    $alleMedewerkers = sizeof($allUsers);
 
     $date = date("Y-m-d");
     ?>
@@ -121,7 +121,7 @@
                                 <td class="field">
 
                                     <select class="selectpicker" name="project" data-width="" data-live-search="true" title="Kies een project..." required>
-                                        <?php for($i = 0; $i < $arraySize; $i++) { ?>
+                                        <?php for($i = 0; $i < $projectsArraySize; $i++) { ?>
                                             <option value="<?= $allCurrentProjects[$i]["idProject"]?>"><?= $allCurrentProjects[$i]["projectnaam"]?></option>
                                         <?php } ?>
                                     </select>
@@ -207,7 +207,7 @@
                                     <td class="description">Project</td>
                                     <td class="field">
                                         <select class="selectpicker" name="project" id="teamProject" data-width="" data-live-search="true" title="Kies een project...">
-                                            <?php for($i = 0; $i < $arraySize; $i++) { ?>
+                                            <?php for($i = 0; $i < $projectsArraySize; $i++) { ?>
                                                 <option value="<?= $allCurrentProjects[$i]["idProject"]?>"><?= $allCurrentProjects[$i]["projectnaam"]?></option>
                                             <?php } ?>
                                         </select>
