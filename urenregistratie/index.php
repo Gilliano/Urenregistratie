@@ -11,9 +11,11 @@
 
     <?php
     $allCurrentProjects = projectManager::getAllCurrentProjects();
+    $arraySize = sizeof($allCurrentProjects);
+
     $allUsers = userManager::getAllUsers();
-    $arraySize = sizeof(projectManager::getAllCurrentProjects());
     $alleMedewerkers = sizeof(userManager::getAllUsers());
+
     $date = date("Y-m-d");
     ?>
 
@@ -22,7 +24,7 @@
     include_once '../main/php/navbar.php';
     ?>
     <div class="container">
-        <div class="col-md-12" style="text-align: center;">
+        <div class="col-md-12 switch">
             <p>
                 <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
             </p>
@@ -31,7 +33,7 @@
             <div class="panel panel-default" id="mainFormulier">
                 <div class="panel-heading">Uren invulformulier</div>
                 <div  class="panel-body">
-                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data"">
                         <table>
                             <tr>
                                 <?php
@@ -56,23 +58,23 @@
                         </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
-                                <td class="field"><input type="time" name="begintijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onblur="realTimeWaarde()" name="begintijd" id="begintijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Eindtijd</td>
-                                <td class="field"><input type="time" name="eindtijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onblur="realTimeWaarde()" name="eindtijd" id="eindtijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Totaal aantal uren gewerkt</td>
-                                <td class="field"><output readonly type="number" name="urentotaal" class="form-control"/></td>
+                                <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
-                                <td class="veld"><input type="number" name="urenregulier" class="form-control" required/></td>
+                                <td class="field"><input type="number" onkeyup="urenInnovatief()" id="urenregulier" name="urenregulier" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Innovatieve uren</td>
-                                <td class="field"><input type="number" name="ureninnovatief" class="form-control" readonly/></td>
+                                <td class="field"><input type="number" id="ureninnovatief" name="ureninnovatief" class="form-control" readonly/></td>
                             </tr>
                             <tr>
                                 <td class="description">Omschrijving van de uren</td>
@@ -110,12 +112,12 @@
                         <h4 class="modal-title">Team uren invullen</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(urentotaal.value=parseFloat(eindtijd.value)-parseFloat(begintijd.value))(ureninnovatief.value=parseFloat(urentotaal.value)-parseFloat(urenregulier.value))">
+                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="(teamUrentotaal.value=parseFloat(teamEindtijd.value)-parseFloat(teamBegintijd.value))(teamUreninnovatief.value=parseFloat(teamUrentotaal.value)-parseFloat(teamUrenregulier.value))">
                             <table>
                                 <tr>
                                     <td class="description">Medewerkers</td>
                                     <td class="field">
-                                        <select class="selectpicker" multiple name="medewerker" id="medewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
+                                        <select class="selectpicker" multiple name="medewerker" id="teamMedewerker" data-width="" data-live-search="true" title="Kies medewerkers...">
                                             <?php for($i = 0; $i < $alleMedewerkers; $i++) { ?>
                                                 <?php if(empty($allUsers[$i]["tussenvoegsel"])) { ?>
                                                     <option value="<?= $allUsers[$i]["idMedewerker"] ?>"><?= $allUsers[$i]["voornaam"] . " "  . $allUsers[$i]["achternaam"]?></option>
@@ -128,7 +130,7 @@
                                 <tr>
                                     <td class="description">Project</td>
                                     <td class="field">
-                                        <select class="selectpicker" name="project" id="project" data-width="" data-live-search="true" title="Kies een project...">
+                                        <select class="selectpicker" name="project" id="teamProject" data-width="" data-live-search="true" title="Kies een project...">
                                             <?php for($i = 0; $i < $arraySize; $i++) { ?>
                                                 <option value="<?= $allCurrentProjects[$i]["idProject"]?>"><?= $allCurrentProjects[$i]["projectnaam"]?></option>
                                             <?php } ?>
@@ -137,27 +139,27 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="begintijd" id="begintijd" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="eindtijd" id="eindtijd" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
-                                    <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control" id="urentotaal"/></td>
+                                    <td class="field"><output readonly type="number" name="teamUrentotaal" id="teamUrentotaal" class="form-control"/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="urenregulier" id="urenregulier" class="form-control" required/></td>
+                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
-                                    <td class="field"><input type="number" name="ureninnovatief" id="ureninnovatief" class="form-control" readonly/></td>
+                                    <td class="field"><input type="number" name="teamUreninnovatief" id="teamUreninnovatief" class="form-control" readonly/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
-                                    <td class="field"><textarea name="omschrijving" id="omschrijving" class="form-control" id="omschrijving" required/></textarea></td>
+                                    <td class="field"><textarea name="omschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
                                 </tr>
                             </table>
                         </form>
@@ -182,4 +184,6 @@
     <script src="js/bootstrap-switch.js"></script>
     <!-- Load the modal -->
     <script src="js/modalHandler.js"></script>
+    <!-- Load hour calculating -->
+    <script src="js/urenAfronden.js"></script>
 </html>
