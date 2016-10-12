@@ -56,11 +56,11 @@
                         </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
-                                <td class="field"><input type="time" onblur="realTimeWaarde()" name="begintijd" id="begintijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onblur="realTimeWaarde(); urenInnovatief()" name="begintijd" id="begintijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Eindtijd</td>
-                                <td class="field"><input type="time" onblur="realTimeWaarde()" name="eindtijd" id="eindtijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onblur="realTimeWaarde(); urenInnovatief()" name="eindtijd" id="eindtijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Totaal aantal uren gewerkt</td>
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
-                                <td class="field"><input type="number" onkeyup="urenInnovatief()" id="urenregulier" name="urenregulier" class="form-control" required/></td>
+                                <td class="field"><input type="number" oninput="urenInnovatief()" id="urenregulier" name="urenregulier" step="0.1" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Innovatieve uren</td>
