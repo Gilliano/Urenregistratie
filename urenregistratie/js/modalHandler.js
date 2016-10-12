@@ -61,11 +61,11 @@ function setDivForEachMedewerker(){
 
     $('#teamMedewerker :selected').each(function(i, selected){
         headerData = array.slice(1,6);
-        medewerker[i] = $(selected).text() + " " + headerData;
+        medewerker[i] = $(selected).text();
 
         newHTML.push(
             '<div class="panel panel-default modalPanel">' +
-                '<div class="panel-heading modalHeader" data-toggle="collapse" href="#collapse' + i + '">' + medewerker[i] + '</div>' +
+                '<div class="panel-heading modalHeader" data-toggle="collapse" href="#collapse' + i + '">' + medewerker[i] + " " + headerData + '</div>' +
                 '<div  class="panel-body collapse" id="collapse' + i + '">' +
                     '<form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data")">' +
                         '<table>' +
