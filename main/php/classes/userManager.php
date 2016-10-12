@@ -59,13 +59,11 @@ class userManager {
 
         $conn = database::connect();
 
-        if(isset($_POST['password'])) {
-            $_POST['password'] = sha1($_POST['password']);
-            $_POST['repassword'] = sha1($_POST['repassword']);
-            $_POST['email'] = $_POST['email'] . '@branchonline.nl';
-        }
-
         if(isset($_POST['user_register'])) {
+
+            $_POST['password'] = sha1($_POST['rpassword']);
+            $_POST['repassword'] = sha1($_POST['repassword']);
+            $_POST['email'] = $_POST['remail'] . '@branchonline.nl';
 
             if($_POST['password'] == $_POST['repassword']) {
 

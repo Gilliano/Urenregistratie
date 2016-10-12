@@ -14,6 +14,21 @@
         require_once 'php/login.php';
     ?>
     <link href="css/login.css" rel="stylesheet">
+
+    <script>function passwordChecker(){
+        password = document.getElementById("rpassword").value;
+        repassword = document.getElementById("repassword").value;
+
+        if(password != repassword){
+            alert('uw wachtwoord komt niet overeen');
+            return false;
+        }
+        else if(password == repassword){
+        return true;
+        }
+    }
+
+        </script>
 </head>
 
 <body>
@@ -55,9 +70,9 @@
                     <img class="registerLogo" src="../main/img/logo.png" alt="" />
                 </div>
 
-                    <form method="post" role="login">
+                    <form method="post" role="login" onsubmit="return passwordChecker()">
                         <h4 class="modal-title">Registreren</h4>
-                        <input type="text" name="firstname" placeholder="Voornaam" autocomplete="false" required class="form-control input-lg" />
+                        <input type="text" name="firstname" placeholder="Voornaam" autocomplete="false" class="form-control input-lg" />
 
                         <input type="text" name="insertion" placeholder="Tussenvoegsel" autocomplete="false" class="form-control input-lg" />
 
@@ -65,15 +80,15 @@
 
                         <div class="row">
                             <div class="col-sm-6 startmail">
-                                <input type="text" name="email" placeholder="Email" autocomplete="false" required class="form-control input-lg" />
+                                <input type="text" name="remail" placeholder="Email" autocomplete="false" required class="form-control input-lg" />
                             </div>
                             <div class="col-sm-6 endmail">
                                 <p>@branchonline.nl</p>
                             </div>
                         </div>
 
-                        <input type="password" name="password" class="form-control input-lg" autocomplete="off" id="password" placeholder="Wachtwoord"/>
-                        <input type="password" name="repassword" class="form-control input-lg" autocomplete="off" id="password" placeholder="Herhaal wachtwoord"/>
+                        <input type="password" required name="rpassword" class="form-control input-lg" autocomplete="off" id="rpassword" placeholder="Wachtwoord"/>
+                        <input type="password" required name="repassword" class="form-control input-lg" autocomplete="off" id="repassword" placeholder="Herhaal wachtwoord"/>
 
                         <input type="submit" name="register" value="Registreer" class="btn btn-lg btn-primary btn-block">
 
