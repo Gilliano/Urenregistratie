@@ -86,6 +86,8 @@
                 <div class="modal-body">
                     <form method="post" id="gebruiker_wijzig_form" style="margin: auto" role="login">
                         <h4 class="modal-title">Registreren</h4>
+                        <input type="hidden" name="id" autocomplete="false" required class="form-control input-lg id" />
+
                         <input type="text" name="firstname" placeholder="Voornaam" autocomplete="false" required class="form-control input-lg firstname" />
 
                         <input type="text" name="insertion" placeholder="Tussenvoegsel" autocomplete="false" class="form-control input-lg tussenvoegsel" />

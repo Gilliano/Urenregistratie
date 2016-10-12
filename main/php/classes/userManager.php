@@ -87,6 +87,39 @@ class userManager {
         return NULL;
     }
 
+    //update user in the management part
+    //$params comes from the ajax.php
+    public static function userChange($params) {
+        $conn = database::connect();
+            try {
+                $updateUser = " UPDATE medewerker 
+                                SET 
+                                voornaam=?, 
+                                tussenvoegsels=?, 
+                                achternaam=?, 
+                                email=?, 
+                                validated=?, 
+                                rol=?,
+                                state=?
+                                WHERE idMedewerker=?";
+                $stmt = $conn->prepare($updateUser);
+                $stmt->bindParam(1, $params['firstname']);
+                $stmt->bindParam(2, $params['insertion']);
+                $stmt->bindParam(3, $params['lastname']);
+                $stmt->bindParam(4, $params['email']);
+                $stmt->bindParam(5, $params['valide']);
+                $stmt->bindParam(6, $params['rol']);
+                $stmt->bindParam(7, $params['state']);
+                $stmt->bindParam(8, $params['id']);
+                $stmt->execute();
+
+                return 'succes';
+            } catch(PDOException $e){
+                return $e->getMessage();
+            }
+
+    }
+
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
     public static function areYouLoggedIn() {

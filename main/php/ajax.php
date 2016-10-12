@@ -120,12 +120,7 @@ function saveUurRecord($params)
         echo $result . "\n";
 }
 
+//this wil update the user
 function wijzigGebruiker($params) {
-    echo $params['firstname'];
-    echo $params['insertion'];
-    echo $params['lastname'];
-    echo $params['email'];
-    echo $params['valide'];
-    echo $params['rol'];
-    echo $params['state'];
+    echo userManager::userChange($params);
 }

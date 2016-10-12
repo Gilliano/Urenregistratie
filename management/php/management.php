@@ -12,7 +12,7 @@ function users() {
     foreach ($users as $user) {
 
         $table .= "<tr>";
-
+        $table .=   "<td style='display: none'>".$user['idMedewerker']."</td>";
         $table .=   "<td>".$user['voornaam']."</td>";
         $table .=   '<td>'.$user['tussenvoegsels'].'</td>';
         $table .=   '<td>'.$user['achternaam'].'</td>';
