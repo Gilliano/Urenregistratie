@@ -74,7 +74,10 @@ $("#save_button").on("click", function(event){
     cache_new_records.forEach(function(item,index){
         for(var propertyname in item){
             if(item[propertyname] !== cache_old_records[index][propertyname]) {
-                changed_records.push(item);
+                var new_item = item;
+                delete new_item['medewerkerNaam'];
+                delete new_item['projectNaam'];
+                changed_records.push(new_item);
                 break;
             }
         }
