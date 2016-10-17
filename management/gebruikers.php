@@ -58,7 +58,7 @@
     </div>
 
     <div style="display: none" class="wijzigen div-1">
-        <table class="gebruikers_wijzigen table">
+        <table id="allUsersTable" class="gebruikers_wijzigen table">
             <t>
                 <td><h4>Voornaam</h4></td>
                 <td><h4>Tussenvoegsel</h4></td>

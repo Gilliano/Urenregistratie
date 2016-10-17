@@ -122,5 +122,5 @@ function saveUurRecord($params)
 
 //this wil update the user
 function wijzigGebruiker($params) {
-    echo userManager::userChange($params);
+    echo json_encode(userManager::userChange($params));
 }

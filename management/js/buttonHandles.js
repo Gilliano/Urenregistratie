@@ -60,7 +60,50 @@ $("#save_button").on("click", function(event){
                 'state': state
             }, false, '');
 
+        //now close the model
         $('#myModal').modal('hide');
+
+
+
+        //$("#allUsersTable").html("<p>okee</p><h1>OKee</h1>");
+
+        //now close the model
+        $('#myModal').modal('hide');
+
+        //$("#allUsersTable").html("<?php users(); ?>");
+
+        var ajaxObjUsers = new AjaxObj("getUsers", {}, false, "json");
+
+        //Lets build the table head first
+        var htmlList = "";
+        htmlList += "<t>";
+        htmlList +=     "<td><h4>Voornaam</h4></td>";
+        htmlList +=     "<td><h4>Tussenvoegsel</h4></td>";
+        htmlList +=     "<td><h4>Achternaam</h4></td>";
+        htmlList +=     "<td><h4>Email</h4></td>";
+        htmlList +=     "<td><h4>Valide</h4></td>";
+        htmlList +=     "<td><h4>Rol</h4></td>";
+        htmlList +=     "<td><h4>Status</h4></td>";
+        htmlList += "</t>";
+
+        //Now lets add the new items :)
+        ajaxObjUsers.result.forEach(function(item){
+            console.log(item.voornaam);
+            htmlList += "<tr>";
+            htmlList += "<td>"+item.voornaam+"</td>";
+            htmlList += "<td>"+item.tussenvoegsels+"</td>";
+            htmlList += "<td>"+item.achternaam+"</td>";
+            htmlList += "<td>"+item.email+"</td>";
+            htmlList += "<td>"+item.validated+"</td>";
+            htmlList += "<td>"+item.rol+"</td>";
+            htmlList += "<td>"+item.state+"</td>";
+            htmlList += "<td> <button type='submit' name='gebruiker_wijzig' value='"+item.idMedewerker+"' class='btn btn-default' data-toggle='modal' data-target='#myModal'>Wijzig</button> </td>";
+            htmlList += "</tr>";
+        });
+
+        $("#allUsersTable").html(htmlList);
+
+        //$("#allUsersTable").html("<tr><td>hello</td></tr>");
 
     });
     //ajax object  maken

@@ -111,7 +111,7 @@ class userManager {
                 $stmt->bindParam(8, $params['id']);
                 $stmt->execute();
 
-                return 'succes';
+                return self::getAllUsers();
             } catch(PDOException $e){
                 return $e->getMessage();
             }
