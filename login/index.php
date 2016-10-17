@@ -1,5 +1,5 @@
 <?php session_start() ?>
-<?php if(isset($_SESSION['idMedewerker'])) {header('Location: /project/urenregistratie/index.php');}?>
+<?php if(isset($_SESSION['idMedewerker'])) {header('Location: ../urenregistratie');}?>
 <!DOCTYPE html>
 <html>
 <head>
