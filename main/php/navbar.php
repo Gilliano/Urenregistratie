@@ -5,7 +5,7 @@ if(isset($_POST['logout'])) {
 }
 
 function adminTab() {
-    if($_SESSION['rol'] == 'admin') {
+    if(isset($_SESSION['rol'])) {
         $tab = "<li><a href='../management?page=dashboard'>Management</a></li>";
         return $tab;
     }

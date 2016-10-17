@@ -12,78 +12,7 @@ class userManager {
         print "In BaseClass constructor\n";
     }
 
-    public static function login() {
 
-        $conn = database::connect();
-
-        //if submit from login form get pressed
-        if(isset($_POST['login'])) {
-
-            //turn form value's in variable
-            $email = $_POST['email'];
-            $password = sha1($_POST['password']);
-
-            //select row where email and password match
-            $userInfo = $conn->prepare("SELECT * FROM medewerker WHERE email=? AND wachtwoord=?");
-            $userInfo->bindParam(1, $email);
-            $userInfo->bindParam(2, $password);
-            $userInfo->execute();
-            //fetch results
-            $user = $userInfo->fetch(PDO::FETCH_ASSOC);
-
-            //check if results are filled
-            if(isset($user) AND !empty($user)) {
-                //if results are correct set SESSIONS
-                $_SESSION['idMedewerker']   = $user['idMedewerker'];
-                $_SESSION['voornaam']       = $user['voornaam'];
-                $_SESSION['lastname']       = $user['tussenvoegsels'] . ' ' . $user['achternaam'];
-                $_SESSION['geboortedatum']  = $user['geboortedatum'];
-                $_SESSION['email']          = $user['email'];
-                $_SESSION['validated']      = $user['validated'];
-                $_SESSION['rol']            = $user['rol'];
-                $_SESSION['state']          = $user['state'];
-
-                header('Location: ../urenregistratie/index.php');
-
-                return true;
-            } else {
-                //if fetch is empty then return a message
-                return false;
-            }
-        }
-
-        return NULL;
-    }
-
-    public static function register() {
-
-        $conn = database::connect();
-
-        if(isset($_POST['user_register'])) {
-
-            $_POST['password'] = sha1($_POST['rpassword']);
-            $_POST['repassword'] = sha1($_POST['repassword']);
-            $_POST['email'] = $_POST['remail'] . '@branchonline.nl';
-
-            if($_POST['password'] == $_POST['repassword']) {
-
-                $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord) VALUES (?,?,?,?,?)";
-                $stmt = $conn->prepare($adduser);
-                $stmt->bindParam(1, $_POST['firstname']);
-                $stmt->bindParam(2, $_POST['insertion']);
-                $stmt->bindParam(3, $_POST['lastname']);
-                $stmt->bindParam(4, $_POST['email']);
-                $stmt->bindParam(5, $_POST['password']);
-                $stmt->execute();
-            } else {
-                return false;
-            }
-
-            return NULL;
-
-        }
-        return NULL;
-    }
 
     //update user in the management part
     //$params comes from the ajax.php
