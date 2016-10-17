@@ -11,10 +11,10 @@
 
     <?php
     $allCurrentProjects = projectManager::getAllCurrentProjects();
-    $arraySize = sizeof($allCurrentProjects);
+    $projectsArraySize = sizeof($allCurrentProjects);
 
     $allUsers = userManager::getAllUsers();
-    $alleMedewerkers = sizeof(userManager::getAllUsers());
+    $alleMedewerkers = sizeof($allUsers);
 
     $date = date("Y-m-d");
     ?>
@@ -45,7 +45,7 @@
                                 <td class="field">
 
                                     <select class="selectpicker" name="project" data-width="" data-live-search="true" title="Kies een project..." required>
-                                        <?php for($i = 0; $i < $arraySize; $i++) { ?>
+                                        <?php for($i = 0; $i < $projectsArraySize; $i++) { ?>
                                             <option value="<?= $allCurrentProjects[$i]["idProject"]?>"><?= $allCurrentProjects[$i]["projectnaam"]?></option>
                                         <?php } ?>
                                     </select>
@@ -70,7 +70,7 @@
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
-                                <td class="field"><input type="number" oninput="urenInnovatief()" id="urenregulier" name="urenregulier" step="0.1" class="form-control" required/></td>
+                                <td class="field"><input type="number" onkeyup="urenInnovatief()" id="urenregulier" name="urenregulier" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Innovatieve uren</td>
@@ -131,7 +131,7 @@
                                     <td class="description">Project</td>
                                     <td class="field">
                                         <select class="selectpicker" name="project" id="teamProject" data-width="" data-live-search="true" title="Kies een project...">
-                                            <?php for($i = 0; $i < $arraySize; $i++) { ?>
+                                            <?php for($i = 0; $i < $projectsArraySize; $i++) { ?>
                                                 <option value="<?= $allCurrentProjects[$i]["idProject"]?>"><?= $allCurrentProjects[$i]["projectnaam"]?></option>
                                             <?php } ?>
                                         </select>

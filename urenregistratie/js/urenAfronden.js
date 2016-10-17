@@ -1,8 +1,9 @@
 function aantalUren(begintijd, eindtijd){
 
     //split de waardes in een array met 2 gegevens 10:33  is    b[0] = 10 en b[1] = 33
-    var b = begintijd.split(':');
-    var e = eindtijd.split(':');
+    var b = splitter(begintijd);
+    var e = splitter(eindtijd);
+
 
     // Uren afronden specifiek op halve en hele uren
     if(b[1] < 15) {
