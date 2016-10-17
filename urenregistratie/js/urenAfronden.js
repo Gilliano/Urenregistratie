@@ -21,13 +21,25 @@ function aantalUren(begintijd, eindtijd){
         document.getElementById("begintijd").value = b;
     }
     else {
-        b[0] = parseInt(b[0]);
-        b[0] += 1;
-        b[0] = b[0].toString();
-        b[1] = "00";
-        var b = b.toString();
-        b = b.replace(",", ":");
-        document.getElementById("begintijd").value = b;
+        if(b[0] < 9) {
+            b[0] = parseInt(b[0]);
+            b[0] += 1;
+            b[0] = "0" + b[0];
+            b[0] = b[0].toString();
+            b[1] = "00";
+            var b = b.toString();
+            b = b.replace(",", ":");
+            document.getElementById("begintijd").value = b;
+        }
+        else {
+            b[0] = parseInt(b[0]);
+            b[0] += 1;
+            b[0] = b[0].toString();
+            b[1] = "00";
+            var b = b.toString();
+            b = b.replace(",", ":");
+            document.getElementById("begintijd").value = b;
+        }
     }
 
     // Hetzelfde als bovenstaande if statements maar dan voor eindtijd
@@ -44,14 +56,25 @@ function aantalUren(begintijd, eindtijd){
         document.getElementById("eindtijd").value = e;
     }
     else {
-        e[0] = parseInt(e[0]);
-        e[0] += 1;
-        e[0] = e[0].toString();
-        e[1] = "00";
-        var e = e.toString();
-        e = e.replace(",", ":");
-
-        document.getElementById("eindtijd").value = e;
+        if(e[0] < 9) {
+            e[0] = parseInt(e[0]);
+            e[0] += 1;
+            e[0] = "0" + e[0];
+            e[0] = e[0].toString();
+            e[1] = "00";
+            var e = e.toString();
+            e = e.replace(",", ":");
+            document.getElementById("eindtijd").value = e;
+        }
+        else {
+            e[0] = parseInt(e[0]);
+            e[0] += 1;
+            e[0] = b[0].toString();
+            e[1] = "00";
+            var e = e.toString();
+            e = e.replace(",", ":");
+            document.getElementById("eindtijd").value = e;
+        }
     }
 
         var Btijd = b.split(':');
