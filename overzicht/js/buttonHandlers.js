@@ -99,7 +99,8 @@ $("#save_button").on("click", function(event){
             else
                 $("#recordSavedSucces").fadeIn();
             cache_old_records = $.extend(true, [], cache_new_records);
-        }); // TODO: Is this really safe??
+            $("#div_description_list").fadeIn();
+        });
     });
 });
 
@@ -125,7 +126,8 @@ $("#edit_modal_changeButton").on("click", function(event){
     // Update selected list item with new values
     var itemID = $("[id='edit_modal_itemID']").val(); // List item id
     var listItem_handle = $("option[name='description_item'][value='"+itemID+"']");
-    listItem_handle.html(currentRecord.omschrijving); // list item text
+    var html = currentRecord.urengewerkt+" uren gewerkt | "+currentRecord.omschrijving;
+    listItem_handle.html(html); // list item text
     if(currentRecord.goedgekeurd == 1)
         $(listItem_handle).addClass("validated");
     else
@@ -135,8 +137,48 @@ $("#edit_modal_changeButton").on("click", function(event){
 
 // Handler for export button
 $("#export_button").on("click", function(){
-    // Export list to csv
-    $(this).prop('disabled', true);
+    // Show message about current changes not being exported
+    if(JSON.stringify(cache_new_records) != JSON.stringify(cache_old_records)) // Only works if key order is exact same
+        $("#csv_message").modal("show");
+    else
+        createCSV();
+});
+
+// Handler for export button inside csv_message modal
+$("#csv_message_exportButton").on("click", function(){
+    $("#csv_message").modal("hide");
+    $("#export_button").prop('disabled', true);
+    // Save changes
+    var changed_records = [];
+    cache_new_records.forEach(function(item,index){
+        for(var propertyname in item){
+            if(item[propertyname] !== cache_old_records[index][propertyname]) {
+                var new_item = $.extend(true, {}, item);
+                delete new_item['medewerkerNaam'];
+                delete new_item['projectNaam'];
+                changed_records.push(new_item);
+                break;
+            }
+        }
+    });
+    $.getScript("../main/js/ajax.js", function(){
+        var ajaxObj = new AjaxObj("saveUurRecord", changed_records, true, "", function(response){
+            console.log(response);
+            $("#description_loader").fadeOut();
+            if(jQuery.inArray("Failed", response) != -1)
+                $("#recordSavedFailed").fadeIn();
+            else
+                $("#recordSavedSucces").fadeIn();
+            cache_old_records = $.extend(true, [], cache_new_records);
+            $("#div_description_list").fadeIn();
+
+            // Export to csv
+            createCSV();
+        });
+    });
+});
+
+function createCSV(){
     $.getScript("../main/js/ajax.js", function(){
         var exclude_list = ['idMedewerker', 'idProject', 'idUur'];
         var records = $.extend(true, [], cache_old_records);
@@ -153,7 +195,7 @@ $("#export_button").on("click", function(){
         });
 
         var ajaxObj = new AjaxObj("setSessionVariable", {"sessionVariable": "csv_array", "value": new_records}, true, "", function(response){
-            var win = window.open(location.href + "/php/csv_export.php", "_blank");
+            var win = window.open(location.href.replace("#", "") + "/php/csv_export.php", "_blank");
             $("#export_button").prop('disabled', false);
             if(win)
                 win.focus();
@@ -161,4 +203,4 @@ $("#export_button").on("click", function(){
                 alert("Please allow popups for this website!");
         })
     })
-});
+}

@@ -83,6 +83,7 @@
                     <button id="export_button" type="button" class="btn btn-info">Export</button>
                 </div>
             </div>
+            <!-- Edit modal -->
             <div id="edit_modal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -94,10 +95,28 @@
                         </div>
                         <div class="modal-footer">
                             <button id="edit_modal_closeButton" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                            <button id="edit_modal_changeButton" type="button" class="btn btn-success">Change</button> <!-- TODO: Make buttonHandler (js) -->
+                            <button id="edit_modal_changeButton" type="button" class="btn btn-success">Change</button>
                         </div>
                     </div>
-
+                </div>
+            </div>
+            <!-- Export info message -->
+            <div id="csv_message" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Export to csv</h4>
+                        </div>
+                        <div class="modal-body">
+                            You have unsaved changes to these records, do you want me to save them for you and create
+                            an export?
+                        </div>
+                        <div class="modal-footer">
+                            <button id="csv_message_closeButton" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button id="csv_message_exportButton" type="button" class="btn btn-success">Yes</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -75,11 +75,13 @@
     animation: spin 2s linear infinite;
 }
 
-#edit_modal_closeButton {
+#edit_modal_closeButton,
+#csv_message_closeButton {
     float: left;
 }
 
-#edit_modal_saveButton {
+#edit_modal_saveButton,
+#csv_message_exportButton {
     float: right;
 }
 

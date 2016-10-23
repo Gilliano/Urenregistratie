@@ -1,6 +1,4 @@
-/**
- * Created by JohnDoe on 29-9-2016.
- */
+// Get current date
 function getCurrentDate(){
     var today = new Date();
     var dd = today.getDate();
