@@ -33,6 +33,10 @@
                 <a href="#" class="close" aria-label="close">&times;</a>
                 <strong>Failed</strong> Some records could not be saved! <!-- TODO: Make more detailed -->
             </div>
+            <div id="filtersNotSet" class="alert alert-danger">
+                <a href="#" class="close" aria-label="close">&times;</a>
+                <strong>Failed</strong> Please make sure all filters are supplied with information.
+            </div>
 
             <?php include_once '../main/php/navbar.php'; ?>
         </header>

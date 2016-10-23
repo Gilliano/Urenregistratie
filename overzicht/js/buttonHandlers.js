@@ -12,6 +12,13 @@ $(document).on('click', '.alert .close', function(){
 
 // Handler for search button
 $("#search_button").on("click", function(event){
+    // Check if filters are applied
+    if($("#users_list").val() == null ||
+        $("#projects_list").val() == null) {
+        $("#filtersNotSet").fadeIn();
+        return;
+    }
+
     $("#search_button").prop("disabled",true);
     $("#div_description_list").hide();
     $(".loader").fadeIn(100);
