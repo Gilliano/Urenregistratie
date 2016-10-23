@@ -21,7 +21,7 @@ $("#search_button").on("click", function(event){
 
     $("#search_button").prop("disabled",true);
     $("#div_description_list").hide();
-    $(".loader").fadeIn(100);
+    $("#description_loader").fadeIn(100);
     $(".alert").each(function(index, item){
         if($(item).css('display') != 'none')
             $(item).hide();
@@ -51,11 +51,11 @@ $("#search_button").on("click", function(event){
 
         if(html.length > 0){
             $("#description_list").html(html);
-            $(".loader").hide();
+            $("#description_loader").hide();
             $("#div_description_list").fadeIn();
         }
         else{
-            $(".loader").fadeOut();
+            $("#description_loader").fadeOut();
             $("#noRecordsFound").fadeIn();
         }
 
@@ -75,7 +75,7 @@ $("#search_button").on("click", function(event){
 $("#save_button").on("click", function(event){
     // Hide description list
     $("#div_description_list").fadeOut();
-    $(".loader").fadeIn();
+    $("#description_loader").fadeIn();
 
     var changed_records = [];
     cache_new_records.forEach(function(item,index){
@@ -93,7 +93,7 @@ $("#save_button").on("click", function(event){
     // Save all 'changed' records
     $.getScript("../main/js/ajax.js", function(){
         var ajaxObj = new AjaxObj("saveUurRecord", changed_records, true, "", function(response){
-            $(".loader").fadeOut();
+            $("#description_loader").fadeOut();
             if(jQuery.inArray("Failed", response) != -1)
                 $("#recordSavedFailed").fadeIn();
             else
@@ -131,4 +131,34 @@ $("#edit_modal_changeButton").on("click", function(event){
     else
         $(listItem_handle).removeClass("validated");
     $("#edit_modal").modal('toggle');
+});
+
+// Handler for export button
+$("#export_button").on("click", function(){
+    // Export list to csv
+    $(this).prop('disabled', true);
+    $.getScript("../main/js/ajax.js", function(){
+        var exclude_list = ['idMedewerker', 'idProject', 'idUur'];
+        var records = $.extend(true, [], cache_old_records);
+        var new_records = [];
+        records.forEach(function(value, index){
+            var obj = value;
+            var new_obj = {};
+            for(var propName in obj){
+                if($.inArray(propName, exclude_list) > -1)
+                    delete obj[propName];
+                new_obj[propName] = obj[propName];
+            }
+            new_records.push(new_obj);
+        });
+
+        var ajaxObj = new AjaxObj("setSessionVariable", {"sessionVariable": "csv_array", "value": new_records}, true, "", function(response){
+            var win = window.open(location.href + "/php/csv_export.php", "_blank");
+            $("#export_button").prop('disabled', false);
+            if(win)
+                win.focus();
+            else
+                alert("Please allow popups for this website!");
+        })
+    })
 });

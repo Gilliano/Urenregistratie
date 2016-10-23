@@ -74,12 +74,13 @@
             </div>
             <div id="description_row" class="row">
                 <!-- Step 4: Description list -->
-                <div class="loader col-sm-2 col-sm-offset-5"></div>
+                <div id="description_loader" class="loader col-sm-2 col-sm-offset-5"></div>
                 <div id="div_description_list" class="col-sm-6 col-sm-offset-3">
                     <label for="description_list">Omschrijvingen</label><br>
                     <select id="description_list" class="form-control" multiple="multiple">
                     </select><br>
                     <button id="save_button" type="button" class="btn btn-success">Opslaan</button>
+                    <button id="export_button" type="button" class="btn btn-info">Export</button>
                 </div>
             </div>
             <div id="edit_modal" class="modal fade" role="dialog">

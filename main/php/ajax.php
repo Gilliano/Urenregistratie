@@ -30,7 +30,7 @@ function getSessionVariable($params)
 function setSessionVariable($params)
 {   
     $_SESSION[$params['sessionVariable']] = $params['value'];
-    echo "\$_SESSION['".$params['sessionVariable']."'] = ".$params['value'];
+    echo "\$_SESSION['".$params['sessionVariable']."'] = ". is_array($params['value'])?var_dump($params['value']):$params['value'];
     exit();
 }
 

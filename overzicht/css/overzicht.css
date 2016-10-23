@@ -39,7 +39,11 @@
 }
 
 #save_button {
-    width: 100%;
+    width: 85%;
+}
+
+#export_button {
+    width: 14%;
 }
 
 .edit_modal {
