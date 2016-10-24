@@ -9,7 +9,7 @@ $("#teamMedewerker").on("change paste keyup", function() {
     // fill the array
 
     array[0] = $("#teamMedewerker option:selected").text();
-    setDivForEachMedewerker();
+    setValuesOnWeb();
 });
 $("#teamProject").on("change paste keyup", function() {
     // fill the array
@@ -24,15 +24,14 @@ $("#teamBegintijd").on("change paste keyup", function() {
 });
 $("#teamEindtijd").on("change paste keyup", function() {
     // fill the array
-    array[3] = "-";
-    array[4] = $(this).val();
-    array[5] = $("#teamUrentotaal").val();
+    array[3] = $(this).val();
+    array[4] = $("#teamUrentotaal").val();
 
     setValuesOnWeb();
 });
 $("#teamUrenregulier").on("change paste keyup", function() {
-    array[6] = $(this).val();
-    array[7] = $("#teamUreninnovatief").val();
+    array[5] = $(this).val();
+    array[6] = $("#teamUreninnovatief").val();
 
     setValuesOnWeb();
 });
@@ -44,15 +43,14 @@ $("#teamOmschrijving").on("change paste keyup", function() {
 
 //if any input is changed then shows it directly on the webpage behind the modal.
 function setValuesOnWeb() {
-
-    //$(".modalHeader").html(headerData.join(" "));
+    setDivForEachMedewerker();
     $(".project").val(array[1]);
     $(".begintijd").val(array[2]);
-    $(".eindtijd").val(array[4]);
-    $(".urentotaal").val(array[5]);
-    $(".urenregulier").val(array[6]);
-    $(".ureninnovatief").val(array[7]);
-    $(".omschrijving").val(array[8]);
+    $(".eindtijd").val(array[3]);
+    $(".urentotaal").val(array[4]);
+    $(".urenregulier").val(array[5]);
+    $(".ureninnovatief").val(array[6]);
+    $(".omschrijving").val(array[7]);
 }
 
 function setDivForEachMedewerker(){
@@ -60,12 +58,17 @@ function setDivForEachMedewerker(){
 
 
     $('#teamMedewerker :selected').each(function(i, selected){
-        headerData = array.slice(1,6);
+        if(array.length < 5){
+            headerData = $(selected).text();
+        }else{
+            headerData = $(selected).text() + " | " + array[1] + ", " + array[2] + " - " + array[3] + " | " + array[4] + " uren gewerkt";
+        }
+
         medewerker[i] = $(selected).text();
 
         newHTML.push(
             '<div class="panel panel-default modalPanel">' +
-                '<div class="panel-heading modalHeader" data-toggle="collapse" href="#collapse' + i + '">' + medewerker[i] + " " + headerData + '</div>' +
+                '<div class="panel-heading modalHeader" data-toggle="collapse" href="#collapse' + i + '">' + headerData + '</div>' +
                 '<div  class="panel-body collapse" id="collapse' + i + '">' +
                     '<form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data")">' +
                         '<table>' +
@@ -108,7 +111,6 @@ function setDivForEachMedewerker(){
         );
 
         $("#modalContent").html(newHTML.join(""));
-        setValuesOnWeb();
     });
 }
 

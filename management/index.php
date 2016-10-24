@@ -27,16 +27,16 @@
 <!--            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>-->
             <br>
             <li>
-                <a <a href='../management?page=dashboard'>Dashboard</a>
+                <a <a href='?page=dashboard'>Dashboard</a>
             </li>
             <li>
-                <a <a href='../management?page=gebruikers'>Gebruikers</a>
+                <a <a href='?page=gebruikers'>Gebruikers</a>
             </li>
             <li>
-                <a <a href='../management?page=projecten'>Projecten</a>
+                <a <a href='?page=projecten'>Projecten</a>
             </li>
             <li>
-                <a <a href='../management?page=uren'>Uren management</a>
+                <a <a href='?page=uren'>Uren management</a>
             </li>
             </ul>
     </div>
