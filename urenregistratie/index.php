@@ -17,6 +17,7 @@
     $alleMedewerkers = sizeof($allUsers);
 
     $date = date("Y-m-d");
+    print_r($_POST);
     ?>
 
     <body>
@@ -33,7 +34,7 @@
             <div class="panel panel-default" id="mainFormulier">
                 <div class="panel-heading">Uren invulformulier</div>
                 <div  class="panel-body">
-                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data"">
+                    <form method="post" action="" class="urenformulier" id="urenformulier" name="urenformulier" enctype="multipart/form-data"">
                         <table>
                             <tr>
                                 <?php
@@ -94,6 +95,7 @@
 
     <!-- Here comes the jQuery model output -->
     <div class="col-md-8 col-md-offset-2" id="modalContent">
+
     </div>
 
 
@@ -112,7 +114,7 @@
                         <h4 class="modal-title">Team uren invullen</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data">
+                        <form method="post" action="" class="urenformulier" name="urenformulier" oninput="(teamUrentotaal.value = parseFloat(teamEindtijd.value) - parseFloat(teamBegintijd.value))(teamUreninnovatief.value = parseFloat(teamUrentotaal.value) - parseFloat(teamUrenregulier.value))" enctype="multipart/form-data">
                             <table>
                                 <tr>
                                     <td class="description">Medewerkers</td>
@@ -139,11 +141,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamTijdWaarde(); teamUrenInnovatief()" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamTijdWaarde(); teamUrenInnovatief()" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
@@ -151,7 +153,7 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="teamUrenregulier" oninput="teamUrenInnovatief()" id="teamUrenregulier" class="form-control" required/></td>
+                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
@@ -159,7 +161,7 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
-                                    <td class="field"><textarea name="omschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
+                                    <td class="field"><textarea name="teamOmschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
                                 </tr>
                             </table>
                         </form>
@@ -169,12 +171,11 @@
                         <input type="submit" name="urenopslaan" class="opslaan btn btn-danger" data-dismiss="modal" value="Annuleren">
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
     </body>
+
     <?php
 
     //performance increasing not everything in the head, not necessary things in the footer.

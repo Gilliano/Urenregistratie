@@ -120,6 +120,9 @@ static function addUren() {
         return "<div class='alert alert-danger' id='error'>Vul alle invoervelden in!</div>";
     }
 }
+    static function addTeamUren() {
+
+    }
 
     // Updates the record in `uur` tabel
     // foreach element in param array

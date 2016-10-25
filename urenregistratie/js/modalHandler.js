@@ -36,8 +36,7 @@ $("#teamUrenregulier").on("change paste keyup", function() {
     setValuesOnWeb();
 });
 $("#teamOmschrijving").on("change paste keyup", function() {
-    array[8] = $(this).val();
-
+    array[7] = $(this).val();
     setValuesOnWeb();
 });
 
@@ -52,7 +51,6 @@ function setValuesOnWeb() {
     $(".ureninnovatief").val(array[6]);
     $(".omschrijving").val(array[7]);
 }
-
 function setDivForEachMedewerker(){
     var newHTML = [];
 
@@ -70,7 +68,7 @@ function setDivForEachMedewerker(){
             '<div class="panel panel-default modalPanel">' +
                 '<div class="panel-heading modalHeader" data-toggle="collapse" href="#collapse' + i + '">' + headerData + '</div>' +
                 '<div  class="panel-body collapse" id="collapse' + i + '">' +
-                    '<form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data")">' +
+                    '<form method="post" class="urenformulier" action="" id="urenformulier' + i + '" name="urenformulier ' + i + '" enctype="multipart/form-data">' +
                         '<table>' +
                             '<tr>' +
                                     '<td class="description">Medewerker</td>' +
@@ -110,8 +108,12 @@ function setDivForEachMedewerker(){
             '</div>'
         );
 
-        $("#modalContent").html(newHTML.join(""));
+        $("#modalContent").html(newHTML.join("") + "<input style='margin-bottom: 15px;' type='submit' name='teamurenopslaan' onclick='submitForms();' class='btn btn-success' value='Alles opslaan'>");
     });
+}
+function submitForms() {
+    $('form#urenformulier1').submit();
+    $('form#urenformulier2').submit();
 }
 
 //what to do if the bootstrapswitch changed
