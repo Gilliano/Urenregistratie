@@ -167,6 +167,7 @@ class userManager
         if (isset($user) AND !empty($user)) {
             //if results are correct set SESSIONS
             $_SESSION['idMedewerker'] = $user['idMedewerker'];
+            $_SESSION['rol'] = $user['idMedewerker'];
             header('Location: ../urenregistratie/index.php');
         } else {
             return false;
