@@ -144,7 +144,9 @@ class userManager
         return $error;
         
     }
-    
+    public static function rolManager(){
+
+    }
     //login heeft een email en een wachtwoord nodig om te kijken of je kan inloggen.
     public static function login($email, $password)
     {
@@ -167,9 +169,11 @@ class userManager
         if (isset($user) AND !empty($user)) {
             //if results are correct set SESSIONS
             $_SESSION['idMedewerker'] = $user['idMedewerker'];
-            $_SESSION['rol'] = $user['idMedewerker'];
+            $_SESSION['rol'] = $user['rol'];
+
             header('Location: ../urenregistratie/index.php');
-        } else {
+        } 
+        else {
             return false;
         }
     }
