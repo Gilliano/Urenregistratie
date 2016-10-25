@@ -17,7 +17,6 @@
     $alleMedewerkers = sizeof($allUsers);
 
     $date = date("Y-m-d");
-    print_r($_POST);
     ?>
 
     <body>

@@ -51,7 +51,7 @@ function setValuesOnWeb() {
     $(".ureninnovatief").val(array[6]);
     $(".omschrijving").val(array[7]);
 }
-function setDivForEachMedewerker(){
+function setDivForEachMedewerker() {
     var newHTML = [];
 
 
@@ -112,8 +112,21 @@ function setDivForEachMedewerker(){
     });
 }
 function submitForms() {
-    $('form#urenformulier1').submit();
-    $('form#urenformulier2').submit();
+    var gegevens = $('form').serialize();
+    var test = gegevens.split('&');
+    for(var i = 0; i < 7; i++){
+        delete test[i];
+    }
+    test.splice(1,6);
+    test.shift();
+    // var arrayLength = test.length;
+    // var FirstItemToDel = arrayLength - 10;
+    // test.splice(FirstItemToDel, arrayLength);
+
+    medewerker = test[0].split('=');
+    delete medewerker[0];
+
+    console.log(medewerker);
 }
 
 //what to do if the bootstrapswitch changed
