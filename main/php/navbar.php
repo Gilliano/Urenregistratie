@@ -3,9 +3,9 @@
 if(isset($_POST['logout'])) {
     userManager::logout();
 }
-
+echo $_SESSION['rol'];
 function adminTab() {
-    if(isset($_SESSION['rol'])) {
+    if((isset($_SESSION['rol']) ? $_SESSION['rol'] : "") == "admin"){
         $tab = "<li><a href='../management?page=dashboard'>Management</a></li>";
         return $tab;
     }
