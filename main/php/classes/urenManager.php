@@ -75,9 +75,7 @@ class urenManager
 static function addUren() {
 
     //Check if input fields are filled
-    if(isset($_POST['begintijd'],$_POST['urenregulier'],$_POST['project'],$_POST['eindtijd'],$_POST['omschrijving'])) {
-
-
+    if (isset($_POST['begintijd'], $_POST['urenregulier'], $_POST['project'], $_POST['eindtijd'], $_POST['omschrijving'])) {
 
         $conn = database::connect();
         $medewerker = $_SESSION['idMedewerker'];
@@ -86,39 +84,70 @@ static function addUren() {
         $datum = $_POST['datum'];
         $Btijd = $datum . " " . $_POST['begintijd'];
         $date = date_create("$Btijd");
-        $begintijd = date_format($date,"Y-m-d H:i:s");
+        $begintijd = date_format($date, "Y-m-d H:i:s");
         $Etijd = $datum . " " . $_POST['eindtijd'];
         $dag = date_create("$Etijd");
-        $eindtijd = date_format($dag,"Y-m-d H:i:s");
+        $eindtijd = date_format($dag, "Y-m-d H:i:s");
         $omschrijving = $_POST['omschrijving'];
+        $ureninnovatief = $_POST['ureninnovatief'];
         $goedgekeurd = FALSE;
 
-        $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bindParam(1, $medewerker, PDO::PARAM_INT);
-        $stmt->bindParam(2, $project, PDO::PARAM_INT);
-        $stmt->bindParam(3, $urenregulier, PDO::PARAM_INT);
-        $stmt->bindParam(4, $begintijd, PDO::PARAM_STR);
-        $stmt->bindParam(5, $eindtijd, PDO::PARAM_STR);
-        $stmt->bindParam(6, $omschrijving, PDO::PARAM_STR);
-        $stmt->bindParam(7, $goedgekeurd, PDO::PARAM_BOOL);
+        if ($ureninnovatief <= 0) {
+            $innovatief = FALSE;
 
-        if($stmt->execute() === TRUE) {
-            return "<div class='alert alert-success' id='error'>De uren zijn succesvol geregistreerd</div>";
-        }
-        else {
-            return "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
-        }
+            $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bindParam(1, $medewerker, PDO::PARAM_INT);
+            $stmt->bindParam(2, $project, PDO::PARAM_INT);
+            $stmt->bindParam(3, $urenregulier, PDO::PARAM_INT);
+            $stmt->bindParam(4, $begintijd, PDO::PARAM_STR);
+            $stmt->bindParam(5, $eindtijd, PDO::PARAM_STR);
+            $stmt->bindParam(6, $omschrijving, PDO::PARAM_STR);
+            $stmt->bindParam(7, $innovatief, PDO::PARAM_BOOL);
+            $stmt->bindParam(8, $goedgekeurd, PDO::PARAM_BOOL);
 
-        if($query->execute() === TRUE) {
-            return "<div class='alert alert-success' id='error'>De uren zijn succesvol geregistreerd</div>";
-        }
-        else {
-            return "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
+            if ($stmt->execute() === TRUE) {
+                return "<div class='alert alert-success' id='error'>De uren zijn succesvol geregistreerd</div>";
+            } else {
+                return "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
+            }
+        } else {
+            $innovatief = TRUE;
+            $inno = FALSE;
+
+            $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bindParam(1, $medewerker, PDO::PARAM_INT);
+            $stmt->bindParam(2, $project, PDO::PARAM_INT);
+            $stmt->bindParam(3, $urenregulier, PDO::PARAM_INT);
+            $stmt->bindParam(4, $begintijd, PDO::PARAM_STR);
+            $stmt->bindParam(5, $eindtijd, PDO::PARAM_STR);
+            $stmt->bindParam(6, $omschrijving, PDO::PARAM_STR);
+            $stmt->bindParam(7, $inno, PDO::PARAM_BOOL);
+            $stmt->bindParam(8, $goedgekeurd, PDO::PARAM_BOOL);
+
+            if ($stmt->execute() === TRUE) {
+                $query = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief, goedgekeurd) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                $query->bindParam(1, $medewerker, PDO::PARAM_INT);
+                $query->bindParam(2, $project, PDO::PARAM_INT);
+                $query->bindParam(3, $ureninnovatief, PDO::PARAM_INT);
+                $query->bindParam(4, $begintijd, PDO::PARAM_STR);
+                $query->bindParam(5, $eindtijd, PDO::PARAM_STR);
+                $query->bindParam(6, $omschrijving, PDO::PARAM_STR);
+                $query->bindParam(7, $innovatief, PDO::PARAM_BOOL);
+                $query->bindParam(8, $goedgekeurd, PDO::PARAM_BOOL);
+
+                if ($query->execute() === TRUE) {
+                    return "<div class='alert alert-success' id='error'>De uren zijn succesvol geregistreerd</div>";
+                } else {
+                    return "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
+                }
+            } else {
+                return "<div class='alert alert-danger' id='error'>De uren konden niet geregistreerd worden.</div>";
+            }
         }
     }
     else {
-        return "<div class='alert alert-danger' id='error'>Vul alle invoervelden in!</div>";
-    }
+            return "<div class='alert alert-danger' id='error'>Vul alle invoervelden in!</div>";
+        }
 }
     static function addTeamUren() {
 
