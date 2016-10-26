@@ -30,7 +30,7 @@
                      <?php echo isset($error) ? $error : ""; ?>
                      <input type="submit" name="login" value="log in" class="btn btn-lg btn-primary btn-block">
                      <div>
-                        <a href="../registreren">maak een account</a> of <a href="vergeten">wachtwoord vergeten?</a>
+                        <a href="../registreren">maak een account</a> of <a href="../vergeten">wachtwoord vergeten?</a>
                      </div>
                   </form>
                </section>

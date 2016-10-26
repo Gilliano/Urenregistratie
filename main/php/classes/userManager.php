@@ -132,13 +132,8 @@ class userManager
     
     //maakt van de gestuurde error text een div alert aan zodat je op de pagina rode error balk kan zien
     public static function errorMessage($errorMessage)
-    {
-        
-        $error = "";
-        $error .= "<div class='alert alert-danger'>";
-        $error .= $errorMessage;
-        $error .= "</div>";
-        
+    {   
+        $error = "<div class='alert alert-danger'>{$errorMessage}</div>";    
         return $error;
         
     }
@@ -195,6 +190,23 @@ class userManager
         }
         
     }
+    //checkt of de email al bestaat als je registreert.
+    public static function tokenBestaatAl($hash)
+    {
+        $conn     = database::connect();
+        $userInfo = $conn->prepare("SELECT * FROM medewerker WHERE token=?");
+        $userInfo->bindParam(1, $hash);
+        $userInfo->execute();
+        //fetch results
+        $user = $userInfo->fetch(PDO::FETCH_ASSOC);
+        
+        if (!empty($user)) {
+            return true;
+        } else {
+            return false;
+        }
+        
+    }
     //registreer een account aan en logt je gelijk in
     
     public static function registerCheck()
@@ -231,5 +243,87 @@ class userManager
         if (isset($_SESSION['idMedewerker'])) {
             header('Location: ../urenregistratie');
         }
+    }
+    public static function wachtwoordHerstellen($email,$wachtwoord){
+        $encrypted_password = sha1($wachtwoord);
+        if(userManager::emailBestaatAl($email) && strlen($encrypted_password) == 40) {
+            echo ' werkt wel';
+            $conn = database::connect();
+            $herstellen = "UPDATE medewerker SET wachtwoord=:wachtwoord where email=:email";
+            $stmt    = $conn->prepare($herstellen);
+            $stmt->bindParam("wachtwoord", $encrypted_password);
+            $stmt->bindParam("email", $email);
+            $stmt->execute();
+        }
+    }
+
+    public static function tokenControleren($email,$hash){
+        $conn = database::connect();
+        $controleertoken = "SELECT email,token FROM medewerker WHERE email=:email AND token=:hash ";
+        $stmt    = $conn->prepare($controleertoken);
+        $stmt->bindParam("hash", $hash);
+        $stmt->bindParam("email", $email);
+        $stmt->execute();
+        $controleer = $stmt->fetch();
+
+        if(!empty($controleer)){
+            return true;
+            echo 'true';
+        }
+        else{
+            echo 'false';
+            return false;
+        }
+
+    }
+
+    public static function tokenAanmaken($email,$hash){
+
+        if(userManager::emailBestaatAl($email) && strlen($hash) == 40) {
+            $conn = database::connect();
+            $addhash = "UPDATE medewerker SET token=:hash where email=:email";
+            $stmt    = $conn->prepare($addhash);
+            $stmt->bindParam("hash", $hash);
+            $stmt->bindParam("email", $email);
+            $stmt->execute();
+        }
+    }
+    public static function tokenVerwijderen($email){
+
+        if(userManager::emailBestaatAl($email)) {
+            $legeString = "";
+            $conn = database::connect();
+            $removeHash = "UPDATE medewerker SET token=:hash where email=:email";
+            $stmt    = $conn->prepare($removeHash);
+            $stmt->bindParam("hash", $legeString);
+            $stmt->bindParam("email", $email);
+            $stmt->execute();
+        }
+    }
+
+    public static function tokenHash($email){
+        return sha1(sha1(rand()).$email);
+    }
+    public static function verzendMail($email){
+
+        $hash = userManager::tokenHash($email);
+        userManager::tokenAanmaken($email,$hash);
+        //temp
+        $herstelLink = "<a href=\"../herstellen?id={$hash}&email={$email}\">herstellen?id={$hash}&email={$email}</a> ";
+
+        //de email die verzonden moet worden
+
+        //$herstelLink = "http://www.branchonline.nl/herstellen?id={$hash}&email={$email}";
+        // //verzend een email
+        // $to      = $email;
+        // $subject = 'branchonline wachtwoord herstellen';
+        // $message = 'Op de volgende link kunt u uw wachtwoord herstellen'. $herstellenlink;
+        // $headers = 'From: webmaster@example.com' . "\r\n" .
+        //     'Reply-To: webmaster@example.com' . "\r\n" ;
+
+        // //verzend de email
+        // mail($to, $subject, $message, $headers);
+
+        echo $herstelLink;
     }
 }
