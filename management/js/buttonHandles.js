@@ -2,11 +2,14 @@
  * Created by niels on 5-10-2016.
  */
 $("button[name='gebruiker_wijzig']").on("click", function (event) {
+    wijzig_button($(this));
+});
 
+function wijzig_button(caller){
     console.log('this does work');
     //get an array from the data from the table
     var array_text = [];
-    $(this).parent().parent().children().each(function () {
+    caller.parent().parent().children().each(function () {
         array_text.push(this.innerHTML);
     });
 
@@ -27,8 +30,9 @@ $("button[name='gebruiker_wijzig']").on("click", function (event) {
         $('.rol').val(array_text[6]);
         $('.status').val(array_text[7]);
     })
-});
 
+    console.log(array_text);
+}
 
 $("#save_button").on("click", function (event) {
     //get an array from the data from the table
@@ -95,7 +99,10 @@ $("#save_button").on("click", function (event) {
 
         $("#allUsersTable").html(htmlList);
 
-        location.reload();
+        $("button[name='gebruiker_wijzig']").on("click", function (event) {
+           wijzig_button($(this));
+        });
+        // location.reload();
 
     });
     //ajax object  maken

@@ -4,6 +4,8 @@ $("[name='mode']").bootstrapSwitch();
 var array = [];
 var headerData = [];
 var medewerker = [];
+var tijd = [];
+
 //check if any input is changed.
 $("#teamMedewerker").on("change paste keyup", function() {
     // fill the array
@@ -16,13 +18,13 @@ $("#teamProject").on("change paste keyup", function() {
     array[1] = $("#teamProject option:selected").text();
     setValuesOnWeb();
 });
-$("#teamBegintijd").on("change paste keyup", function() {
+$("#teamBegintijd").on("change paste keyup focus blur", function() {
     // fill the array
     array[2] = $(this).val();
 
     setValuesOnWeb();
 });
-$("#teamEindtijd").on("change paste keyup", function() {
+$("#teamEindtijd").on("change paste keyup focus blur", function() {
     // fill the array
     array[3] = $(this).val();
     array[4] = $("#teamUrentotaal").val();
@@ -51,7 +53,17 @@ function setValuesOnWeb() {
     $(".ureninnovatief").val(array[6]);
     $(".omschrijving").val(array[7]);
 }
-function setDivForEachMedewerker() {
+
+function timeSplit() {
+    tijd = urenAfronden($(".begintijd").val());
+    $(".begintijd").val(tijd);
+    tijd = urenAfronden($(".eindtijd").val());
+    $(".eindtijd").val(tijd);
+    var totaal = urenBerekenen($(".begintijd").val(), $(".eindtijd").val());
+    $(".urentotaal").vall(totaal);
+}
+
+function setDivForEachMedewerker(){
     var newHTML = [];
 
 
@@ -80,11 +92,11 @@ function setDivForEachMedewerker() {
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Begintijd</td>' +
-                                '<td class="field"><input type="time" name="begintijd" class="form-control begintijd" required/></td>' +
+                                '<td class="field"><input type="time" name="begintijd" onblur="timeSplit()" class="form-control begintijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Eindtijd</td>' +
-                                '<td class="field"><input type="time" name="eindtijd" class="form-control eindtijd" required/></td>' +
+                                '<td class="field"><input type="time" name="eindtijd" onblur="timeSplit()" class="form-control eindtijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Totaal aantal uren gewerkt</td>' +
@@ -153,3 +165,65 @@ $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state
 $('#modalFormulier').on('hide.bs.modal', function () {
     $("[name='mode']").bootstrapSwitch('toggleState');
 });
+
+function urenAfronden(tijd) {
+    var tijd = tijd.split(":");
+
+    if(tijd[1] < 15) {
+        tijd[1] = "00";
+        tijd = tijd.toString();
+        tijd = tijd.replace(",",":");
+        return tijd;
+    }
+    else if(tijd[1] > 14 && tijd[1] < 45) {
+        tijd[1] = "30";
+        tijd = tijd.toString();
+        tijd = tijd.replace(",",":");
+        return tijd;
+    }
+    else {
+        if(tijd[0] < 10) {
+            tijd[0] = parseInt(tijd[0]);
+            tijd[0] += 1;
+            tijd[0] = "0" + tijd[0];
+            tijd[0] = tijd[0].toString();
+            tijd[1] = "00";
+            tijd = tijd.toString();
+            tijd = tijd.replace(",", ":");
+            return tijd;
+        }
+        else {
+            tijd[0] = parseInt(tijd[0]);
+            tijd[0] += 1;
+            tijd[0] = tijd[0].toString();
+            tijd[1] = "00";
+            tijd = tijd.toString();
+            tijd = tijd.replace(",", ":");
+            return tijd;
+        }
+    }
+}
+
+function urenBerekenen(begintijd, eindtijd) {
+    begintijd = begintijd.split(":");
+    eindtijd = eindtijd.split(":");
+
+    var begin_seconden = begintijd[0] * 3600 + begintijd[1] * 60;
+    var eind_seconden = eindtijd[0] * 3600 + eindtijd[1] * 60;
+
+    var berekening = eind_seconden - begin_seconden;
+    var uren = berekening / 3600;
+
+    var totaal = parseFloat(uren.toFixed(1));
+    totaal = totaal.toString();
+
+    if(totaal < 0) {
+        return "Begintijd is groter dan eindtijd";
+    }
+    else if(totaal === 0) {
+        return "U kunt niet 0 uren hebben";
+    }
+    else {
+        return totaal;
+    }
+}

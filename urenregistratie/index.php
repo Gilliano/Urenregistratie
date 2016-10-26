@@ -113,7 +113,7 @@
                         <h4 class="modal-title">Team uren invullen</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="" class="urenformulier" name="urenformulier" oninput="(teamUrentotaal.value = parseFloat(teamEindtijd.value) - parseFloat(teamBegintijd.value))(teamUreninnovatief.value = parseFloat(teamUrentotaal.value) - parseFloat(teamUrenregulier.value))" enctype="multipart/form-data">
+                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data">
                             <table>
                                 <tr>
                                     <td class="description">Medewerkers</td>
@@ -140,11 +140,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde()" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde()" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
@@ -152,7 +152,7 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" class="form-control" required/></td>
+                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" onkeyup="teamUrenInnovatief()" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
@@ -179,7 +179,6 @@
     //performance increasing not everything in the head, not necessary things in the footer.
     require_once '../main/php/footer.php';
     ?>
-    <script src="js/jquery.form.js"></script>
     <!-- Load the bootstrap switch -->
     <script src="js/bootstrap-switch.js"></script>
     <!-- Load the modal -->
