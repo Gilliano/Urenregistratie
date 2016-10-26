@@ -86,6 +86,7 @@ $("#save_button").on("click", function (event) {
         ajaxObjUsers.result.forEach(function (item) {
             console.log(item.voornaam);
             htmlList += "<tr>";
+            htmlList += "<td style='display: none'>" + item.idMedewerker + "</td>";
             htmlList += "<td>" + item.voornaam + "</td>";
             htmlList += "<td>" + item.tussenvoegsels + "</td>";
             htmlList += "<td>" + item.achternaam + "</td>";
