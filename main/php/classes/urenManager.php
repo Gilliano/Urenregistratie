@@ -149,10 +149,11 @@ static function addUren() {
             return "<div class='alert alert-danger' id='error'>Vul alle invoervelden in!</div>";
         }
 }
-    static function addTeamUren() {
+    public static function addTeamUren($arrayUren) {
+        $arrayUren = array_values($arrayUren);
+        print_r($arrayUren);
 
     }
-
     // Updates the record in `uur` tabel
     // foreach element in param array
     // parameters: Array which contains

@@ -92,11 +92,11 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Begintijd</td>' +
-                                '<td class="field"><input type="time" name="begintijd" onblur="timeSplit()" class="form-control begintijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" name="begintijd" onblur="//timeSplit();" class="form-control begintijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Eindtijd</td>' +
-                                '<td class="field"><input type="time" name="eindtijd" onblur="timeSplit()" class="form-control eindtijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" name="eindtijd" onblur="//timeSplit();" class="form-control eindtijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Totaal aantal uren gewerkt</td>' +
@@ -125,29 +125,40 @@ function setDivForEachMedewerker(){
 }
 //submit all forms
 function submitForms(){
-    var test = $("form").serializeArray();
-    $.each(test, function(i, field){
-        console.log(field.name + " : " + field.value);
+    $('#teamMedewerker :selected').each(function(i){
+        var employee = $("form#urenformulier" + i).serializeArray();
+        $.ajax({
+            type: "POST",
+            data: employee,
+            url: "test.php",
+            success: function(data)
+            {
+                console.log(data);
+            }
+        });
     });
+
+    // var arrayOfEmployees = $('#teamMedewerker :selected').map(function(i){
+    //     return [$("form#urenformulier" + i).serializeArray()];
+    // }).get();
+    //
+    // arrayOfEmployees.forEach(function(employee){
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         data: employee,
+    //         url: "test.php",
+    //         success: function(data)
+    //         {
+    //             console.log(data);
+    //         }
+    //     });
+    //
+    //     // employee.forEach(function(field){
+    //     //     //console.log(field.name + " : " + field.value);
+    //     // });
+    // });
 }
-/*function submitForms() {
-    var gegevens = $('form').serialize();
-    var test = gegevens.split('&');
-    for(var i = 0; i < 7; i++){
-        delete test[i];
-    }
-    test.splice(1,6);
-    test.shift();
-    // var arrayLength = test.length;
-    // var FirstItemToDel = arrayLength - 10;
-    // test.splice(FirstItemToDel, arrayLength);
-
-    medewerker = test[0].split('=');
-    delete medewerker[0];
-
-    console.log(medewerker);
-
-}*/
 
 //what to do if the bootstrapswitch changed
 $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state) {
