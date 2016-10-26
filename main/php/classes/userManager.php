@@ -144,7 +144,11 @@ class userManager
         return $error;
         
     }
-    
+    public static function rolManager(){
+
+    }
+
+
     //login heeft een email en een wachtwoord nodig om te kijken of je kan inloggen.
     public static function login($email, $password)
     {
@@ -152,7 +156,7 @@ class userManager
         if ($email == "" || $password == "") {
             return false;
         }
-        $conn               = database::connect();
+        $conn  = database::connect();
         //turn form value's in variable
         $encrypted_password = sha1($password);
         
@@ -167,8 +171,11 @@ class userManager
         if (isset($user) AND !empty($user)) {
             //if results are correct set SESSIONS
             $_SESSION['idMedewerker'] = $user['idMedewerker'];
+            $_SESSION['rol'] = $user['rol'];
+
             header('Location: ../urenregistratie/index.php');
-        } else {
+        } 
+        else {
             return false;
         }
     }
@@ -219,8 +226,6 @@ class userManager
         $stmt->bindParam(4, $email);
         $stmt->bindParam(5, $encrypted_password);
         $stmt->execute();
-        
-        self::login($email, $password);
     }
     
     public static function alIngelogd()
