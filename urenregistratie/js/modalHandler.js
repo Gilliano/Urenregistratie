@@ -68,7 +68,7 @@ function setDivForEachMedewerker() {
             '<div class="panel panel-default modalPanel">' +
                 '<div class="panel-heading modalHeader" data-toggle="collapse" href="#collapse' + i + '">' + headerData + '</div>' +
                 '<div  class="panel-body collapse" id="collapse' + i + '">' +
-                    '<form method="post" class="urenformulier" action="" id="urenformulier' + i + '" name="urenformulier ' + i + '" enctype="multipart/form-data">' +
+                    '<form method="post" class="urenformulier" action="" id="urenformulier' + i + '" name="urenformulier' + i + '" enctype="multipart/form-data">' +
                         '<table>' +
                             '<tr>' +
                                     '<td class="description">Medewerker</td>' +
@@ -111,7 +111,13 @@ function setDivForEachMedewerker() {
         $("#modalContent").html(newHTML.join("") + "<input style='margin-bottom: 15px;' type='submit' name='teamurenopslaan' onclick='submitForms();' class='btn btn-success' value='Alles opslaan'>");
     });
 }
-function submitForms() {
+function submitForms(){
+    var test = $("form").serializeArray();
+    $.each(test, function(i, field){
+        console.log(field.name + " : " + field.value);
+    });
+}
+/*function submitForms() {
     var gegevens = $('form').serialize();
     var test = gegevens.split('&');
     for(var i = 0; i < 7; i++){
@@ -127,7 +133,8 @@ function submitForms() {
     delete medewerker[0];
 
     console.log(medewerker);
-}
+
+}*/
 
 //what to do if the bootstrapswitch changed
 $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state) {

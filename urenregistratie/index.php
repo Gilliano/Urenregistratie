@@ -4,8 +4,6 @@
         <?php
         //make sure everything we need in here
         require_once '../main/php/head.php';
-
-        echo $_SESSION['rol'];
         ?>
         <link href="css/urenregistratie.css" rel="stylesheet">
         <link href="css/bootstrap-switch.css" rel="stylesheet">
@@ -176,12 +174,12 @@
         </div>
     </div>
     </body>
-
     <?php
 
     //performance increasing not everything in the head, not necessary things in the footer.
     require_once '../main/php/footer.php';
     ?>
+    <script src="js/jquery.form.js"></script>
     <!-- Load the bootstrap switch -->
     <script src="js/bootstrap-switch.js"></script>
     <!-- Load the modal -->
