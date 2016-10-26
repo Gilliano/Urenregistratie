@@ -247,7 +247,6 @@ class userManager
     public static function wachtwoordHerstellen($email,$wachtwoord){
         $encrypted_password = sha1($wachtwoord);
         if(userManager::emailBestaatAl($email) && strlen($encrypted_password) == 40) {
-            echo ' werkt wel';
             $conn = database::connect();
             $herstellen = "UPDATE medewerker SET wachtwoord=:wachtwoord where email=:email";
             $stmt    = $conn->prepare($herstellen);
@@ -268,10 +267,8 @@ class userManager
 
         if(!empty($controleer)){
             return true;
-            echo 'true';
         }
         else{
-            echo 'false';
             return false;
         }
 
