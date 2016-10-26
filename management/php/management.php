@@ -43,11 +43,20 @@ function projecten()
         } else {
             $table .= '<td>Wel verwijderd</td>';
         }
-        $table .= "<td><button type='submit' name='gebruiker_wijzig' value='" . $project['idProject'] . "' class='btn btn-default' data-toggle='modal' data-target='#myModal'>toggle status</button></td>";
+        //$table .= '<td><input type="hidden" value=\'" . $project[\'idProject\'] . "\'></td>';
+
+        $table .= "<td><a href='php/toggleProject.php?projectid=" . $project['idProject'] . "&delete=". $project['verwijderd'] ."' type='submit' name='project_toggle' class='btn btn-default'>toggle status</a></td>";
         $table .= '</tr>';
+
 
     }
 
     return $table;
+}
+
+function toggleProject() {
+    if(isset($_GET['projectid'])) {
+        echo $_GET['projectid'];
+    }
 }
 
