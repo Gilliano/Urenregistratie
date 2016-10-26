@@ -123,6 +123,7 @@ function setDivForEachMedewerker(){
         $("#modalContent").html(newHTML.join("") + "<input style='margin-bottom: 15px;' type='submit' name='teamurenopslaan' onclick='submitForms();' class='btn btn-success' value='Alles opslaan'>");
     });
 }
+//submit all forms
 function submitForms(){
     var test = $("form").serializeArray();
     $.each(test, function(i, field){

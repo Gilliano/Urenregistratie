@@ -15,7 +15,7 @@
 
     $allUsers = userManager::getAllUsers();
     $alleMedewerkers = sizeof($allUsers);
-
+    //datum
     $date = date("Y-m-d");
     ?>
 
