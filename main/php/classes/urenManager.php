@@ -151,6 +151,18 @@ static function addUren() {
 }
     public static function addTeamUren($arrayUren) {
         $arrayUren = array_values($arrayUren);
+
+//        $conn = database::connect();
+//        $stmt = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief) VALUES (?, ?, ?, ?, ?, ?, ?)");
+//        $stmt->bindParam(1, $arrayUren[0], PDO::PARAM_INT);
+//        $stmt->bindParam(2, $arrayUren[1], PDO::PARAM_INT);
+//        $stmt->bindParam(3, $arrayUren[2], PDO::PARAM_INT);
+//        $stmt->bindParam(4, $arrayUren[3], PDO::PARAM_STR);
+//        $stmt->bindParam(5, $arrayUren[4], PDO::PARAM_STR);
+//        $stmt->bindParam(6, $arrayUren[5], PDO::PARAM_STR);
+//        $stmt->bindParam(7, $arrayUren[6], PDO::PARAM_BOOL);
+//        $stmt->execute();
+
         print_r($arrayUren);
 
     }
