@@ -14,8 +14,6 @@ class userManager
         print "In BaseClass constructor\n";
     }
     
-    
-    
     //update user in the management part
     //$params comes from the ajax.php
     public static function userChange($params)
