@@ -112,7 +112,7 @@
                         <h4 class="modal-title">Team uren invullen</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data" oninput="">
+                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data">
                             <table>
                                 <tr>
                                     <td class="description">Medewerkers</td>
@@ -139,11 +139,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde()" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde()" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
@@ -151,7 +151,7 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" class="form-control" required/></td>
+                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" onkeyup="teamUrenInnovatief()" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
