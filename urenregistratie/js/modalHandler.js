@@ -126,6 +126,7 @@ function setDivForEachMedewerker(){
     });
 }
 //submit all forms
+
 function submitForms(){
     $('#teamMedewerker :selected').each(function(i){
         var employee = $("form#urenformulier" + i).serializeArray();
