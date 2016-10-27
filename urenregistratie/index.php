@@ -5,7 +5,6 @@
         //make sure everything we need in here
         require_once '../main/php/head.php';
 
-        echo $_SESSION['rol'];
         ?>
         <link href="css/urenregistratie.css" rel="stylesheet">
         <link href="css/bootstrap-switch.css" rel="stylesheet">
