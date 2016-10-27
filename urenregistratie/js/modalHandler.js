@@ -5,6 +5,7 @@ var array = [];
 var headerData = [];
 var medewerker = [];
 var tijd = [];
+
 //check if any input is changed.
 
 $("#teamMedewerker").on("change paste keyup", function() {
@@ -38,8 +39,7 @@ $("#teamUrenregulier").on("change paste keyup", function() {
     setValuesOnWeb();
 });
 $("#teamOmschrijving").on("change paste keyup", function() {
-    array[8] = $(this).val();
-
+    array[7] = $(this).val();
     setValuesOnWeb();
 });
 
@@ -81,7 +81,7 @@ function setDivForEachMedewerker(){
             '<div class="panel panel-default modalPanel">' +
                 '<div class="panel-heading modalHeader" data-toggle="collapse" href="#collapse' + i + '">' + headerData + '</div>' +
                 '<div  class="panel-body collapse" id="collapse' + i + '">' +
-                    '<form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data")">' +
+                    '<form method="post" class="urenformulier" action="" id="urenformulier' + i + '" name="urenformulier' + i + '" enctype="multipart/form-data">' +
                         '<table>' +
                             '<tr>' +
                                     '<td class="description">Medewerker</td>' +
@@ -101,15 +101,16 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Totaal aantal uren gewerkt</td>' +
-                                '<td class="field"><output readonly type="number" id="urentotaal" name="urentotaal" class="form-control urentotaal"/></td>' +
+                                '<td class="field"><output readonly type="number" name="urentotaal" class="form-control urentotaal"/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Reguliere uren</td>' +
                                 '<td class="veld"><input type="number" id="urenregulier" name="urenregulier" onkeyup="innovatieveUren()" class="form-control urenregulier" required/></td>' +
+                                '<td class="veld"><input type="number" name="urenregulier" class="form-control urenregulier" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Innovatieve uren</td>' +
-                                '<td class="field"><input type="number" id="ureninnovatief" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
+                                '<td class="field"><input type="number" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Omschrijving van de uren</td>' +
@@ -121,8 +122,44 @@ function setDivForEachMedewerker(){
             '</div>'
         );
 
-        $("#modalContent").html(newHTML.join(""));
+        $("#modalContent").html(newHTML.join("") + "<input style='margin-bottom: 15px;' type='submit' name='teamurenopslaan' onclick='submitForms();' class='btn btn-success' value='Alles opslaan'>");
     });
+}
+//submit all forms
+function submitForms(){
+    $('#teamMedewerker :selected').each(function(i){
+        var employee = $("form#urenformulier" + i).serializeArray();
+        $.ajax({
+            type: "POST",
+            data: employee,
+            url: "test.php",
+            success: function(data)
+            {
+                console.log(data);
+            }
+        });
+    });
+
+    // var arrayOfEmployees = $('#teamMedewerker :selected').map(function(i){
+    //     return [$("form#urenformulier" + i).serializeArray()];
+    // }).get();
+    //
+    // arrayOfEmployees.forEach(function(employee){
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         data: employee,
+    //         url: "test.php",
+    //         success: function(data)
+    //         {
+    //             console.log(data);
+    //         }
+    //     });
+    //
+    //     // employee.forEach(function(field){
+    //     //     //console.log(field.name + " : " + field.value);
+    //     // });
+    // });
 }
 
 //what to do if the bootstrapswitch changed

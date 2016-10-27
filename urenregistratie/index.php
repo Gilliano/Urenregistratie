@@ -34,7 +34,7 @@
             <div class="panel panel-default" id="mainFormulier">
                 <div class="panel-heading">Uren invulformulier</div>
                 <div  class="panel-body">
-                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data"">
+                    <form method="post" action="" class="urenformulier" id="urenformulier" name="urenformulier" enctype="multipart/form-data"">
                         <table>
                             <tr>
                                 <?php
@@ -160,7 +160,7 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
-                                    <td class="field"><textarea name="omschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
+                                    <td class="field"><textarea name="teamOmschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
                                 </tr>
                             </table>
                         </form>

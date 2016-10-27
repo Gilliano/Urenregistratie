@@ -2,11 +2,13 @@
  * Created by niels on 5-10-2016.
  */
 $("button[name='gebruiker_wijzig']").on("click", function (event) {
+    wijzig_button($(this));
+});
 
-    console.log('this does work');
+function wijzig_button(caller){
     //get an array from the data from the table
     var array_text = [];
-    $(this).parent().parent().children().each(function () {
+    caller.parent().parent().children().each(function () {
         array_text.push(this.innerHTML);
     });
 
@@ -15,7 +17,6 @@ $("button[name='gebruiker_wijzig']").on("click", function (event) {
 
     //for each array value should be set in the new model that is getting opened.
     array_text.forEach(function () {
-        console.log(array_text[0]);
 
         //basic values are now getting set.
         $('.id').val(array_text[0]);
@@ -27,13 +28,10 @@ $("button[name='gebruiker_wijzig']").on("click", function (event) {
         $('.rol').val(array_text[6]);
         $('.status').val(array_text[7]);
     })
-});
-
+}
 
 $("#save_button").on("click", function (event) {
     //get an array from the data from the table
-    //console.log($('#gebruiker_wijzig_form').serializeArray('firstname'));
-
     var data = $('#gebruiker_wijzig_form').serializeArray('firstname');
 
     $.getScript('../main/js/ajax.js', function () {
@@ -80,8 +78,8 @@ $("#save_button").on("click", function (event) {
 
         //Now lets add the new items :)
         ajaxObjUsers.result.forEach(function (item) {
-            console.log(item.voornaam);
             htmlList += "<tr>";
+            htmlList += "<td style='display: none'>" + item.idMedewerker + "</td>";
             htmlList += "<td>" + item.voornaam + "</td>";
             htmlList += "<td>" + item.tussenvoegsels + "</td>";
             htmlList += "<td>" + item.achternaam + "</td>";
@@ -95,7 +93,10 @@ $("#save_button").on("click", function (event) {
 
         $("#allUsersTable").html(htmlList);
 
-        location.reload();
+        $("button[name='gebruiker_wijzig']").on("click", function (event) {
+           wijzig_button($(this));
+        });
+        // location.reload();
 
     });
     //ajax object  maken
