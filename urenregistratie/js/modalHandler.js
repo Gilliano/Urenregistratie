@@ -124,6 +124,7 @@ function setDivForEachMedewerker(){
     });
 }
 //submit all forms
+
 function submitForms(){
     var test = $("form").serializeArray();
     $.each(test, function(i, field){
