@@ -4,18 +4,23 @@ $("[name='mode']").bootstrapSwitch();
 var array = [];
 var headerData = [];
 var medewerker = [];
+var valMedewerker = [];
 var tijd = [];
 
 //check if any input is changed.
 $("#teamMedewerker").on("change paste keyup", function() {
-    // fill the array
-
-    array[0] = $("#teamMedewerker option:selected").text();
-    setValuesOnWeb();
+    setDivForEachMedewerker();
 });
 $("#teamProject").on("change paste keyup", function() {
     // fill the array
     array[1] = $("#teamProject option:selected").text();
+    array[9] = $("#teamProject option:selected").val();
+    setValuesOnWeb();
+});
+$("#teamDatum").on("change paste keyup focus blur", function() {
+    // fill the array
+    array[8] = $(this).val();
+
     setValuesOnWeb();
 });
 $("#teamBegintijd").on("change paste keyup focus blur", function() {
@@ -44,14 +49,19 @@ $("#teamOmschrijving").on("change paste keyup", function() {
 
 //if any input is changed then shows it directly on the webpage behind the modal.
 function setValuesOnWeb() {
+    if (array[8] == null){
+        array[8] = $('#teamDatum').val();
+    }
     setDivForEachMedewerker();
     $(".project").val(array[1]);
+    $(".datum").val(array[8]);
     $(".begintijd").val(array[2]);
     $(".eindtijd").val(array[3]);
     $(".urentotaal").val(array[4]);
     $(".urenregulier").val(array[5]);
     $(".ureninnovatief").val(array[6]);
     $(".omschrijving").val(array[7]);
+    $(".idProject").val(array[9]);
 }
 
 function timeSplit() {
@@ -60,7 +70,7 @@ function timeSplit() {
     tijd = urenAfronden($(".eindtijd").val());
     $(".eindtijd").val(tijd);
     var totaal = urenBerekenen($(".begintijd").val(), $(".eindtijd").val());
-    $(".urentotaal").vall(totaal);
+    $(".urentotaal").val(totaal);
 }
 
 function setDivForEachMedewerker(){
@@ -75,6 +85,7 @@ function setDivForEachMedewerker(){
         }
 
         medewerker[i] = $(selected).text();
+        valMedewerker[i] = $(selected).val();
 
         newHTML.push(
             '<div class="panel panel-default modalPanel">' +
@@ -84,11 +95,17 @@ function setDivForEachMedewerker(){
                         '<table>' +
                             '<tr>' +
                                     '<td class="description">Medewerker</td>' +
+                                    '<input type="hidden" name="idMedewerker" class="form-control medewerker" value="' + valMedewerker[i] + '" readonly required/>' +
                                     '<td class="field"><input type="text" name="medewerker" class="form-control medewerker" value="' + medewerker[i] + '" readonly required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Project</td>' +
+                                '<input type="hidden" name="idProject" class="form-control idProject" value="" readonly required/>' +
                                 '<td class="field"><input type="text" name="project" class="form-control project" readonly required/></td>' +
+                                '</tr>' +
+                            '<tr>' +
+                                '<td class="description">Datum</td>' +
+                                '<td class="field"><input type="date" name="datum" class="form-control datum" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Begintijd</td>' +

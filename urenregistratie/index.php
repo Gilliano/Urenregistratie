@@ -139,6 +139,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="description">Datum</td>
+                                    <td class="field"><input type="date" name="teamDatum" id="teamDatum" class="form-control" value="<?= $date ?>" required/></td>
+                                </tr>
+                                <tr>
                                     <td class="description">Begintijd</td>
                                     <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde()" class="form-control" required/></td>
                                 </tr>
