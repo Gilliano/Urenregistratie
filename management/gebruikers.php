@@ -4,7 +4,7 @@ $voornaam = isset($_POST['voornaam']) ? $_POST['voornaam'] : '';
 $tussenvoegsel = isset($_POST['tussenvoegsel']) ? $_POST['tussenvoegsel'] : '';  
 $achternaam = isset($_POST['achternaam']) ? $_POST['achternaam'] : '';
 $remail = isset($_POST['remail']) ? $_POST['remail'] : '';
-    
+
    if(isset($_POST['registreren'])){
 
 
@@ -27,6 +27,7 @@ $remail = isset($_POST['remail']) ? $_POST['remail'] : '';
             
             if(!empty($error)){
                 $error = userManager::errorMessage($error);
+                
             }
     }
 
