@@ -1,8 +1,6 @@
-/**
- * Created by JohnDoe on 29-9-2016.
- */
 $(document).ready(function(){
     console.log("Initializing...");
+    $("#filter_loader").show();
 
     $.getScript("../main/js/ajax.js", function() {
         // Get current userrole
@@ -75,7 +73,10 @@ $(document).ready(function(){
         });
         console.log("Daterange picker complete!"); // DEBUG
 
-        // Step 4: Descriptions list
+        // Step 4: Fastselect
+        $(".multipleSelect").fastselect();
+
+        // Step 5: Descriptions list
         $.contextMenu({
             selector: '.context-menu-one',
             build: function($trigger) {
@@ -156,7 +157,8 @@ $(document).ready(function(){
         });
         console.log("Context menu complete!"); // DEBUG
 
-        $("#filter_row").show();
+        $("#filter_loader").parent().remove();
+        $("#filter_row").fadeIn();
         console.log("Initialized!");
     });
 });

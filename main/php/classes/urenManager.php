@@ -27,8 +27,9 @@ class urenManager
     // where idMedewerker = $userID
     // and idProject = $projectID
     // and begintijd is between $date1 and $date2
+    // and extra filters
     // NOTE: date format is string('YYYY-MM-DD HH:MM:SS')
-    public static function getRecordsForUserProjectDaterange($userIDs, $projectIDs, $date1, $date2)
+    public static function getRecordsForUserProjectDaterange($userIDs, $projectIDs, $date1, $date2, $extra)
     {
         $records = [];
         $conn = database::connect();
@@ -56,8 +57,30 @@ class urenManager
             $index++;
             array_push($values, $projectID);
         }
+        if(is_array($extra))
+        {
+            foreach($extra as $value)
+            {
+                switch ($value)
+                {
+                    case 'innovative':
+                        $query .= "innovatief = 1 AND ";
+                        break;
+                    case 'regular':
+                        $query .= "innovatief = 0 AND ";
+                        break;
+                    case 'validated':
+                        $query .= "goedgekeurd = 1 AND";
+                        break;
+                    case 'invalidated':
+                        $query .= "goedgekeurd = 0 AND";
+                        break;
+                }
+            }
+        }
         $query .= "(begintijd BETWEEN ? AND ?) ORDER BY begintijd ASC";
 
+        error_log($query);
         $stmt = $conn->prepare($query);
 
         for($i = 1; $i <= count($values); $i++)

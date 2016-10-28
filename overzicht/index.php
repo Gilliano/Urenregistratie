@@ -15,6 +15,8 @@
         <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
         <!-- Context Menu -->
         <link rel="stylesheet" type="text/css" href="css/jquery.contextMenu.min.css">
+        <!-- Fastselect -->
+        <link rel="stylesheet" type="text/css" href="css/fastselect.min.css">
         <!-- Overizcht -->
         <link href="css/overzicht.css" rel="stylesheet">
     </head>
@@ -43,44 +45,71 @@
 
         <!-- Container -->
         <div class="container">
+            <div class="row">
+                <div id="filter_loader" class="loader col-sm-2 col-sm-offset-5"></div>
+            </div>
             <div id="filter_row" class="row">
-                <!-- Step 1: Users list -->
-                <div class="col-sm-3 col-sm-offset-1">
-                    <label for="users_list">Gebruikers</label><br>
-                    <select id="users_list" class="selectpicker" data-live-search="true" multiple>
-                        <!-- <option>Loading...</option> -->
-                    </select>
+                <div id="filters_1" class="row">
+                    <!-- Step 1: Users list -->
+                    <div class="col-sm-3 col-sm-offset-2">
+                        <label for="users_list">Gebruikers</label><br>
+                        <select id="users_list" class="selectpicker" data-live-search="true" multiple>
+                            <!-- <option>Loading...</option> -->
+                        </select>
+                    </div>
+
+                    <!-- Step 2: Projects list -->
+                    <div class="col-sm-3">
+                        <label for="projects_list">Projecten</label><br>
+                        <select id="projects_list" class="selectpicker" data-live-search="true" multiple>
+                            <!-- <option>Loading...</option> -->
+                        </select>
+                    </div>
+
+                    <!-- Step 3: Date range picker -->
+                    <div class="col-sm-3">
+                        <label for="daterange_picker">Datum: van .. tot</label><br>
+                        <input id="daterange_picker" type="text" class="form-control" name="daterange"/>
+                    </div>
                 </div>
 
-                <!-- Step 2: Projects list -->
-                <div class="col-sm-3">
-                    <label for="projects_list">Projecten</label><br>
-                    <select id="projects_list" class="selectpicker" data-live-search="true" multiple>
-                        <!-- <option>Loading...</option> -->
-                    </select>
-                </div>
+                <div id="filters_2" class="row">
+                    <!-- Step 4: Extra filters (tags) -->
+                    <div class="col-sm-7 col-sm-offset-2">
+                        <label for="tags_input"></label><br>
+                        <select id="tags_input" class="multipleSelect" multiple>
+                            <option value="innovative">Innovatief</option>
+                            <option value="regular">Regulier</option>
+                            <option value="validated">Goedgekeurd</option>
+                            <option value="invalidated">Niet-Goedgekeurd</option>
+                        </select>
+                    </div>
 
-                <!-- Step 3: Date range picker -->
-                <div class="col-sm-3">
-                    <label for="daterange_picker">Datum: van .. tot</label><br>
-                    <input id="daterange_picker" type="text" class="form-control" name="daterange"/>
-                </div>
-
-                <!-- Button to show description list -->
-                <div class="col-sm-1">
-                    <label for="search_button"></label><br>
-                    <button id="search_button" type="button" class="btn btn-primary">Zoeken</button>
+                    <!-- Button to show description list -->
+                    <div class="col-sm-1">
+                        <label for="search_button"></label><br>
+                        <button id="search_button" type="button" class="btn btn-primary">Zoeken</button>
+                    </div>
                 </div>
             </div>
             <div id="description_row" class="row">
-                <!-- Step 4: Description list -->
+                <!-- Step 5: Description list -->
                 <div id="description_loader" class="loader col-sm-2 col-sm-offset-5"></div>
-                <div id="div_description_list" class="col-sm-6 col-sm-offset-3">
+                <div id="div_description_list" class="col-sm-6 col-sm-offset-2">
                     <label for="description_list">Omschrijvingen</label><br>
                     <select id="description_list" class="form-control" multiple="multiple">
                     </select><br>
                     <button id="save_button" type="button" class="btn btn-success">Opslaan</button>
                     <button id="export_button" type="button" class="btn btn-info">Export</button>
+                </div>
+                <div id="div_summary" class="col-sm-3">
+                    <br>
+                    <label for="innoHours_value">Innovatieve uren: </label>
+                    <span id="innoHours_value">--</span><br>
+                    <label for="regularHours_value">Reguliere uren: </label>
+                    <span id="regularHours_value">--</span><br>
+                    <label for="totalHours_value">Totaal uren: </label>
+                    <span id="totalHours_value">--</span>
                 </div>
             </div>
             <!-- Edit modal -->
@@ -135,5 +164,7 @@
         <script type="text/javascript" src="js/daterangepicker.js"></script>
         <!-- Include Context Menu -->
         <script type="text/javascript" src="js/jquery.contextMenu.min.js"></script>
+        <!-- Fastselect -->
+        <script type="text/javascript" src="js/fastselect.standalone.min.js"></script>
     </body>
 </html>
