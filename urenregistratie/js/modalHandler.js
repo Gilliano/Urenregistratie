@@ -4,18 +4,23 @@ $("[name='mode']").bootstrapSwitch();
 var array = [];
 var headerData = [];
 var medewerker = [];
+var valMedewerker = [];
 var tijd = [];
+
 //check if any input is changed.
-
 $("#teamMedewerker").on("change paste keyup", function() {
-    // fill the array
-
-    array[0] = $("#teamMedewerker option:selected").text();
-    setValuesOnWeb();
+    setDivForEachMedewerker();
 });
 $("#teamProject").on("change paste keyup", function() {
     // fill the array
     array[1] = $("#teamProject option:selected").text();
+    array[9] = $("#teamProject option:selected").val();
+    setValuesOnWeb();
+});
+$("#teamDatum").on("change paste keyup focus blur", function() {
+    // fill the array
+    array[8] = $(this).val();
+
     setValuesOnWeb();
 });
 $("#teamBegintijd").on("change paste keyup focus blur", function() {
@@ -38,21 +43,25 @@ $("#teamUrenregulier").on("change paste keyup", function() {
     setValuesOnWeb();
 });
 $("#teamOmschrijving").on("change paste keyup", function() {
-    array[8] = $(this).val();
-
+    array[7] = $(this).val();
     setValuesOnWeb();
 });
 
 //if any input is changed then shows it directly on the webpage behind the modal.
 function setValuesOnWeb() {
+    if (array[8] == null){
+        array[8] = $('#teamDatum').val();
+    }
     setDivForEachMedewerker();
     $(".project").val(array[1]);
+    $(".datum").val(array[8]);
     $(".begintijd").val(array[2]);
     $(".eindtijd").val(array[3]);
     $(".urentotaal").val(array[4]);
     $(".urenregulier").val(array[5]);
     $(".ureninnovatief").val(array[6]);
     $(".omschrijving").val(array[7]);
+    $(".idProject").val(array[9]);
 }
 
 function timeSplit() {
@@ -61,7 +70,7 @@ function timeSplit() {
     tijd = urenAfronden($(".eindtijd").val());
     $(".eindtijd").val(tijd);
     var totaal = urenBerekenen($(".begintijd").val(), $(".eindtijd").val());
-    $(".urentotaal").vall(totaal);
+    $(".urentotaal").val(totaal);
 }
 
 function setDivForEachMedewerker(){
@@ -76,40 +85,47 @@ function setDivForEachMedewerker(){
         }
 
         medewerker[i] = $(selected).text();
+        valMedewerker[i] = $(selected).val();
 
         newHTML.push(
             '<div class="panel panel-default modalPanel">' +
                 '<div class="panel-heading modalHeader" data-toggle="collapse" href="#collapse' + i + '">' + headerData + '</div>' +
                 '<div  class="panel-body collapse" id="collapse' + i + '">' +
-                    '<form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data")">' +
+                    '<form method="post" class="urenformulier" action="" id="urenformulier' + i + '" name="urenformulier' + i + '" enctype="multipart/form-data">' +
                         '<table>' +
                             '<tr>' +
                                     '<td class="description">Medewerker</td>' +
+                                    '<input type="hidden" name="idMedewerker" class="form-control medewerker" value="' + valMedewerker[i] + '" readonly required/>' +
                                     '<td class="field"><input type="text" name="medewerker" class="form-control medewerker" value="' + medewerker[i] + '" readonly required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Project</td>' +
+                                '<input type="hidden" name="idProject" class="form-control idProject" value="" readonly required/>' +
                                 '<td class="field"><input type="text" name="project" class="form-control project" readonly required/></td>' +
+                                '</tr>' +
+                            '<tr>' +
+                                '<td class="description">Datum</td>' +
+                                '<td class="field"><input type="date" name="datum" class="form-control datum" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Begintijd</td>' +
-                                '<td class="field"><input type="time" id="begintijd" name="begintijd" onblur="timeSplit()" class="form-control begintijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" name="begintijd" onblur="//timeSplit();" class="form-control begintijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Eindtijd</td>' +
-                                '<td class="field"><input type="time" id="eindtijd" name="eindtijd" onblur="timeSplit()" class="form-control eindtijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" name="eindtijd" onblur="//timeSplit();" class="form-control eindtijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Totaal aantal uren gewerkt</td>' +
-                                '<td class="field"><output readonly type="number" id="urentotaal" name="urentotaal" class="form-control urentotaal"/></td>' +
+                                '<td class="field"><output readonly type="number" name="urentotaal" class="form-control urentotaal"/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Reguliere uren</td>' +
-                                '<td class="veld"><input type="number" id="urenregulier" name="urenregulier" class="form-control urenregulier" required/></td>' +
+                                '<td class="veld"><input type="number" name="urenregulier" class="form-control urenregulier" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Innovatieve uren</td>' +
-                                '<td class="field"><input type="number" id="ureninnovatief" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
+                                '<td class="field"><input type="number" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Omschrijving van de uren</td>' +
@@ -121,8 +137,45 @@ function setDivForEachMedewerker(){
             '</div>'
         );
 
-        $("#modalContent").html(newHTML.join(""));
+        $("#modalContent").html(newHTML.join("") + "<input style='margin-bottom: 15px;' type='submit' name='teamurenopslaan' onclick='submitForms();' class='btn btn-success' value='Alles opslaan'>");
     });
+}
+//submit all forms
+
+function submitForms(){
+    $('#teamMedewerker :selected').each(function(i){
+        var employee = $("form#urenformulier" + i).serializeArray();
+        $.ajax({
+            type: "POST",
+            data: employee,
+            url: "test.php",
+            success: function(data)
+            {
+                console.log(data);
+            }
+        });
+    });
+
+    // var arrayOfEmployees = $('#teamMedewerker :selected').map(function(i){
+    //     return [$("form#urenformulier" + i).serializeArray()];
+    // }).get();
+    //
+    // arrayOfEmployees.forEach(function(employee){
+    //
+    //     $.ajax({
+    //         type: "POST",
+    //         data: employee,
+    //         url: "test.php",
+    //         success: function(data)
+    //         {
+    //             console.log(data);
+    //         }
+    //     });
+    //
+    //     // employee.forEach(function(field){
+    //     //     //console.log(field.name + " : " + field.value);
+    //     // });
+    // });
 }
 
 //what to do if the bootstrapswitch changed

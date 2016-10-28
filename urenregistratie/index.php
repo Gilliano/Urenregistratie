@@ -4,8 +4,6 @@
         <?php
         //make sure everything we need in here
         require_once '../main/php/head.php';
-
-        echo $_SESSION['rol'];
         ?>
         <link href="css/urenregistratie.css" rel="stylesheet">
         <link href="css/bootstrap-switch.css" rel="stylesheet">
@@ -17,7 +15,7 @@
 
     $allUsers = userManager::getAllUsers();
     $alleMedewerkers = sizeof($allUsers);
-
+    //datum
     $date = date("Y-m-d");
     ?>
 
@@ -35,7 +33,7 @@
             <div class="panel panel-default" id="mainFormulier">
                 <div class="panel-heading">Uren invulformulier</div>
                 <div  class="panel-body">
-                    <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data"">
+                    <form method="post" action="" class="urenformulier" id="urenformulier" name="urenformulier" enctype="multipart/form-data"">
                         <table>
                             <tr>
                                 <?php
@@ -96,6 +94,7 @@
 
     <!-- Here comes the jQuery model output -->
     <div class="col-md-8 col-md-offset-2" id="modalContent">
+
     </div>
 
 
@@ -140,6 +139,10 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="description">Datum</td>
+                                    <td class="field"><input type="date" name="teamDatum" id="teamDatum" class="form-control" value="<?= $date ?>" required/></td>
+                                </tr>
+                                <tr>
                                     <td class="description">Begintijd</td>
                                     <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde()" class="form-control" required/></td>
                                 </tr>
@@ -161,7 +164,7 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>
-                                    <td class="field"><textarea name="omschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
+                                    <td class="field"><textarea name="teamOmschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
                                 </tr>
                             </table>
                         </form>
@@ -171,10 +174,8 @@
                         <input type="submit" name="urenopslaan" class="opslaan btn btn-danger" data-dismiss="modal" value="Annuleren">
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
     </body>
     <?php

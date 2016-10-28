@@ -172,7 +172,36 @@ static function addUren() {
             return "<div class='alert alert-danger' id='error'>Vul alle invoervelden in!</div>";
         }
 }
+    public static function addTeamUren($arrayUren) {
+        $arrayUren['begintijd'] = date_format(date_create($arrayUren['datum'] . $arrayUren['begintijd']), "Y-m-d H:i");
+        $arrayUren['eindtijd'] = date_format(date_create($arrayUren['datum'] . $arrayUren['eindtijd']), "Y-m-d H:i");
 
+        $conn = database::connect();
+
+        $stmtReg = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief) VALUES (?, ?, ?, ?, ?, ?, FALSE)");
+        $stmtReg->bindParam(1, $arrayUren['idMedewerker'], PDO::PARAM_INT);
+        $stmtReg->bindParam(2, $arrayUren['idProject'], PDO::PARAM_INT);
+        $stmtReg->bindParam(3, $arrayUren['urenregulier'], PDO::PARAM_INT);
+        $stmtReg->bindParam(4, $arrayUren['begintijd'], PDO::PARAM_STR);
+        $stmtReg->bindParam(5, $arrayUren['eindtijd'], PDO::PARAM_STR);
+        $stmtReg->bindParam(6, $arrayUren['omschrijving'], PDO::PARAM_STR);
+        if($arrayUren['ureninnovatief'] > 0){
+            $stmtInno = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief) VALUES (?, ?, ?, ?, ?, ?, TRUE)");
+            $stmtInno->bindParam(1, $arrayUren['idMedewerker'], PDO::PARAM_INT);
+            $stmtInno->bindParam(2, $arrayUren['idProject'], PDO::PARAM_INT);
+            $stmtInno->bindParam(3, $arrayUren['ureninnovatief'], PDO::PARAM_INT);
+            $stmtInno->bindParam(4, $arrayUren['begintijd'], PDO::PARAM_STR);
+            $stmtInno->bindParam(5, $arrayUren['eindtijd'], PDO::PARAM_STR);
+            $stmtInno->bindParam(6, $arrayUren['omschrijving'], PDO::PARAM_STR);
+
+            $stmtInno->execute();
+        }
+        $stmtReg->execute();
+
+
+        print_r($arrayUren);
+
+    }
     // Updates the record in `uur` tabel
     // foreach element in param array
     // parameters: Array which contains
