@@ -32,13 +32,13 @@ $("#teamEindtijd").on("change paste keyup focus blur", function() {
 
     setValuesOnWeb();
 });
-$("#teamUrenregulier").on("change paste keyup", function() {
+$("#teamUrenregulier").on("change paste keyup focus blur", function() {
     array[5] = $(this).val();
     array[6] = $("#teamUreninnovatief").val();
 
     setValuesOnWeb();
 });
-$("#teamOmschrijving").on("change paste keyup", function() {
+$("#teamOmschrijving").on("change paste keyup focus blur", function() {
     array[7] = $(this).val();
     setValuesOnWeb();
 });
@@ -106,7 +106,6 @@ function setDivForEachMedewerker(){
                             '<tr>' +
                                 '<td class="description">Reguliere uren</td>' +
                                 '<td class="veld"><input type="number" id="urenregulier" name="urenregulier" onkeyup="innovatieveUren()" class="form-control urenregulier" required/></td>' +
-                                '<td class="veld"><input type="number" name="urenregulier" class="form-control urenregulier" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Innovatieve uren</td>' +
@@ -253,4 +252,5 @@ function innovatieveUren() {
     ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
     ureninnovatief = ureninnovatief.replace(".",",");
     $(".ureninnovatief").val(ureninnovatief);
+
 }

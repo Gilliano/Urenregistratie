@@ -140,11 +140,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde()" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde(); teamUrenInnovatief()" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde()" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde(); teamUrenInnovatief()" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
