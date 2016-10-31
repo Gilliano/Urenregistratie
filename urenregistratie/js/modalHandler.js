@@ -39,7 +39,7 @@ $("#teamEindtijd").on("change paste keyup focus blur", function() {
 $("#teamUrenregulier").on("change paste keyup focus blur", function() {
     array[5] = $(this).val();
     array[6] = $("#teamUreninnovatief").val();
-    
+
     setValuesOnWeb();
 });
 $("#teamOmschrijving").on("change paste keyup focus blur", function() {
@@ -65,6 +65,9 @@ function setValuesOnWeb() {
 }
 
 function timeSplit() {
+    console.log('test');
+    console.log($(this).text());
+
     tijd = urenAfronden($(".begintijd").val());
     $(".begintijd").val(tijd);
     tijd = urenAfronden($(".eindtijd").val());
@@ -109,23 +112,23 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Begintijd</td>' +
-                                '<td class="field"><input type="time" id="begintijd" name="begintijd" onblur="timeSplit(); innovatieveUren()" class="form-control begintijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" id="begintijd' + i + '" name="begintijd" onblur="timeSplit(); innovatieveUren()" class="form-control begintijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Eindtijd</td>' +
-                                '<td class="field"><input type="time" id="eindtijd" name="eindtijd" onblur="timeSplit(); innovatieveUren()" class="form-control eindtijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" id="eindtijd' + i + '" name="eindtijd" onblur="timeSplit(); innovatieveUren()" class="form-control eindtijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Totaal aantal uren gewerkt</td>' +
-                                '<td class="field"><output readonly type="number" name="urentotaal" class="form-control urentotaal"/></td>' +
+                                '<td class="field"><output readonly type="number" id="urentotaal' + i + '" name="urentotaal" class="form-control urentotaal"/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Reguliere uren</td>' +
-                                '<td class="veld"><input type="number" id="urenregulier" name="urenregulier" onkeyup="innovatieveUren()" class="form-control urenregulier" required/></td>' +
+                                '<td class="veld"><input type="number" id="urenregulier' + i + '" name="urenregulier" onkeyup="innovatieveUren()" class="form-control urenregulier" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Innovatieve uren</td>' +
-                                '<td class="field"><input type="number" id="ureninnovatief" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
+                                '<td class="field"><input type="number" id="ureninnovatief' + i + '" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Omschrijving van de uren</td>' +
