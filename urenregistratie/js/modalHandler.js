@@ -5,7 +5,6 @@ var array = [];
 var headerData = [];
 var medewerker = [];
 var valMedewerker = [];
-var tijd = [];
 
 //check if any input is changed.
 
@@ -40,7 +39,7 @@ $("#teamEindtijd").on("change paste keyup focus blur", function() {
 $("#teamUrenregulier").on("change paste keyup focus blur", function() {
     array[5] = $(this).val();
     array[6] = $("#teamUreninnovatief").val();
-
+    
     setValuesOnWeb();
 });
 $("#teamOmschrijving").on("change paste keyup focus blur", function() {
@@ -126,7 +125,7 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Innovatieve uren</td>' +
-                                '<td class="field"><input type="number" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
+                                '<td class="field"><input type="number" id="ureninnovatief" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Omschrijving van de uren</td>' +
@@ -271,7 +270,7 @@ function innovatieveUren() {
     var urenregulier = $(".urenregulier").val();
     var ureninnovatief = urentotaal - urenregulier;
     ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
-    ureninnovatief = ureninnovatief.replace(".",",");
     $(".ureninnovatief").val(ureninnovatief);
+    ureninnovatief = ureninnovatief.replace(".",",");
 
 }
