@@ -66,12 +66,23 @@ function setValuesOnWeb() {
 }
 
 function timeSplit() {
-    tijd = urenAfronden($("#begintijd1").val());
-    $("#begintijd1").val(tijd);
-    tijd = urenAfronden($("#eindtijd").val());
-    $("#eindtijd").val(tijd);
-    var totaal = urenBerekenen($("#begintijd").val(), $("#eindtijd").val());
-    $("#urentotaal").val(totaal);
+    $('#teamMedewerker :selected').each(function(i) {
+        var Btijd = "#begintijd" + i;
+        var begintijd = urenAfronden($(Btijd).val());
+        $(Btijd).val(begintijd);
+        var Etijd = "#eindtijd" + i;
+        var eindtijd = urenAfronden($(Etijd).val());
+        $(Etijd).val(eindtijd);
+        var totaal = urenBerekenen($(Btijd).val(), $(Etijd).val());
+        totaal = totaal.toString();
+        totaal = totaal.replace(".",",");
+        var uren = "#urentotaal" + i;
+        $(uren).val(totaal);
+        var regulier = "#urenregulier" + i;
+        var ureninnovatief = innovatieveUren(totaal, $(regulier).val());
+        var innovatief = "#ureninnovatief" + i;
+        $(innovatief).val(ureninnovatief);
+    });
 }
 
 function setDivForEachMedewerker(){
@@ -79,6 +90,7 @@ function setDivForEachMedewerker(){
 
 
     $('#teamMedewerker :selected').each(function(i, selected){
+
         if(array.length < 5){
             headerData = $(selected).text();
         }else{
@@ -110,11 +122,11 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Begintijd</td>' +
-                                '<td class="field"><input type="time" id="begintijd' + i + '" name="begintijd" onblur="timeSplit(); innovatieveUren()" class="form-control begintijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" id="begintijd' + i + '" name="begintijd" onblur="timeSplit()" class="form-control begintijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Eindtijd</td>' +
-                                '<td class="field"><input type="time" id="eindtijd' + i + '" name="eindtijd" onblur="timeSplit(); innovatieveUren()" class="form-control eindtijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" id="eindtijd' + i + '" name="eindtijd" onblur="timeSplit()" class="form-control eindtijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Totaal aantal uren gewerkt</td>' +
@@ -122,7 +134,7 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Reguliere uren</td>' +
-                                '<td class="veld"><input type="number" id="urenregulier' + i + '" name="urenregulier" onkeyup="innovatieveUren()" class="form-control urenregulier" required/></td>' +
+                                '<td class="veld"><input type="number" id="urenregulier' + i + '" name="urenregulier" onkeyup="timeSplit()" class="form-control urenregulier" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Innovatieve uren</td>' +
@@ -217,7 +229,7 @@ function urenAfronden(tijd) {
         return tijd;
     }
     else {
-        if(tijd[0] < 10) {
+        if(tijd[0] < 9) {
             tijd[0] = parseInt(tijd[0]);
             tijd[0] += 1;
             tijd[0] = "0" + tijd[0];
@@ -250,28 +262,25 @@ function urenBerekenen(begintijd, eindtijd) {
     var uren = berekening / 3600;
 
     var totaal = parseFloat(uren.toFixed(1));
-    totaal = totaal.toString();
-    totaal = totaal.replace(".",",");
 
     if(totaal < 0) {
-        return "Begintijd is groter dan eindtijd";
+        var fout = "Begintijd is groter dan eindtijd";
+        return fout;
     }
-    else if(totaal === 0) {
-        return "U kunt niet 0 uren hebben";
+    else if(totaal == 0) {
+        var fout = "U kunt niet 0 uren hebben";
+        return fout;
     }
     else {
         return totaal;
     }
 }
 
-function innovatieveUren() {
-    var urentotaal = $(".urentotaal").val();
-    urentotaal = urentotaal.replace(",",".");
+function innovatieveUren(urentotaal, urenregulier) {
+    urentotaal = urentotaal.replace(",", ".");
     urentotaal = parseFloat(urentotaal);
-    var urenregulier = $(".urenregulier").val();
     var ureninnovatief = urentotaal - urenregulier;
     ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
-    $(".ureninnovatief").val(ureninnovatief);
-    ureninnovatief = ureninnovatief.replace(".",",");
-
+    return ureninnovatief;
+    ureninnovatief = ureninnovatief.replace(".", ",");
 }
