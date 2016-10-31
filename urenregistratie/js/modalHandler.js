@@ -9,9 +9,6 @@ var valMedewerker = [];
 //check if any input is changed.
 
 $("#teamMedewerker").on("change paste keyup", function() {
-    // fill the array
-    array[1] = $("#teamProject option:selected").text();
-    array[9] = $("#teamProject option:selected").val();
     setValuesOnWeb();
     //push
 });
@@ -69,15 +66,12 @@ function setValuesOnWeb() {
 }
 
 function timeSplit() {
-    console.log('test');
-    console.log($(this).text());
-
-    tijd = urenAfronden($(".begintijd").val());
-    $(".begintijd").val(tijd);
-    tijd = urenAfronden($(".eindtijd").val());
-    $(".eindtijd").val(tijd);
-    var totaal = urenBerekenen($(".begintijd").val(), $(".eindtijd").val());
-    $(".urentotaal").val(totaal);
+    tijd = urenAfronden($("#begintijd1").val());
+    $("#begintijd1").val(tijd);
+    tijd = urenAfronden($("#eindtijd").val());
+    $("#eindtijd").val(tijd);
+    var totaal = urenBerekenen($("#begintijd").val(), $("#eindtijd").val());
+    $("#urentotaal").val(totaal);
 }
 
 function setDivForEachMedewerker(){
