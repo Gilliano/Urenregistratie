@@ -307,19 +307,19 @@ class userManager
         userManager::tokenAanmaken($email,$hash);
         //temp
 
-        $herstelLink = "<a href=\"../herstellen?id={$hash}&email={$email}\">herstellen?id={$hash}&email={$email}</a> ";
+         $herstelLink = "<a href=\"../herstellen?id={$hash}&email={$email}\">herstellen?id={$hash}&email={$email}</a> ";
 
-//        de email die verzonden moet worden
-         //verzend een email
-         $to      = $email;
-         $subject = 'branchonline wachtwoord herstellen';
-         $message = 'Op de volgende link kunt u uw wachtwoord herstellen'. $herstelLink;
-         $headers = 'From: webmaster@example.com' . "\r\n" .
-             'Reply-To: m.belhaj_zakelijk@hotmail.com' . "\r\n" ;
+// //        de email die verzonden moet worden
+//          //verzend een email
+//          $to      = $email;
+//          $subject = 'branchonline wachtwoord herstellen';
+//          $message = 'Op de volgende link kunt u uw wachtwoord herstellen'. $herstelLink;
+//          $headers = 'From: webmaster@example.com' . "\r\n" .
+//              'Reply-To: m.belhaj_zakelijk@hotmail.com' . "\r\n" ;
 
-         //verzend de email
-         mail($to, $subject, $message, $headers);
+//          //verzend de email
+//          mail($to, $subject, $message, $headers);
 
-//        echo $herstelLink;
+        echo $herstelLink;
     }
 }
