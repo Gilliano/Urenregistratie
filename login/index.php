@@ -26,7 +26,7 @@
                   <form method="post" role="login">
                      <img class="loginLogo" src="../main/img/logo.png" alt="" />
                      <input type="text" name="email" placeholder="Email" required class="form-control input-lg" />
-                     <input type="password" name="password" class="form-control input-lg" id="password" placeholder="wachtwoord"/>
+                     <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password"/>
                      <?php echo isset($error) ? $error : ""; ?>
                      <input type="submit" name="login" value="log in" class="btn btn-lg btn-primary btn-block">
                      <div>
