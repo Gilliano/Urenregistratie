@@ -13,6 +13,7 @@ $("#teamMedewerker").on("change paste keyup", function() {
     array[1] = $("#teamProject option:selected").text();
     array[9] = $("#teamProject option:selected").val();
     setValuesOnWeb();
+    //push
 });
 $("#teamProject").on("change paste keyup", function() {
     // fill the array
