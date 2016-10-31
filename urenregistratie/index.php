@@ -84,7 +84,7 @@
                             <!--submit-->
                             <tr>
                                 <td class="submit"></td>
-                                <td><input type="submit" name="urenopslaan" class="opslaan btn btn-success" value="Bevestigen"></td>
+                                <td><input type="submit" name="urenopslaan" class="opslaan btn btn-success" value="Opslaan"></td>
                             </tr>
                         </table>
                     </form>
@@ -170,8 +170,8 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" name="urenopslaan" class="opslaan btn btn-success" value="Bevestigen">
-                        <input type="submit" name="urenopslaan" class="opslaan btn btn-danger" data-dismiss="modal" value="Annuleren">
+                        <input type="submit" name="bevestigen" id="bevestigen" class="btn btn-success" data-dismiss="modal" value="Bevestigen">
+                        <input type="submit" name="annuleren" id="annuleren" class="btn btn-danger" data-dismiss="modal" value="Annuleren">
                     </div>
                 </div>
 

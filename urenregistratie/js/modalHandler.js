@@ -1,16 +1,47 @@
 // initialize the bootstrapswitch
 $("[name='mode']").bootstrapSwitch();
 
+//variables
 var array = [];
 var headerData = [];
 var medewerker = [];
 var valMedewerker = [];
+var bevestigen = 0;
+
+//what to do if the bootstrapswitch changed
+$('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state) {
+    if(state === true){
+        // switch is on
+        $('#modalFormulier').modal('toggle');
+        $('#mainFormulier').hide();
+
+        setValuesOnWeb();
+    }else{
+        // switch is off
+        $("#mainFormulier").show();
+        $(".modalPanel").hide();
+        $("#teamOpslaan").hide();
+    }
+});
+
+// Check if button is clicked
+$('#bevestigen').click(function () {
+    bevestigen = 1;
+});
+// Switch the bootstrapswitch back to normal
+$('#modalFormulier').on('hide.bs.modal', function () {
+    if(bevestigen == 1){
+        bevestigen = 0;
+    }else{
+        $("[name='mode']").bootstrapSwitch('toggleState');
+    }
+});
+
+
 
 //check if any input is changed.
-
 $("#teamMedewerker").on("change paste keyup", function() {
     setValuesOnWeb();
-    //push
 });
 $("#teamProject").on("change paste keyup", function() {
     // fill the array
@@ -63,6 +94,8 @@ function setValuesOnWeb() {
     $(".ureninnovatief").val(array[6]);
     $(".omschrijving").val(array[7]);
     $(".idProject").val(array[9]);
+
+    $("#teamOpslaan").show();
 }
 
 function timeSplit() {
@@ -150,7 +183,7 @@ function setDivForEachMedewerker(){
             '</div>'
         );
 
-        $("#modalContent").html(newHTML.join("") + "<input style='margin-bottom: 15px;' type='submit' name='teamurenopslaan' onclick='submitForms();' class='btn btn-success' value='Alles opslaan'>");
+        $("#modalContent").html(newHTML.join("") + "<input style='margin-bottom: 15px;' type='submit' id='teamOpslaan' name='teamurenopslaan' onclick='submitForms();' class='btn btn-success' value='Alles opslaan'>");
     });
 }
 //submit all forms
@@ -161,57 +194,18 @@ function submitForms(){
         $.ajax({
             type: "POST",
             data: employee,
-            url: "test.php",
+            url: "ajax.php",
             success: function(data)
             {
                 if(~data.indexOf("true")){
-                    console.log('true');
+                    //console.log('true');
                 }else{
-                    console.log('false');
+                    //console.log('false');
                 }
             }
         });
     });
-
-    // var arrayOfEmployees = $('#teamMedewerker :selected').map(function(i){
-    //     return [$("form#urenformulier" + i).serializeArray()];
-    // }).get();
-    //
-    // arrayOfEmployees.forEach(function(employee){
-    //
-    //     $.ajax({
-    //         type: "POST",
-    //         data: employee,
-    //         url: "test.php",
-    //         success: function(data)
-    //         {
-    //             console.log(data);
-    //         }
-    //     });
-    //
-    //     // employee.forEach(function(field){
-    //     //     //console.log(field.name + " : " + field.value);
-    //     // });
-    // });
 }
-
-//what to do if the bootstrapswitch changed
-$('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state) {
-    if(state === true){
-        // switch is on
-        $('#modalFormulier').modal('toggle');
-        $('#mainFormulier').hide();
-    }else{
-        // switch is off
-        //$("#mainFormulier").show();
-        //$(".modalPanel").hide();
-    }
-});
-
-// Switch the bootstrapswitch back to normal
-$('#modalFormulier').on('hide.bs.modal', function () {
-    $("[name='mode']").bootstrapSwitch('toggleState');
-});
 
 function urenAfronden(tijd) {
     var tijd = tijd.split(":");
