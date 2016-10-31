@@ -5,9 +5,9 @@ var array = [];
 var headerData = [];
 var medewerker = [];
 var valMedewerker = [];
-var tijd = [];
 
 //check if any input is changed.
+
 $("#teamMedewerker").on("change paste keyup", function() {
     // fill the array
     array[1] = $("#teamProject option:selected").text();
@@ -39,13 +39,13 @@ $("#teamEindtijd").on("change paste keyup focus blur", function() {
 
     setValuesOnWeb();
 });
-$("#teamUrenregulier").on("change paste keyup", function() {
+$("#teamUrenregulier").on("change paste keyup focus blur", function() {
     array[5] = $(this).val();
     array[6] = $("#teamUreninnovatief").val();
-
+    
     setValuesOnWeb();
 });
-$("#teamOmschrijving").on("change paste keyup", function() {
+$("#teamOmschrijving").on("change paste keyup focus blur", function() {
     array[7] = $(this).val();
     setValuesOnWeb();
 });
@@ -112,11 +112,11 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Begintijd</td>' +
-                                '<td class="field"><input type="time" name="begintijd" onblur="//timeSplit();" class="form-control begintijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" id="begintijd" name="begintijd" onblur="timeSplit(); innovatieveUren()" class="form-control begintijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Eindtijd</td>' +
-                                '<td class="field"><input type="time" name="eindtijd" onblur="//timeSplit();" class="form-control eindtijd" step="1800" required/></td>' +
+                                '<td class="field"><input type="time" id="eindtijd" name="eindtijd" onblur="timeSplit(); innovatieveUren()" class="form-control eindtijd" step="1800" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Totaal aantal uren gewerkt</td>' +
@@ -124,11 +124,11 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Reguliere uren</td>' +
-                                '<td class="veld"><input type="number" name="urenregulier" class="form-control urenregulier" required/></td>' +
+                                '<td class="veld"><input type="number" id="urenregulier" name="urenregulier" onkeyup="innovatieveUren()" class="form-control urenregulier" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Innovatieve uren</td>' +
-                                '<td class="field"><input type="number" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
+                                '<td class="field"><input type="number" id="ureninnovatief" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Omschrijving van de uren</td>' +
@@ -253,6 +253,7 @@ function urenBerekenen(begintijd, eindtijd) {
 
     var totaal = parseFloat(uren.toFixed(1));
     totaal = totaal.toString();
+    totaal = totaal.replace(".",",");
 
     if(totaal < 0) {
         return "Begintijd is groter dan eindtijd";
@@ -263,4 +264,16 @@ function urenBerekenen(begintijd, eindtijd) {
     else {
         return totaal;
     }
+}
+
+function innovatieveUren() {
+    var urentotaal = $(".urentotaal").val();
+    urentotaal = urentotaal.replace(",",".");
+    urentotaal = parseFloat(urentotaal);
+    var urenregulier = $(".urenregulier").val();
+    var ureninnovatief = urentotaal - urenregulier;
+    ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
+    $(".ureninnovatief").val(ureninnovatief);
+    ureninnovatief = ureninnovatief.replace(".",",");
+
 }

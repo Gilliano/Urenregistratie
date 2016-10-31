@@ -4,6 +4,7 @@
         <?php
         //make sure everything we need in here
         require_once '../main/php/head.php';
+
         ?>
         <link href="css/urenregistratie.css" rel="stylesheet">
         <link href="css/bootstrap-switch.css" rel="stylesheet">
@@ -15,7 +16,7 @@
 
     $allUsers = userManager::getAllUsers();
     $alleMedewerkers = sizeof($allUsers);
-    //datum
+
     $date = date("Y-m-d");
     ?>
 
@@ -94,7 +95,6 @@
 
     <!-- Here comes the jQuery model output -->
     <div class="col-md-8 col-md-offset-2" id="modalContent">
-
     </div>
 
 
@@ -144,11 +144,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde()" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde(); teamUrenInnovatief()" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde()" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde(); teamUrenInnovatief()" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
@@ -174,8 +174,10 @@
                         <input type="submit" name="urenopslaan" class="opslaan btn btn-danger" data-dismiss="modal" value="Annuleren">
                     </div>
                 </div>
+
             </div>
         </div>
+
     </div>
     </body>
     <?php
