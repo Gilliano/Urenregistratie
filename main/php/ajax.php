@@ -109,7 +109,7 @@ function getUrenBetweenDate($params)
         }
     }
 
-    $records = urenManager::getRecordsForUserProjectDaterange($params['userIDs'], $params['projectIDs'], $params['date1'], $params['date2']);
+    $records = urenManager::getRecordsForUserProjectDaterange($params['userIDs'], $params['projectIDs'], $params['date1'], $params['date2'], $params['extra']);
     echo json_encode($records);
 }
 

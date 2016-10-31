@@ -21,6 +21,7 @@ $("#search_button").on("click", function(event){
 
     $("#search_button").prop("disabled",true);
     $("#div_description_list").hide();
+    $("#div_summary").hide();
     $("#description_loader").fadeIn(100);
     $(".alert").each(function(index, item){
         if($(item).css('display') != 'none')
@@ -35,8 +36,9 @@ $("#search_button").on("click", function(event){
         daterange = daterange.split(" t/m ");
         var date1 = daterange[0] + " 00:00:00";
         var date2 = daterange[1] + " 23:59:59";
+        var extra_filters = $("#tags_input").val();
 
-        var ajaxObj = new AjaxObj("getUrenBetweenDate", {'userEmails': users, 'projectNames': projects, 'date1': date1, 'date2': date2}, false, "json");
+        var ajaxObj = new AjaxObj("getUrenBetweenDate", {'userEmails': users, 'projectNames': projects, 'date1': date1, 'date2': date2, 'extra': extra_filters}, false, "json");
         var response = ajaxObj.result;
         // Cache response
         cache_old_records = $.extend(true, [], response);
@@ -44,19 +46,35 @@ $("#search_button").on("click", function(event){
 
         // Fill the description list
         var html = "";
+        var innoHours = 0;
+        var regularHours = 0;
         response.forEach(function(item, index){
             var validateClass = item.goedgekeurd==1?'validated':'';
             html += "<option name='description_item' class='context-menu-one "+validateClass+"' value='"+index+"'>"+item.urengewerkt+" uren gewerkt"+" | "+item.omschrijving+"</option>";
+            if(item.innovatief === "1")
+                innoHours += +item.urengewerkt;
+            else
+                regularHours += +item.urengewerkt;
         });
+
+        // TODO: Show summary
+        // - Total number of inno hours
+        $("#innoHours_value").html(innoHours);
+        // - Total number of regular hours
+        $("#regularHours_value").html(regularHours);
+        // - Total number of hours
+        $("#totalHours_value").html(innoHours + regularHours);
 
         if(html.length > 0){
             $("#description_list").html(html);
             $("#description_loader").hide();
             $("#div_description_list").fadeIn();
+            $("#div_summary").fadeIn();
         }
         else{
             $("#description_loader").fadeOut();
             $("#noRecordsFound").fadeIn();
+            $("#div_summary").fadeOut();
         }
 
         // Setup dubble click handler for option items
