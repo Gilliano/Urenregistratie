@@ -176,31 +176,32 @@ static function addUren() {
         $arrayUren['begintijd'] = date_format(date_create($arrayUren['datum'] . $arrayUren['begintijd']), "Y-m-d H:i");
         $arrayUren['eindtijd'] = date_format(date_create($arrayUren['datum'] . $arrayUren['eindtijd']), "Y-m-d H:i");
 
-        $conn = database::connect();
-
-        $stmtReg = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief) VALUES (?, ?, ?, ?, ?, ?, FALSE)");
-        $stmtReg->bindParam(1, $arrayUren['idMedewerker'], PDO::PARAM_INT);
-        $stmtReg->bindParam(2, $arrayUren['idProject'], PDO::PARAM_INT);
-        $stmtReg->bindParam(3, $arrayUren['urenregulier'], PDO::PARAM_INT);
-        $stmtReg->bindParam(4, $arrayUren['begintijd'], PDO::PARAM_STR);
-        $stmtReg->bindParam(5, $arrayUren['eindtijd'], PDO::PARAM_STR);
-        $stmtReg->bindParam(6, $arrayUren['omschrijving'], PDO::PARAM_STR);
-        if($arrayUren['ureninnovatief'] > 0){
-            $stmtInno = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief) VALUES (?, ?, ?, ?, ?, ?, TRUE)");
-            $stmtInno->bindParam(1, $arrayUren['idMedewerker'], PDO::PARAM_INT);
-            $stmtInno->bindParam(2, $arrayUren['idProject'], PDO::PARAM_INT);
-            $stmtInno->bindParam(3, $arrayUren['ureninnovatief'], PDO::PARAM_INT);
-            $stmtInno->bindParam(4, $arrayUren['begintijd'], PDO::PARAM_STR);
-            $stmtInno->bindParam(5, $arrayUren['eindtijd'], PDO::PARAM_STR);
-            $stmtInno->bindParam(6, $arrayUren['omschrijving'], PDO::PARAM_STR);
-
-            $stmtInno->execute();
+        if(!empty($arrayUren['idMedewerker'] && $arrayUren['idProject'] && $arrayUren['urenregulier'] && $arrayUren['begintijd'] && $arrayUren['eindtijd'] && $arrayUren['omschrijving'])){
+            $conn = database::connect();
+            if($arrayUren['urenregulier'] > 0){
+                $stmtReg = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief) VALUES (?, ?, ?, ?, ?, ?, FALSE)");
+                $stmtReg->bindParam(1, $arrayUren['idMedewerker'], PDO::PARAM_INT);
+                $stmtReg->bindParam(2, $arrayUren['idProject'], PDO::PARAM_INT);
+                $stmtReg->bindParam(3, $arrayUren['urenregulier'], PDO::PARAM_INT);
+                $stmtReg->bindParam(4, $arrayUren['begintijd'], PDO::PARAM_STR);
+                $stmtReg->bindParam(5, $arrayUren['eindtijd'], PDO::PARAM_STR);
+                $stmtReg->bindParam(6, $arrayUren['omschrijving'], PDO::PARAM_STR);
+                $stmtReg->execute();
+            }
+            if($arrayUren['ureninnovatief'] > 0){
+                $stmtInno = $conn->prepare("INSERT INTO uur (idMedewerker, idProject, urengewerkt, begintijd, eindtijd, omschrijving, innovatief) VALUES (?, ?, ?, ?, ?, ?, TRUE)");
+                $stmtInno->bindParam(1, $arrayUren['idMedewerker'], PDO::PARAM_INT);
+                $stmtInno->bindParam(2, $arrayUren['idProject'], PDO::PARAM_INT);
+                $stmtInno->bindParam(3, $arrayUren['ureninnovatief'], PDO::PARAM_INT);
+                $stmtInno->bindParam(4, $arrayUren['begintijd'], PDO::PARAM_STR);
+                $stmtInno->bindParam(5, $arrayUren['eindtijd'], PDO::PARAM_STR);
+                $stmtInno->bindParam(6, $arrayUren['omschrijving'], PDO::PARAM_STR);
+                $stmtInno->execute();
+            }
+            echo "true";
+        }else{
+            echo "false";
         }
-        $stmtReg->execute();
-
-
-        print_r($arrayUren);
-
     }
     // Updates the record in `uur` tabel
     // foreach element in param array

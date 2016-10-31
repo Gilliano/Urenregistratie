@@ -151,7 +151,11 @@ function submitForms(){
             url: "test.php",
             success: function(data)
             {
-                console.log(data);
+                if(~data.indexOf("true")){
+                    console.log('true');
+                }else{
+                    console.log('false');
+                }
             }
         });
     });
