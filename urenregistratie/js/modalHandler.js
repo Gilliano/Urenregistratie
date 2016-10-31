@@ -9,7 +9,11 @@ var valMedewerker = [];
 //check if any input is changed.
 
 $("#teamMedewerker").on("change paste keyup", function() {
-    setDivForEachMedewerker();
+    // fill the array
+    array[1] = $("#teamProject option:selected").text();
+    array[9] = $("#teamProject option:selected").val();
+    setValuesOnWeb();
+    //push
 });
 $("#teamProject").on("change paste keyup", function() {
     // fill the array
