@@ -66,6 +66,7 @@
 <?php require_once("../main/php/footer.php"); ?>
 <script src="js/switch-div.js"></script>
 <script src="js/buttonHandles.js"></script>
+<script src="js/projectTrigger.js"></script>
 <!-- Menu Toggle Script -->
 <script>
     $("#menu-toggle").click(function (e) {
