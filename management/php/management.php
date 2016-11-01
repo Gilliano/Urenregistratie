@@ -36,8 +36,10 @@ function projecten()
     foreach ($projecten as $project) {
 
         $table .= "<tr>";
+        $table .= "<td style='display: none'>" . $project['idProject'] . "</td>";
 
         $table .= "<td>" . $project['projectnaam'] . "</td>";
+        $table .= "<td style='display: none'>" . $project['verwijderd'] . "</td>";
         if ($project['verwijderd'] == 0) {
             $table .= '<td>Niet verwijderd</td>';
         } else {
@@ -45,7 +47,9 @@ function projecten()
         }
         //$table .= '<td><input type="hidden" value=\'" . $project[\'idProject\'] . "\'></td>';
 
-        $table .= "<td><a href='php/toggleProject.php?projectid=" . $project['idProject'] . "&delete=". $project['verwijderd'] ."' type='submit' name='project_toggle' class='btn btn-default'>toggle status</a></td>";
+        //$table .= "<td><a href='php/toggleProject.php?projectid=" . $project['idProject'] . "&delete=". $project['verwijderd'] ."' type='submit' name='project_toggle' class='btn btn-default'>toggle status</a></td>";
+        $table .= "<td><button type='submit' name='project_wijzig' value='" . $project['idProject'] . "' class='btn btn-default' data-toggle='modal' data-target='#myProject'>Wijzig</button> </td>";
+
         $table .= '</tr>';
 
 
@@ -54,11 +58,7 @@ function projecten()
     return $table;
 }
 
-function toggleProject() {
-    if(isset($_GET['projectid'])) {
-        echo $_GET['projectid'];
-    }
-}
+
 
 function registerOtherUser() {
     if(isset($_POST['registreren'])){

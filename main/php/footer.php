@@ -11,6 +11,10 @@
 <!--Bootstrap-->
 <script src="../main/js/bootstrap.min.js"></script>
 <script src="../main/js/npm.js"></script>
+<script src="../main/js/bootstrap-checkbox.min.js"></script>
+<script>
+    $(':checkbox').checkboxpicker();
+</script>
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>

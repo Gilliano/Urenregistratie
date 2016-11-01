@@ -52,37 +52,6 @@ class projectManager
 
         return $projectID;
     }
-
-    public static function toggleProjectFromID($projectId, $delete) {
-        $conn = database::connect();
-
-        if($delete == 0) {
-            $deletetoggle = 1;
-        } else {
-            $deletetoggle = 0;
-        }
-
-        echo $deletetoggle;
-
-        try {
-            $updateUser = " UPDATE project
-                                SET
-                                verwijderd=?
-                                WHERE idProject=?";
-            $stmt       = $conn->prepare($updateUser);
-            $stmt->bindParam(1, $deletetoggle);
-            $stmt->bindParam(2, $projectId);
-            $stmt->execute();
-
-            header('Location: ../?page=projecten');
-            return NULL;
-        }
-        catch (PDOException $e) {
-            return $e->getMessage();
-        }
-
-    }
-
     // TODO: Function to get all projects that match userID
 }
 

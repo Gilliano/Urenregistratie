@@ -124,3 +124,29 @@ function saveUurRecord($params)
 function wijzigGebruiker($params) {
     echo json_encode(userManager::userChange($params));
 }
+
+function updateProject($params) {
+    $conn = database::connect();
+    try {
+        $updateUser = " UPDATE project
+                                SET
+                                projectnaam=?,
+                                verwijderd=?
+                                WHERE idProject=?";
+        $stmt       = $conn->prepare($updateUser);
+        $stmt->bindParam(1, $params['title']);
+        $stmt->bindParam(2, $params['done']);
+        $stmt->bindParam(3, $params['id']);
+        $stmt->execute();
+
+        header('Location: ../?page=projecten');
+        echo "succes";
+    }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+function allProjects() {
+    echo json_encode(projectManager::getAllProjects());
+}
