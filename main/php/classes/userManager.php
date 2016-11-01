@@ -328,7 +328,7 @@ class userManager
         $hash = userManager::tokenHash($email);
         $naam = userManager::getNaam($email);
         userManager::tokenAanmaken($email,$hash);
-
+        //
         $herstelLink = $_SERVER['SERVER_NAME']."/herstellen?id={$hash}&email={$email}";
 
         $mail = new PHPMailer(); // create a new object
