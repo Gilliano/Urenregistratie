@@ -18,6 +18,7 @@
     $alleMedewerkers = sizeof($allUsers);
 
     $date = date("Y-m-d");
+    //lol
     ?>
 
     <body>
