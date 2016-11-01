@@ -60,3 +60,31 @@ function toggleProject() {
     }
 }
 
+function registerOtherUser() {
+    if(isset($_POST['registreren'])){
+
+
+        if(userManager::emailBestaatAl($_POST['remail']."@branchonline.nl") === true){
+            $error = 'de ingevoerde email adress bestaat al';
+        }
+        else if($_POST['rpassword'] != $_POST['repassword']){
+            $error = 'uw wachtwoorden komen niet overeen';
+        }
+        else if(strlen($_POST['rpassword']) < 3 || strlen($_POST['repassword']) < 3){
+            $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
+        }
+        else if($_POST['rpassword'] == $_POST['repassword']){
+            userManager::registreren($_POST['voornaam'],$_POST['tussenvoegsel'],$_POST['achternaam'],$_POST['remail'],$_POST['rpassword']);
+            $voornaam = "";
+            $tussenvoegsel = "";
+            $achternaam = "";
+            $remail = "";
+        }
+
+        if(!empty($error)){
+            $error = userManager::errorMessage($error);
+
+        }
+    }
+}
+
