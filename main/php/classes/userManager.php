@@ -329,7 +329,7 @@ class userManager
         $naam = userManager::getNaam($email);
         userManager::tokenAanmaken($email,$hash);
 
-        $herstelLink = "localhost/project/herstellen?id={$hash}&email={$email}";
+        $herstelLink = $_SERVER['SERVER_NAME']."/herstellen?id={$hash}&email={$email}";
 
         $mail = new PHPMailer(); // create a new object
         $mail->IsSMTP(); // enable SMTP
