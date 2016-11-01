@@ -74,9 +74,9 @@ $("#save_button_project").on("click", function (event) {
             htmlList += "<td>" + item.projectnaam + "</td>";
             htmlList += "<td style='display: none'>" + item.verwijderd + "</td>";
             if(item.verwijderd == 0) {
-                htmlList += "<td>Niet klaar</td>";
+                htmlList += "<td>Niet afgerong</td>";
             } else {
-                htmlList += "<td>Wel klaar</td>";
+                htmlList += "<td>Afgerond</td>";
             }
             htmlList += "<td><button type='submit' name='project_wijzig' value='" + item.idProject + "' class='btn btn-default' data-toggle='modal' data-target='#myProject'>Wijzig</button> </td>";
             htmlList += "</tr>";

@@ -41,9 +41,9 @@ function projecten()
         $table .= "<td>" . $project['projectnaam'] . "</td>";
         $table .= "<td style='display: none'>" . $project['verwijderd'] . "</td>";
         if ($project['verwijderd'] == 0) {
-            $table .= '<td>Niet verwijderd</td>';
+            $table .= '<td>Niet afgerond</td>';
         } else {
-            $table .= '<td>Wel verwijderd</td>';
+            $table .= '<td>Afgerond</td>';
         }
         //$table .= '<td><input type="hidden" value=\'" . $project[\'idProject\'] . "\'></td>';
 
