@@ -6,12 +6,13 @@
          if(isset($_POST['herstellen'])){
          	$message = '<div class="alert alert-success">
             u heeft <strong>een email</strong> ontvangen van ons waardoor u uw wachtwoord kunt veranderen. 
-            Bekijk eventueel uw spam. Mocht de email niet zijn ontvangen probeer het opnieuw.
+            Bekijk eventueel uw spam. Mocht de email <strong>niet zijn ontvangen</strong> probeer het opnieuw.
             </div>';
          	if(userManager::emailBestaatAl($_POST['remail'])){
          		userManager::verzendMail($_POST['remail']);
          	}
          	else{
+
          	}
 
 
@@ -19,7 +20,6 @@
    
    
    ?>
-
 <!DOCTYPE html>
 <html>
    <head>
