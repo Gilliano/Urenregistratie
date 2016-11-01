@@ -74,7 +74,9 @@ $(document).ready(function(){
         console.log("Daterange picker complete!"); // DEBUG
 
         // Step 4: Fastselect
-        $(".multipleSelect").fastselect();
+        $(".multipleSelect").fastselect({
+            placeholder: "Kies extra filters"
+        });
 
         // Step 5: Descriptions list
         $.contextMenu({
@@ -129,26 +131,30 @@ $(document).ready(function(){
                         invalidFound = true;
                 });
 
-                // If multiple items are selected
-                // and they consist of 'validated' and 'not validated' items
-                // then the option you get is "Goedkeuren"
-                if ($("#description_list :selected").length > 1 && (validFound || invalidFound)) {
-                    if (validFound && !invalidFound)
-                        options.items.invalidate = {name: "Afkeuren"};
-                    else if(!validFound && invalidFound)
-                        options.items.validate = {name: "Goedkeuren"};
-                    else if(validFound && invalidFound)
-                        options.items.validate = {name: "Goedkeuren"};
-                }
-                else{
-                    if ($("#description_list :selected").hasClass("validated"))
-                        options.items.invalidate = {name: "Afkeuren"};
-                    else
-                        options.items.validate = {name: "Goedkeuren"};
+                if(userrole !== "medewerker")
+                {
+                    // If multiple items are selected
+                    // and they consist of 'validated' and 'not validated' items
+                    // then the option you get is "Goedkeuren"
+                    if ($("#description_list :selected").length > 1 && (validFound || invalidFound)) {
+                        if (validFound && !invalidFound)
+                            options.items.invalidate = {name: "Afkeuren"};
+                        else if(!validFound && invalidFound)
+                            options.items.validate = {name: "Goedkeuren"};
+                        else if(validFound && invalidFound)
+                            options.items.validate = {name: "Goedkeuren"};
+                    }
+                    else{
+                        if ($("#description_list :selected").hasClass("validated"))
+                            options.items.invalidate = {name: "Afkeuren"};
+                        else
+                            options.items.validate = {name: "Goedkeuren"};
+                    }
+
+                    options.items.log = {name: "Log"}; // DEBUG: Logs current item info in console
                 }
 
-                options.items.view = {name: "Bekijken", disabled: $("#description_list :selected").length>1 ? true : false}; // TODO: Show modal
-                options.items.log = {name: "Log"}; // DEBUG: Logs current item info in console
+                options.items.view = {name: "Bekijken", disabled: $("#description_list :selected").length>1 ? true : false};
                 options.items.sep1 = "---------";
                 options.items.cancel = {name: "Cancel"};
 
@@ -156,6 +162,10 @@ $(document).ready(function(){
             }
         });
         console.log("Context menu complete!"); // DEBUG
+
+        // Disable save button if not admin
+        if(userrole !== "admin")
+            $("#save_button").prop('disabled', true);
 
         $("#filter_loader").parent().remove();
         $("#filter_row").fadeIn();
@@ -218,6 +228,10 @@ function viewEditModal(selectedItem){
     });
 
     $("#edit_modal").find(".modal-body").html(modalHtml);
+
+    // Disable the 'change' button
+    if(userrole === "medewerker")
+        $("#edit_modal_changeButton").prop(disabled, true);
 
     // Setup daterangepicker for the 'begintijd' and 'eindtijd'
     $(".edit_modal_datetime").daterangepicker({
