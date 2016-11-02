@@ -9,6 +9,8 @@
 
 
     ?>
+    <!-- Date Range picker -->
+    <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
     <!-- Custom CSS -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
     <link href="css/management.css" rel="stylesheet">
@@ -67,12 +69,20 @@
 <script src="js/switch-div.js"></script>
 <script src="js/buttonHandles.js"></script>
 <script src="js/projectTrigger.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/daterangepicker.js"></script>
+<script type="text/javascript" src="js/getHours.js"></script>
+<script type="text/javascript" src="js/deleteHour.js"></script>
 <!-- Menu Toggle Script -->
 <script>
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
+</script>
+<!-- actived date range picker -->
+<script>
+    $('input[name="daterange"]').daterangepicker();
 </script>
 
 <!-- gebruikers inladen-->

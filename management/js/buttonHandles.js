@@ -99,6 +99,4 @@ $("#save_button").on("click", function (event) {
         // location.reload();
 
     });
-    //ajax object  maken
-
 });

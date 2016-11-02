@@ -150,3 +150,21 @@ function updateProject($params) {
 function allProjects() {
     echo json_encode(projectManager::getAllProjects());
 }
+
+function getAllHoursSimple($params) {
+    $conn = database::connect();
+    $stmt = $conn->prepare("SELECT * FROM uur WHERE begintijd >=? AND begintijd >=?");
+    $stmt->bindParam(1, $params['start']);
+    $stmt->bindParam(2, $params['end']);
+    $stmt->execute();
+    $records = $stmt->fetchAll();
+
+    echo json_encode($records);
+}
+
+function deleteHourByID($params) {
+    $conn = database::connect();
+    $stmt = $conn->prepare("DELETE FROM uur WHERE idUur=?");
+    $stmt->bindParam(1, $params['idHour']);
+    $stmt->execute();
+}
