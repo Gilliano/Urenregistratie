@@ -45,9 +45,6 @@ function projecten()
         } else {
             $table .= '<td>Afgerond</td>';
         }
-        //$table .= '<td><input type="hidden" value=\'" . $project[\'idProject\'] . "\'></td>';
-
-        //$table .= "<td><a href='php/toggleProject.php?projectid=" . $project['idProject'] . "&delete=". $project['verwijderd'] ."' type='submit' name='project_toggle' class='btn btn-default'>toggle status</a></td>";
         $table .= "<td><button type='submit' name='project_wijzig' value='" . $project['idProject'] . "' class='btn btn-default' data-toggle='modal' data-target='#myProject'>Wijzig</button> </td>";
 
         $table .= '</tr>';

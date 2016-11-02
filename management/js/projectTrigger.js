@@ -74,7 +74,7 @@ $("#save_button_project").on("click", function (event) {
             htmlList += "<td>" + item.projectnaam + "</td>";
             htmlList += "<td style='display: none'>" + item.verwijderd + "</td>";
             if(item.verwijderd == 0) {
-                htmlList += "<td>Niet afgerong</td>";
+                htmlList += "<td>Niet afgerond</td>";
             } else {
                 htmlList += "<td>Afgerond</td>";
             }
