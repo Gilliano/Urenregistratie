@@ -44,3 +44,7 @@
     text-align: center;
     margin-top: 10px;
 }
+
+.ugly_fix_checkbox div:nth-of-type(2) {
+    display: none;
+}

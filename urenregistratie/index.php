@@ -26,7 +26,7 @@
     ?>
     <div class="container">
         <div class="col-md-12 switch">
-            <p>
+            <p class="ugly_fix_checkbox">
                 <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
             </p>
         </div>
