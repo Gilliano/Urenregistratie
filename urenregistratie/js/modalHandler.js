@@ -90,6 +90,7 @@ function setValuesOnWeb() {
     if (array[8] == null){
         array[8] = $('#teamDatum').val();
     }
+    console.log(array[2]);
     setDivForEachMedewerker();
     $(".project").val(array[1]);
     $(".datum").val(array[8]);
@@ -104,36 +105,11 @@ function setValuesOnWeb() {
     $("#teamOpslaan").show();
 }
 
-function timeSplit() {
-    $('#teamMedewerker :selected').each(function(i) {
-        var Btijd = "#begintijd" + i;
-        var Etijd = "#eindtijd" + i;
-
-        if($(Btijd).val() != "" && $(Etijd).val() != "") {
-            var begintijd = urenAfronden($(Btijd).val());
-            $(Btijd).val(begintijd);
-            var eindtijd = urenAfronden($(Etijd).val());
-            $(Etijd).val(eindtijd);
-
-            var totaal = urenBerekenen($(Btijd).val(), $(Etijd).val());
-            totaal = totaal.toString();
-            totaal = totaal.replace(".", ",");
-            var uren = "#urentotaal" + i;
-            $(uren).val(totaal);
-            var regulier = "#urenregulier" + i;
-            var ureninnovatief = innovatieveUren(totaal, $(regulier).val());
-            var innovatief = "#ureninnovatief" + i;
-            $(innovatief).val(ureninnovatief);
-        }
-    });
-}
-
 function setDivForEachMedewerker(){
     var newHTML = [];
 
 
     $('#teamMedewerker :selected').each(function(i, selected){
-
         if(array.length < 5){
             headerData = $(selected).text();
         }else{
@@ -208,12 +184,38 @@ function submitForms(){
             success: function(data)
             {
                 if(~data.indexOf("true")){
-                    //console.log('true');
+                    $("#errorMessage").html("<div class='alert alert-success'>" +
+                        "Het is gelukt, alle uren zijn opgeslagen!</div>");
                 }else{
-                    //console.log('false');
+                    $("#errorMessage").html("<div class='alert alert-danger'>" +
+                        "Er is iets mis gegaan bij het opslaan van de gegevens.</div>");
                 }
             }
         });
+    });
+}
+
+function timeSplit() {
+    $('#teamMedewerker :selected').each(function(i) {
+        var Btijd = "#begintijd" + i;
+        var Etijd = "#eindtijd" + i;
+
+        if($(Btijd).val() != "" && $(Etijd).val() != "") {
+            var begintijd = urenAfronden($(Btijd).val());
+            $(Btijd).val(begintijd);
+            var eindtijd = urenAfronden($(Etijd).val());
+            $(Etijd).val(eindtijd);
+
+            var totaal = urenBerekenen($(Btijd).val(), $(Etijd).val());
+            totaal = totaal.toString();
+            totaal = totaal.replace(".", ",");
+            var uren = "#urentotaal" + i;
+            $(uren).val(totaal);
+            var regulier = "#urenregulier" + i;
+            var ureninnovatief = innovatieveUren(totaal, $(regulier).val());
+            var innovatief = "#ureninnovatief" + i;
+            $(innovatief).val(ureninnovatief);
+        }
     });
 }
 
