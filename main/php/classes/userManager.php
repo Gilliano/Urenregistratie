@@ -238,7 +238,6 @@ class userManager
         $conn = database::connect();
         
         $encrypted_password = sha1($password);
-        $email              = $email . '@branchonline.nl';
         
         if (userManager::emailBestaatAl($email)) {
             return false;
@@ -363,6 +362,38 @@ class userManager
         $mail->SetFrom("smtpserver088@gmail.com");
         $mail->Subject = "Uw wachtwoord herstellen Branchonline";
         $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik {$herstelLink} om uw wachtwoord te herstellen. <br/><br/>Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
+
+        $mail->AddAddress($email);
+
+        //dit moet erbij nders werkt het niet
+         if(!$mail->Send()) {
+         } else {
+         }
+
+    }
+    public static function verzendVerificatieMail($email){
+        require('phpmailer/PHPMailerAutoload.php');
+
+        $hash = userManager::tokenHash($email);
+        $naam = userManager::getNaam($email);
+        userManager::tokenAanmaken($email,$hash);
+
+        $url = userManager::url()."bevestigen?id={$hash}&email={$email}";
+        $herstelLink = '<a href="'.$url.'">hier</a>';
+
+        $mail = new PHPMailer(); // create a new object
+        $mail->IsSMTP(); // enable SMTP
+        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->SMTPAuth = true; // authentication enabled
+        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 465; // or 587
+        $mail->IsHTML(true);
+        $mail->Username = "smtpserver088@gmail.com";
+        $mail->Password = "Mailserver88";
+        $mail->SetFrom("smtpserver088@gmail.com");
+        $mail->Subject = "Uw account bevestigen Branchonline";
+        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> Klik {$herstelLink} om uw account te bevestigen. <br/><br/>Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
 
         $mail->AddAddress($email);
 
