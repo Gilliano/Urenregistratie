@@ -348,7 +348,7 @@ class userManager
         $mail->Password = "Mailserver88";
         $mail->SetFrom("smtpserver088@gmail.com");
         $mail->Subject = "Uw wachtwoord herstellen Branchonline";
-        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik {$herstelLink} hieronder om uw wachtwoord te herstellen. <br/><br/>Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
+        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik {$herstelLink} om uw wachtwoord te herstellen. <br/><br/>Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
 
         $mail->AddAddress($email);
 
