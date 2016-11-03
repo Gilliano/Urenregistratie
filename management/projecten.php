@@ -1,4 +1,5 @@
-<h1 style="font-family: 'Montserrat'">Projecten</h1>
+<h1 style="font-family: 'Montserrat'">Projecten <button type='submit' name='project_aanmaken' class='btn btn-default' data-toggle='modal' data-target='#addProject'>Project toevoegen</button></h1>
+
 
 <div class="wijzigen div-1">
     <table id="allProjects" class="gebruikers_wijzigen table">
@@ -43,5 +44,32 @@
             <div class="modal-footer">
                 <input type="submit" id="save_button_project" class="btn btn-default" value="save">
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addProject" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">wijzig</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="add_project">
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project naam</label>
+                        <input type="text" name="add_project_naam" placeholder="project naam" class="form-control add_project_naam">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button name="add_project" class="btn btn-default">Aanmaken</button>
+            </div>
+        </div>
     </div>
 </div>

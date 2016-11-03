@@ -1,7 +1,6 @@
 $(function() {
     $.getScript('../main/js/ajax.js', function () {
         tableHoursBetweenData();
-        console.log('hello');
     });
 });
 
