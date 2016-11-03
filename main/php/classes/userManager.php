@@ -26,7 +26,6 @@ class userManager
                                 tussenvoegsels=?, 
                                 achternaam=?, 
                                 email=?, 
-                                validated=?, 
                                 rol=?,
                                 state=?
                                 WHERE idMedewerker=?";
@@ -35,10 +34,9 @@ class userManager
             $stmt->bindParam(2, $params['insertion']);
             $stmt->bindParam(3, $params['lastname']);
             $stmt->bindParam(4, $params['email']);
-            $stmt->bindParam(5, $params['valide']);
-            $stmt->bindParam(6, $params['rol']);
-            $stmt->bindParam(7, $params['state']);
-            $stmt->bindParam(8, $params['id']);
+            $stmt->bindParam(5, $params['rol']);
+            $stmt->bindParam(6, $params['state']);
+            $stmt->bindParam(7, $params['id']);
             $stmt->execute();
             
             return self::getAllUsers();

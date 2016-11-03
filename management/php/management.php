@@ -18,7 +18,6 @@ function users()
         $table .= '<td>' . $user['tussenvoegsels'] . '</td>';
         $table .= '<td>' . $user['achternaam'] . '</td>';
         $table .= '<td>' . $user['email'] . '</td>';
-        $table .= '<td>' . $user['validated'] . '</td>';
         $table .= '<td>' . $user['rol'] . '</td>';
         $table .= '<td>' . $user['state'] . '</td>';
         $table .= "<td> <button type='submit' id='gebruiker_wijzig' name='gebruiker_wijzig' value='" . $user['idMedewerker'] . "' class='btn btn-default' data-toggle='modal' data-target='#myModal'>Wijzig</button> </td>";

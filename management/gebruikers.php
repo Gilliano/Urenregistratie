@@ -31,9 +31,6 @@ registerOtherUser();
             <h4>Email</h4>
          </td>
          <td>
-            <h4>Valide</h4>
-         </td>
-         <td>
             <h4>Rol</h4>
          </td>
          <td>
@@ -78,18 +75,19 @@ registerOtherUser();
                   </div>
 
                   <div class="form-group">
-                     <label for="recipient-name" class="form-control-label">Valid</label>
-                     <input type="text" name="valid" placeholder="Email" class="form-control valid">
+                     <label for="sel1">Rol</label>
+                     <select class="form-control rol">
+                        <option value="admin">admin</option>
+                        <option value="medewerker">medewerker</option>
+                     </select>
                   </div>
 
                   <div class="form-group">
-                     <label for="recipient-name" class="form-control-label">Rol</label>
-                     <input type="text" name="rol" placeholder="Rol" class="form-control rol">
-                  </div>
-
-                  <div class="form-group">
-                     <label for="recipient-name" class="form-control-label">Status</label>
-                     <input type="text" name="status" placeholder="Status" class="form-control status">
+                     <label for="sel1">Status</label>
+                     <select class="form-control status">
+                        <option value="enabled">enabled</option>
+                        <option value="disabled">disabled</option>
+                     </select>
                   </div>
                </form>
             </div>

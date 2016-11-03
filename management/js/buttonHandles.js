@@ -15,6 +15,8 @@ function wijzig_button(caller){
     //remove the last item from the array (because it gives us an <button>
     array_text.splice(array_text.length - 1, 1);
 
+    console.log(array_text);
+
     //for each array value should be set in the new model that is getting opened.
     array_text.forEach(function () {
 
@@ -24,15 +26,17 @@ function wijzig_button(caller){
         $('.tussenvoegsel').val(array_text[2]);
         $('.lastname').val(array_text[3]);
         $('.email').val(array_text[4]);
-        $('.valid').val(array_text[5]);
-        $('.rol').val(array_text[6]);
-        $('.status').val(array_text[7]);
+        $('.rol').val(array_text[5]);
+        $('.status').val(array_text[6]);
     })
 }
 
 $("#save_button").on("click", function (event) {
     //get an array from the data from the table
     var data = $('#gebruiker_wijzig_form').serializeArray('firstname');
+    //
+    // console.log(data);
+    // console.log($( ".rol" ).val());
 
     $.getScript('../main/js/ajax.js', function () {
 
@@ -42,9 +46,8 @@ $("#save_button").on("click", function (event) {
         var insertion = data[2].value;
         var lastname = data[3].value;
         var email = data[4].value;
-        var valide = data[5].value;
-        var rol = data[6].value;
-        var state = data[7].value;
+        var rol = $( ".rol" ).val();
+        var state = $( ".status" ).val();
 
 
         var ajaxobj = new AjaxObj('wijzigGebruiker',
@@ -54,7 +57,6 @@ $("#save_button").on("click", function (event) {
                 'insertion': insertion,
                 'lastname': lastname,
                 'email': email,
-                'valide': valide,
                 'rol': rol,
                 'state': state
             }, false, '');
@@ -71,7 +73,6 @@ $("#save_button").on("click", function (event) {
         htmlList += "<td><h4>Tussenvoegsel</h4></td>";
         htmlList += "<td><h4>Achternaam</h4></td>";
         htmlList += "<td><h4>Email</h4></td>";
-        htmlList += "<td><h4>Valide</h4></td>";
         htmlList += "<td><h4>Rol</h4></td>";
         htmlList += "<td><h4>Status</h4></td>";
         htmlList += "</t>";
@@ -84,7 +85,6 @@ $("#save_button").on("click", function (event) {
             htmlList += "<td>" + item.tussenvoegsels + "</td>";
             htmlList += "<td>" + item.achternaam + "</td>";
             htmlList += "<td>" + item.email + "</td>";
-            htmlList += "<td>" + item.validated + "</td>";
             htmlList += "<td>" + item.rol + "</td>";
             htmlList += "<td>" + item.state + "</td>";
             htmlList += "<td><button type='submit' id='gebruiker_wijzig' name='gebruiker_wijzig' value='" + item.idMedewerker + "' class='btn btn-default' data-toggle='modal' data-target='#myModal'>Wijzig</button> </td>";
