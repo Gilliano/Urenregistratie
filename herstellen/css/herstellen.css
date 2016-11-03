@@ -11,7 +11,7 @@ over-ride "Weak" message, show font in dark grey
 
 /*
 Reference:
-http://www.bootstrapzen.com/item/135/simple-login-form-logo/
+http://www.bootstrapzen.com/item/135/simple-herstellen-form-logo/
 */
 
 * {
@@ -38,11 +38,11 @@ body {
     background-size: cover;
 }
 
-.login-form {
+.form {
     margin-top: 60px;
 }
 
-form[role=login] {
+form[role=herstellen] {
     color: #5d5d5d;
     background: #f2f2f2;
     padding: 26px;
@@ -50,17 +50,17 @@ form[role=login] {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
 }
-form[role=login] img {
+form[role=herstellen] img {
     display: block;
     margin: 0 auto;
     margin-bottom: 35px;
 }
-form[role=login] input,
-form[role=login] button {
+form[role=herstellen] input,
+form[role=herstellen] button {
     font-size: 18px;
     margin: 16px 0;
 }
-form[role=login] > div {
+form[role=herstellen] > div {
     text-align: center;
 }
 
@@ -74,7 +74,7 @@ form[role=login] > div {
 }
 
 /* Custom CSS By Niels */
-.loginLogo {
+.herstellenLogo {
     height: 100px;
 }
 

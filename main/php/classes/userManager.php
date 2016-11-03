@@ -47,15 +47,12 @@ class userManager
     
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
-    //@TODO: fix this function
-    public static function areYouLoggedIn()
-    {
-        // $url = $_SERVER['REQUEST_URI'];
-        // if(!strpos($url, 'login' || !strpos($url, 'register'))) {
-        //     if(!isset($_SESSION['idMedewerker']) || empty($_SESSION['idMedewerker'])) {
-        //         header("location: ../login/");
-        //     }
-        // }
+    public static function areYouLoggedIn(){
+        if (strpos($_SERVER['REQUEST_URI'], 'login') === false && strpos($_SERVER['REQUEST_URI'], 'registreren') === false && strpos($_SERVER['REQUEST_URI'], 'vergeten') === false) {
+            if(!isset($_SESSION['idMedewerker']) && empty($_SESSION['idMedewerker'] && $_SERVER['REQUEST_URI'])) {
+                header("location: ../login");
+            }
+        }
     }
     
     
@@ -224,7 +221,7 @@ class userManager
             return false;
         }
         
-        $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord, disabled) VALUES (?,?,?,?,?,'disabled')";
+        $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord) VALUES (?,?,?,?,?)";
         $stmt    = $conn->prepare($adduser);
         $stmt->bindParam(1, $voornaam);
         $stmt->bindParam(2, $tussenvoegsel);
@@ -238,6 +235,12 @@ class userManager
     {
         if (isset($_SESSION['idMedewerker'])) {
             header('Location: ../urenregistratie');
+        }
+    }
+    public static function nietIngelogd()
+    {
+        if (!isset($_SESSION['idMedewerker'])) {
+            header('Location: ../login');
         }
     }
     public static function wachtwoordHerstellen($email,$wachtwoord){
@@ -318,14 +321,23 @@ class userManager
     public static function tokenHash($email){
         return sha1(sha1(rand()).$email);
     }
+
+    function url(){
+      return sprintf(
+        "%s://%s%s",
+        isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+        $_SERVER['SERVER_NAME'],'/'
+      );
+    }
     public static function verzendMail($email){
         require('phpmailer/PHPMailerAutoload.php');
 
         $hash = userManager::tokenHash($email);
         $naam = userManager::getNaam($email);
         userManager::tokenAanmaken($email,$hash);
-        //
-        $herstelLink = $_SERVER['SERVER_NAME']."/herstellen?id={$hash}&email={$email}";
+
+        $url = userManager::url()."herstellen?id={$hash}&email={$email}";
+        $herstelLink = '<a href="'.$url.'">hier</a>';
 
         $mail = new PHPMailer(); // create a new object
         $mail->IsSMTP(); // enable SMTP
@@ -339,7 +351,7 @@ class userManager
         $mail->Password = "Mailserver88";
         $mail->SetFrom("smtpserver088@gmail.com");
         $mail->Subject = "Uw wachtwoord herstellen Branchonline";
-        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik op de link hieronder om uw wachtwoord te herstellen. <br/><br/> {$herstelLink} <br/><br/> Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
+        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik {$herstelLink} om uw wachtwoord te herstellen. <br/><br/>Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
 
         $mail->AddAddress($email);
 
