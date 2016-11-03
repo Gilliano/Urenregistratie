@@ -8,8 +8,12 @@ if(isset($_POST['email'],$_POST['password'],$_POST['login'])){
    $email = !empty($_POST['email']) ? $_POST['email'] : '';
    $password = !empty($_POST['password']) ? $_POST['password'] : '';
    userManager::login($email,$password);
+
    if(userManager::login($email,$password) == false){
-       $error = userManager::errorMessage("email en wachtwoord komen niet overeen.");
+       $error = userManager::Message("email en wachtwoord komen niet overeen.",'danger');
+   }
+   if(userManager::login($email,$password) == 'disabled'){
+       $error = userManager::Message("uw account moet geverifieerd worden om in te kunnen loggen", 'warning');
    }
 }
 ?>
