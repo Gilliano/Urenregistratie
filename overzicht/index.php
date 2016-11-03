@@ -18,7 +18,7 @@
         <!-- Fastselect -->
         <link rel="stylesheet" type="text/css" href="css/fastselect.min.css">
         <!-- Overizcht -->
-        <link href="css/overzicht.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/overzicht.css">
     </head>
     <body>
         <header>
@@ -52,7 +52,7 @@
                     <!-- Step 1: Users list -->
                     <div class="col-sm-3 col-sm-offset-2">
                         <label for="users_list">Gebruikers</label><br>
-                        <select id="users_list" class="selectpicker" data-live-search="true" multiple>
+                        <select id="users_list" class="selectpicker" data-live-search=<?php echo $_SESSION['rol']==="medewerker"?"false":"true"?> data-actions-box=<?php echo $_SESSION['rol']==="medewerker"?"false":"true"?> multiple>
                             <!-- <option>Loading...</option> -->
                         </select>
                     </div>
@@ -60,7 +60,7 @@
                     <!-- Step 2: Projects list -->
                     <div class="col-sm-3">
                         <label for="projects_list">Projecten</label><br>
-                        <select id="projects_list" class="selectpicker" data-live-search="true" multiple>
+                        <select id="projects_list" class="selectpicker" data-live-search="true" data-actions-box="true" multiple>
                             <!-- <option>Loading...</option> -->
                         </select>
                     </div>
