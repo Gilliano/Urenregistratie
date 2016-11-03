@@ -83,7 +83,7 @@ class userManager
     {
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT * FROM medewerker");
+        $stmt = $conn->prepare("SELECT * FROM medewerker ORDER BY voornaam");
         $stmt->execute();
         $records = $stmt->fetchAll();
         
