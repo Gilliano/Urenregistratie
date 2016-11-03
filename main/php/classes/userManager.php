@@ -231,18 +231,6 @@ class userManager
         $stmt->execute();
     }
     
-    public static function alIngelogd()
-    {
-        if (isset($_SESSION['idMedewerker'])) {
-            header('Location: ../urenregistratie');
-        }
-    }
-    public static function nietIngelogd()
-    {
-        if (!isset($_SESSION['idMedewerker'])) {
-            header('Location: ../login');
-        }
-    }
     public static function wachtwoordHerstellen($email,$wachtwoord){
         $encrypted_password = sha1($wachtwoord);
         if(userManager::emailBestaatAl($email) && strlen($encrypted_password) == 40) {

@@ -1,17 +1,16 @@
-<?php session_start();
-   require_once '../main/php/head.php';
+<?php 
+session_start();
+require_once '../main/php/head.php';
    
-           userManager::alIngelogd();
-   
-           if(isset($_POST['email'],$_POST['password'],$_POST['login'])){
-               $email = !empty($_POST['email']) ? $_POST['email'] : '';
-               $password = !empty($_POST['password']) ? $_POST['password'] : '';
-               userManager::login($email,$password);
-               if(userManager::login($email,$password) == false){
-                   $error = userManager::errorMessage("email en wachtwoord komen niet overeen.");
-               }
-           }
-    ?>
+if(isset($_POST['email'],$_POST['password'],$_POST['login'])){
+   $email = !empty($_POST['email']) ? $_POST['email'] : '';
+   $password = !empty($_POST['password']) ? $_POST['password'] : '';
+   userManager::login($email,$password);
+   if(userManager::login($email,$password) == false){
+       $error = userManager::errorMessage("email en wachtwoord komen niet overeen.");
+   }
+}
+?>
 <!DOCTYPE html>
 <html>
    <head>

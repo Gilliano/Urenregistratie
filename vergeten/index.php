@@ -1,21 +1,19 @@
-<?php session_start();
-   require_once '../main/php/head.php';
-         userManager::alIngelogd();
+<?php 
+session_start();
+require_once '../main/php/head.php';
 
+if(isset($_POST['herstellen'])){
+	$message = '<div class="alert alert-success">
+   als dit email adres gebonden is aan een account in ons systeem, dan ontvangt u een email.
+   </div>';
 
-         if(isset($_POST['herstellen'])){
-         	$message = '<div class="alert alert-success">
-            als dit email adres gebonden is aan een account in ons systeem, dan ontvangt u een email.
-            </div>';
-         	if(userManager::emailBestaatAl($_POST['remail'])){
-         		userManager::verzendMail($_POST['remail']);
-         	}
-         	else{
+	if(userManager::emailBestaatAl($_POST['remail'])){
+		userManager::verzendMail($_POST['remail']);
+	}
+	else{
 
-         	}
-
-
-         }
+	}
+}
    
    
    ?>
