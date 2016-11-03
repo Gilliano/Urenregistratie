@@ -30,7 +30,7 @@ function users()
 
 function projecten()
 {
-    $projecten = projectManager::getAllProjects();
+    $projecten = projectManager::getAllProjectsStatusSort();
     $table = '';
     foreach ($projecten as $project) {
 

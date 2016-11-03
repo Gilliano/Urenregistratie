@@ -13,6 +13,18 @@ class projectManager
         
         return $records;
     }
+
+    public static function getAllProjectsStatusSort()
+    {
+        $records = [];
+        $conn = database::connect();
+        $stmt = $conn->prepare("SELECT * FROM project ORDER BY verwijderd");
+        $stmt->execute();
+        $records = $stmt->fetchAll();
+
+        return $records;
+    }
+
     // Returns all names from 'project' that isn't deleted.
     public static function getAllCurrentProjects()
     {
