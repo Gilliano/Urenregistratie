@@ -1,6 +1,7 @@
 $(function() {
     $.getScript('../main/js/ajax.js', function () {
         tableHoursBetweenData();
+        console.log('hello');
     });
 });
 
@@ -55,8 +56,8 @@ function tableHoursBetweenData() {
         ajaxobj.result.forEach(function (item) {
             htmlList += "<tr>";
             htmlList += "<td style='display: none;'>" + item.idUur + "</td>";
-            htmlList += "<td>" + item.idMedewerker + "</td>";
-            htmlList += "<td>" + item.idProject + "</td>";
+            htmlList += "<td>" + item.voornaam + " " + item.tussenvoegsels + " " + item.achternaam +"</td>";
+            htmlList += "<td>" + item.projectnaam + "</td>";
             htmlList += "<td>" + item.urengewerkt + "</td>";
             htmlList += "<td>" + item.begintijd + "</td>";
             htmlList += "<td>" + item.eindtijd + "</td>";

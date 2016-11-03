@@ -83,12 +83,12 @@ registerOtherUser();
                   </div>
 
                   <div class="form-group">
-                     <label for="recipient-name" class="form-control-label">Valid</label>
+                     <label for="recipient-name" class="form-control-label">Rol</label>
                      <input type="text" name="rol" placeholder="Rol" class="form-control rol">
                   </div>
 
                   <div class="form-group">
-                     <label for="recipient-name" class="form-control-label">Valid</label>
+                     <label for="recipient-name" class="form-control-label">Status</label>
                      <input type="text" name="status" placeholder="Status" class="form-control status">
                   </div>
                </form>
