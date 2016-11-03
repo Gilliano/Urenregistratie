@@ -26,7 +26,13 @@ $('input[name="mode"]').on('switchChange.bootstrapSwitch', function(event, state
 
 // Check if button is clicked
 $('#bevestigen').click(function () {
-    bevestigen = 1;
+    if(!$("#teamMedewerker").val() || !$("#teamProject").val() || !$("#teamDatum").val() || !$("#teamBegintijd").val() || !$("#teamEindtijd").val() || !$("#teamUrenregulier").val() || !$("#teamUreninnovatief").val() || !$("#teamUrentotaal").val() || !$("#teamOmschrijving").val()){
+        $("#errorMessage").html("<div class='alert alert-danger'>" +
+        "U bent iets vergeten in te vullen! </div>");
+    }else{
+        $("#errorMessage").html("");
+        bevestigen = 1;
+    }
 });
 // Switch the bootstrapswitch back to normal
 $('#modalFormulier').on('hide.bs.modal', function () {
