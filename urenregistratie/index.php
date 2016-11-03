@@ -62,23 +62,23 @@
                         </tr>
                             <tr>
                                 <td class="description">Begintijd</td>
-                                <td class="field"><input type="time" onblur="realTimeWaarde(); urenInnovatief()" name="begintijd" id="begintijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onblur="time(); realTimeWaarde(); urenInnovatief()" name="begintijd" id="begintijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Eindtijd</td>
-                                <td class="field"><input type="time" onblur="realTimeWaarde(); urenInnovatief()" name="eindtijd" id="eindtijd" step="1800" class="form-control" required/></td>
+                                <td class="field"><input type="time" onblur="time(); realTimeWaarde(); urenInnovatief()" name="eindtijd" id="eindtijd" step="1800" class="form-control" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Totaal aantal uren gewerkt</td>
-                                <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" class="form-control"/></td>
+                                <td class="field"><output readonly type="number" name="urentotaal" id="urentotaal" min="0.5" class="form-control"/></td>
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
-                                <td class="field"><input type="number" onkeyup="urenInnovatief()" id="urenregulier" name="urenregulier" class="form-control" required/></td>
+                                <td class="field"><input type="number" onchange="urenInnovatief()" id="urenregulier" name="urenregulier" class="form-control" step="0.5" min="0" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Innovatieve uren</td>
-                                <td class="field"><input type="number" step="any" id="ureninnovatief" name="ureninnovatief" class="form-control" readonly/></td>
+                                <td class="field"><input type="number" step="any" id="ureninnovatief" name="ureninnovatief" min="0" class="form-control" readonly/></td>
                             </tr>
                             <tr>
                                 <td class="description">Omschrijving van de uren</td>
@@ -147,11 +147,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde(); teamUrenInnovatief()" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="time(); realTimeWaarde(); teamUrenInnovatief()" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde(); teamUrenInnovatief()" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="time(); realTimeWaarde(); teamUrenInnovatief()" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
@@ -159,11 +159,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Reguliere uren</td>
-                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" onkeyup="teamUrenInnovatief()" class="form-control" required/></td>
+                                    <td class="veld"><input type="number" name="teamUrenregulier" id="teamUrenregulier" onchange="teamUrenInnovatief()" step="0.5" min="0" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Innovatieve uren</td>
-                                    <td class="field"><input type="number" name="teamUreninnovatief" id="teamUreninnovatief" class="form-control" readonly/></td>
+                                    <td class="field"><input type="number" name="teamUreninnovatief" id="teamUreninnovatief" min="0" step="any" class="form-control" readonly/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Omschrijving van de uren</td>

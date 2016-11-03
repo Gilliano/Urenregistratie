@@ -107,20 +107,24 @@ function setValuesOnWeb() {
 function timeSplit() {
     $('#teamMedewerker :selected').each(function(i) {
         var Btijd = "#begintijd" + i;
-        var begintijd = urenAfronden($(Btijd).val());
-        $(Btijd).val(begintijd);
         var Etijd = "#eindtijd" + i;
-        var eindtijd = urenAfronden($(Etijd).val());
-        $(Etijd).val(eindtijd);
-        var totaal = urenBerekenen($(Btijd).val(), $(Etijd).val());
-        totaal = totaal.toString();
-        totaal = totaal.replace(".",",");
-        var uren = "#urentotaal" + i;
-        $(uren).val(totaal);
-        var regulier = "#urenregulier" + i;
-        var ureninnovatief = innovatieveUren(totaal, $(regulier).val());
-        var innovatief = "#ureninnovatief" + i;
-        $(innovatief).val(ureninnovatief);
+
+        if($(Btijd).val() != "" && $(Etijd).val() != "") {
+            var begintijd = urenAfronden($(Btijd).val());
+            $(Btijd).val(begintijd);
+            var eindtijd = urenAfronden($(Etijd).val());
+            $(Etijd).val(eindtijd);
+
+            var totaal = urenBerekenen($(Btijd).val(), $(Etijd).val());
+            totaal = totaal.toString();
+            totaal = totaal.replace(".", ",");
+            var uren = "#urentotaal" + i;
+            $(uren).val(totaal);
+            var regulier = "#urenregulier" + i;
+            var ureninnovatief = innovatieveUren(totaal, $(regulier).val());
+            var innovatief = "#ureninnovatief" + i;
+            $(innovatief).val(ureninnovatief);
+        }
     });
 }
 
@@ -173,11 +177,11 @@ function setDivForEachMedewerker(){
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Reguliere uren</td>' +
-                                '<td class="veld"><input type="number" id="urenregulier' + i + '" name="urenregulier" onkeyup="timeSplit()" class="form-control urenregulier" required/></td>' +
+                                '<td class="veld"><input type="number" id="urenregulier' + i + '" name="urenregulier" onchange="timeSplit()" class="form-control urenregulier" step="0.5" min="0" required/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Innovatieve uren</td>' +
-                                '<td class="field"><input type="number" id="ureninnovatief' + i + '" name="ureninnovatief" class="form-control ureninnovatief" readonly/></td>' +
+                                '<td class="field"><input type="number" id="ureninnovatief' + i + '" name="ureninnovatief" class="form-control ureninnovatief" step="any" min="0" readonly/></td>' +
                             '</tr>' +
                             '<tr>' +
                                 '<td class="description">Omschrijving van de uren</td>' +
