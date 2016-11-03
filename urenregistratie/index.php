@@ -194,7 +194,7 @@
     <!-- Load hour calculating -->
     <script src="js/urenAfronden.js"></script>
 
-
+    <!-- voor firefox even snel geinstalleerd! -->
     <!-- cdn for modernizr, if you haven't included it already -->
     <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
     <!-- polyfiller file to detect and load polyfills -->
