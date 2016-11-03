@@ -48,7 +48,7 @@ class userManager
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
     public static function areYouLoggedIn(){
-        if (strpos($_SERVER['REQUEST_URI'], 'login') === false) {
+        if (strpos($_SERVER['REQUEST_URI'], 'login') === false && strpos($_SERVER['REQUEST_URI'], 'registreren') === false && strpos($_SERVER['REQUEST_URI'], 'vergeten') === false) {
             if(!isset($_SESSION['idMedewerker']) && empty($_SESSION['idMedewerker'] && $_SERVER['REQUEST_URI'])) {
                 header("location: ../login");
             }
