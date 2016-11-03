@@ -4,7 +4,10 @@ $voornaam = isset($_POST['voornaam']) ? $_POST['voornaam'] : '';
 $tussenvoegsel = isset($_POST['tussenvoegsel']) ? $_POST['tussenvoegsel'] : '';
 $achternaam = isset($_POST['achternaam']) ? $_POST['achternaam'] : '';
 $remail = isset($_POST['remail']) ? $_POST['remail'] : '';
-registerOtherUser();
+$check = registerOtherUser();
+echo $check;
+
+
 ?>
 <h1 style="font-family: 'Montserrat'">Gebruikers</h1>
 <td colspan="3" valign="top" class='tabbed-content-container ui-corner-all'>

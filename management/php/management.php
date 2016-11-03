@@ -78,7 +78,7 @@ function registerOtherUser() {
         }
 
         if(!empty($error)){
-            $error = userManager::Message($error,'danger');
+           return $error = userManager::Message($error,'danger');
 
         }
     }
