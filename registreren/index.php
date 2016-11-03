@@ -13,7 +13,7 @@ $remail = isset($_POST['remail']) ? $_POST['remail'] : '';
 
 //$email = 'm.belhaj_zakelijk@hotmail.com';
 
-$remail."@branchonline.nl";
+$email."@branchonline.nl";
 
 if(isset($_POST['registreren'])){
   if(userManager::emailBestaatAl($email) === true){
