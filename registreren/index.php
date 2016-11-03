@@ -1,4 +1,7 @@
 <?php session_start();
+require_once '../main/php/head.php';
+
+userManager::alIngelogd();
 
 //zorgt ervoor dat de waardes opgeslagen worden op de regisratie pagina 
 $voornaam = isset($_POST['voornaam']) ? $_POST['voornaam'] : '';
@@ -21,11 +24,12 @@ if(isset($_POST['registreren'])){
     $tussenvoegsel = "";
     $achternaam = "";
     $remail = "";
-    userManager::login($_POST['remail']."@branchonline.nl",$_POST['rpassword']);
+    $message = userManager::Message('uw account is succesvol aangemaakt. U hoeft nu alleen de email verificatie te accepteren om in te loggen','success');
+    //userManager::login($_POST['remail']."@branchonline.nl",$_POST['rpassword']);
   }
 
   if(!empty($error)){
-    $error = userManager::errorMessage($error);
+    $message = userManager::Message($error,'danger');
   }
 }
 
@@ -56,7 +60,7 @@ if(isset($_POST['registreren'])){
                      </div>
                      <input type="password" required name="rpassword" class="form-control input-lg" autocomplete="off" id="rpassword" placeholder="Wachtwoord"/>
                      <input type="password" required name="repassword" class="form-control input-lg" autocomplete="off" id="repassword" placeholder="Herhaal wachtwoord"/>
-                     <?php echo isset($error) ? $error : ""; ?>
+                     <?php echo isset($message) ? $message : ""; ?>
                      <button type="submit" name="registreren" class="btn btn-lg btn-primary btn-block">Registreer</button>
                      <div>
                         <p>klik <a href="../login">hier</a> om in te loggen.</p>

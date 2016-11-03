@@ -47,11 +47,31 @@ class userManager
     
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
-    public static function areYouLoggedIn(){
-        if (strpos($_SERVER['REQUEST_URI'], 'login') === false && strpos($_SERVER['REQUEST_URI'], 'registreren') === false && strpos($_SERVER['REQUEST_URI'], 'vergeten') === false && strpos($_SERVER['REQUEST_URI'], 'herstellen') === false) {
-            if(!isset($_SESSION['idMedewerker']) && empty($_SESSION['idMedewerker'] && $_SERVER['REQUEST_URI'])) {
-                header("location: ../login");
-            }
+
+
+    public static function checkDisabled($email){
+        $conn     = database::connect();
+        $userInfo = $conn->prepare("SELECT state FROM medewerker WHERE email=? and state='disabled'");
+        $userInfo->bindParam(1, $email);
+        $userInfo->execute();
+        //fetch results
+        $user = $userInfo->fetch(PDO::FETCH_ASSOC);
+
+        
+        if (!empty($user)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static function nietIngelogd(){
+        if(!isset($_SESSION['idMedewerker'])){
+            header('Location: ../login');
+        }
+    }
+    public static function alIngelogd(){
+        if(isset($_SESSION['idMedewerker'])){
+            header('Location: ../urenregistratie');
         }
     }
     
@@ -124,10 +144,10 @@ class userManager
     
     
     //maakt van de gestuurde error text een div alert aan zodat je op de pagina rode error balk kan zien
-    public static function errorMessage($errorMessage)
+    public static function Message($message,$type)
     {   
-        $error = "<div class='alert alert-danger'>{$errorMessage}</div>";    
-        return $error;
+        $message = "<div class='alert alert-{$type}'>{$message}</div>";    
+        return $message;
         
     }
     public static function rolManager(){
@@ -154,7 +174,10 @@ class userManager
         //fetch results
         $user = $userInfo->fetch(PDO::FETCH_ASSOC);
         //check if results are filled
-        if (isset($user) AND !empty($user)) {
+        if(userManager::checkDisabled($email)){
+            return 'disabled';   
+        }
+        else if (isset($user) AND !empty($user)) {
             //if results are correct set SESSIONS
             $_SESSION['idMedewerker'] = $user['idMedewerker'];
             $_SESSION['rol'] = $user['rol'];
