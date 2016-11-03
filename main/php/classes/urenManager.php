@@ -221,7 +221,7 @@ static function addUren() {
     public static function addTeamUren($arrayUren) {
         $arrayUren['begintijd'] = date_format(date_create($arrayUren['datum'] . $arrayUren['begintijd']), "Y-m-d H:i");
         $arrayUren['eindtijd'] = date_format(date_create($arrayUren['datum'] . $arrayUren['eindtijd']), "Y-m-d H:i");
-
+        //print_r($arrayUren);
         if(!empty($arrayUren['idMedewerker'] && $arrayUren['idProject'] && $arrayUren['urenregulier'] && $arrayUren['begintijd'] && $arrayUren['eindtijd'] && $arrayUren['omschrijving'])){
             $conn = database::connect();
             if($arrayUren['urenregulier'] > 0){
