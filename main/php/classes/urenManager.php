@@ -59,21 +59,67 @@ class urenManager
         }
         if(is_array($extra))
         {
+            $hourTypeStarted = false;
+            $validationStarted = false;
             foreach($extra as $value)
             {
                 switch ($value)
                 {
                     case 'innovative':
-                        $query .= "innovatief = 1 AND ";
+                        if(in_array('regular', $extra))
+                        {
+                            if(!$hourTypeStarted)
+                            {
+                                $hourTypeStarted = true;
+                                $query .= "(innovatief = 1 OR ";
+                            }
+                            else
+                                $query .= "innovatief = 1) AND ";
+                        }
+                        else
+                            $query .= "innovatief = 1 AND ";
                         break;
                     case 'regular':
-                        $query .= "innovatief = 0 AND ";
+                        if(in_array('innovative', $extra))
+                        {
+                            if(!$hourTypeStarted)
+                            {
+                                $hourTypeStarted = true;
+                                $query .= "(innovatief = 0 OR ";
+                            }
+                            else
+                                $query .= "innovatief = 0) AND ";
+                        }
+                        else
+                            $query .= "innovatief = 0 AND ";
                         break;
                     case 'validated':
-                        $query .= "goedgekeurd = 1 AND";
+                        if(in_array('invalidated', $extra))
+                        {
+                            if(!$validationStarted)
+                            {
+                                $validationStarted = true;
+                                $query .= "(goedgekeurd = 1 OR ";
+                            }
+                            else
+                                $query .= "goedgekeurd = 1) AND ";
+                        }
+                        else
+                            $query .= "goedgekeurd = 1 AND ";
                         break;
                     case 'invalidated':
-                        $query .= "goedgekeurd = 0 AND";
+                        if(in_array('validated', $extra))
+                        {
+                            if(!$validationStarted)
+                            {
+                                $validationStarted = true;
+                                $query .= "(goedgekeurd = 0 OR ";
+                            }
+                            else
+                                $query .= "goedgekeurd = 0) AND ";
+                        }
+                        else
+                            $query .= "goedgekeurd = 0 AND ";
                         break;
                 }
             }

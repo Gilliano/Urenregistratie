@@ -26,7 +26,6 @@ class userManager
                                 tussenvoegsels=?, 
                                 achternaam=?, 
                                 email=?, 
-                                validated=?, 
                                 rol=?,
                                 state=?
                                 WHERE idMedewerker=?";
@@ -35,10 +34,9 @@ class userManager
             $stmt->bindParam(2, $params['insertion']);
             $stmt->bindParam(3, $params['lastname']);
             $stmt->bindParam(4, $params['email']);
-            $stmt->bindParam(5, $params['valide']);
-            $stmt->bindParam(6, $params['rol']);
-            $stmt->bindParam(7, $params['state']);
-            $stmt->bindParam(8, $params['id']);
+            $stmt->bindParam(5, $params['rol']);
+            $stmt->bindParam(6, $params['state']);
+            $stmt->bindParam(7, $params['id']);
             $stmt->execute();
             
             return self::getAllUsers();
@@ -298,28 +296,59 @@ class userManager
         }
     }
 
+    public static function getNaam($email){
+        $conn = database::connect();
+        $getnaam = "SELECT voornaam,tussenvoegsels,achternaam FROM medewerker WHERE email=:email";
+        $stmt    = $conn->prepare($getnaam);
+        $stmt->bindParam("email", $email);
+        $stmt->execute();
+        $get = $stmt->fetch();
+
+        if(!empty($get)){
+            if(!$get['tussenvoegsels']){
+                return "{$get['voornaam']} {$get['achternaam']}";
+            }
+            else if($get['tussenvoegsels']){
+                return "{$get['voornaam']} {$get['tussenvoegsels']} {$get['achternaam']}";
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
     public static function tokenHash($email){
         return sha1(sha1(rand()).$email);
     }
     public static function verzendMail($email){
+        require('phpmailer/PHPMailerAutoload.php');
 
         $hash = userManager::tokenHash($email);
+        $naam = userManager::getNaam($email);
         userManager::tokenAanmaken($email,$hash);
-        //temp
+        //
+        $herstelLink = $_SERVER['SERVER_NAME']."/herstellen?id={$hash}&email={$email}";
 
-         $herstelLink = "<a href=\"../herstellen?id={$hash}&email={$email}\">herstellen?id={$hash}&email={$email}</a> ";
+        $mail = new PHPMailer(); // create a new object
+        $mail->IsSMTP(); // enable SMTP
+        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->SMTPAuth = true; // authentication enabled
+        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 465; // or 587
+        $mail->IsHTML(true);
+        $mail->Username = "smtpserver088@gmail.com";
+        $mail->Password = "Mailserver88";
+        $mail->SetFrom("smtpserver088@gmail.com");
+        $mail->Subject = "Uw wachtwoord herstellen Branchonline";
+        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik op de link hieronder om uw wachtwoord te herstellen. <br/><br/> {$herstelLink} <br/><br/> Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
 
-// //        de email die verzonden moet worden
-//          //verzend een email
-//          $to      = $email;
-//          $subject = 'branchonline wachtwoord herstellen';
-//          $message = 'Op de volgende link kunt u uw wachtwoord herstellen'. $herstelLink;
-//          $headers = 'From: webmaster@example.com' . "\r\n" .
-//              'Reply-To: m.belhaj_zakelijk@hotmail.com' . "\r\n" ;
+        $mail->AddAddress($email);
 
-//          //verzend de email
-//          mail($to, $subject, $message, $headers);
+        //dit moet erbij nders werkt het niet
+         if(!$mail->Send()) {
+         } else {
+         }
 
-        echo $herstelLink;
     }
 }

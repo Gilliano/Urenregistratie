@@ -18,29 +18,28 @@
         <!-- Fastselect -->
         <link rel="stylesheet" type="text/css" href="css/fastselect.min.css">
         <!-- Overizcht -->
-        <link href="css/overzicht.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/overzicht.css">
     </head>
     <body>
         <header>
+            <?php include_once '../main/php/navbar.php'; ?>
             <!-- Alerts -->
             <div id="noRecordsFound" class="alert alert-info">
                 <a href="#" class="close" aria-label="close">&times;</a>
-                <strong>Info</strong> No records found with the current filters...
+                <strong>Info</strong> Geen records gevonden met deze filters...
             </div>
             <div id="recordSavedSucces" class="alert alert-success">
                 <a href="#" class="close" aria-label="close">&times;</a>
-                <strong>Succes</strong> Succesfully saved the changes!
+                <strong>Succes</strong> Veranderingen zijn opgeslagen!
             </div>
             <div id="recordSavedFailed" class="alert alert-danger">
                 <a href="#" class="close" aria-label="close">&times;</a>
-                <strong>Failed</strong> Some records could not be saved! <!-- TODO: Make more detailed -->
+                <strong>Failed</strong> Sommigen records konden niet opgeslagen worden <!-- TODO: Make more detailed -->
             </div>
             <div id="filtersNotSet" class="alert alert-danger">
                 <a href="#" class="close" aria-label="close">&times;</a>
-                <strong>Failed</strong> Please make sure all filters are supplied with information.
+                <strong>Failed</strong> Zorg ervoor dat er bij alle filters info is ingevuld!
             </div>
-
-            <?php include_once '../main/php/navbar.php'; ?>
         </header>
 
         <!-- Container -->
@@ -53,7 +52,7 @@
                     <!-- Step 1: Users list -->
                     <div class="col-sm-3 col-sm-offset-2">
                         <label for="users_list">Gebruikers</label><br>
-                        <select id="users_list" class="selectpicker" data-live-search="true" multiple>
+                        <select id="users_list" class="selectpicker" data-live-search=<?php echo $_SESSION['rol']==="medewerker"?"false":"true"?> data-actions-box=<?php echo $_SESSION['rol']==="medewerker"?"false":"true"?> multiple>
                             <!-- <option>Loading...</option> -->
                         </select>
                     </div>
@@ -61,7 +60,7 @@
                     <!-- Step 2: Projects list -->
                     <div class="col-sm-3">
                         <label for="projects_list">Projecten</label><br>
-                        <select id="projects_list" class="selectpicker" data-live-search="true" multiple>
+                        <select id="projects_list" class="selectpicker" data-live-search="true" data-actions-box="true" multiple>
                             <!-- <option>Loading...</option> -->
                         </select>
                     </div>
@@ -78,10 +77,10 @@
                     <div class="col-sm-7 col-sm-offset-2">
                         <label for="tags_input"></label><br>
                         <select id="tags_input" class="multipleSelect" multiple>
-                            <option value="innovative">Innovatief</option>
-                            <option value="regular">Regulier</option>
-                            <option value="validated">Goedgekeurd</option>
-                            <option value="invalidated">Niet-Goedgekeurd</option>
+                            <option selected value="innovative">Innovatief</option>
+                            <option selected value="regular">Regulier</option>
+                            <option selected value="validated">Goedgekeurd</option>
+                            <option selected value="invalidated">Niet-Goedgekeurd</option>
                         </select>
                     </div>
 
@@ -135,11 +134,11 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Export to csv</h4>
+                            <h4 class="modal-title">Exporteren naar csv</h4>
                         </div>
                         <div class="modal-body">
-                            You have unsaved changes to these records, do you want me to save them for you and create
-                            an export?
+                            Je hebt verandering die nog niet zijn opgeslagen, wil je dat ik deze wijzigingen
+                            voor je ga opslaan?
                         </div>
                         <div class="modal-footer">
                             <button id="csv_message_closeButton" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
