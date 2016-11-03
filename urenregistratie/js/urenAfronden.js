@@ -126,13 +126,13 @@ function teamAantalUren(begintijd, eindtijd){
         document.getElementById("teamBegintijd").value = b;
     }
     else {
-        if(b[0] < 10) {
+        if(b[0] < 9) {
             b[0] = parseInt(b[0]);
             b[0] += 1;
             b[0] = "0" + b[0];
             b[0] = b[0].toString();
             b[1] = "00";
-            var b = b.toString();
+            b = b.toString();
             b = b.replace(",", ":");
             document.getElementById("teamBegintijd").value = b;
         }
@@ -141,7 +141,7 @@ function teamAantalUren(begintijd, eindtijd){
             b[0] += 1;
             b[0] = b[0].toString();
             b[1] = "00";
-            var b = b.toString();
+            b = b.toString();
             b = b.replace(",", ":");
             document.getElementById("teamBegintijd").value = b;
         }
@@ -174,7 +174,7 @@ function teamAantalUren(begintijd, eindtijd){
         else {
             e[0] = parseInt(e[0]);
             e[0] += 1;
-            e[0] = b[0].toString();
+            e[0] = e[0].toString();
             e[1] = "00";
             var e = e.toString();
             e = e.replace(",", ":");
@@ -244,5 +244,5 @@ function teamUrenInnovatief() {
     var ureninnovatief = totaaluren - urenregulier;
     ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
     document.getElementById("teamUreninnovatief").value = ureninnovatief;
-    var ureninnovatief = ureninnovatief.replace(".", ",");
+    ureninnovatief = ureninnovatief.replace(".",",");
 }
