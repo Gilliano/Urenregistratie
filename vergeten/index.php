@@ -5,8 +5,7 @@
 
          if(isset($_POST['herstellen'])){
          	$message = '<div class="alert alert-success">
-            u heeft <strong>een email</strong> ontvangen van ons waardoor u uw wachtwoord kunt veranderen. 
-            Bekijk eventueel uw spam. Mocht de email <strong>niet zijn ontvangen</strong> probeer het opnieuw.
+            als dit email adres gebonden is aan een account in ons systeem, dan ontvang je een email.
             </div>';
          	if(userManager::emailBestaatAl($_POST['remail'])){
          		userManager::verzendMail($_POST['remail']);
