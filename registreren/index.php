@@ -52,7 +52,7 @@ $remail = isset($_POST['remail']) ? $_POST['remail'] : '';
                      <input type="text" value="<?= $achternaam; ?>" name="achternaam" placeholder="Achternaam" autocomplete="false" required class="form-control input-lg" />
                      <div class="row">
                         <div class="col-sm-6 startmail">
-                           <input type="email" value="<?= $remail; ?>" name="remail" id="remail" placeholder="Email" autocomplete="false" required class="form-control input-lg" />
+                           <input type="text" value="<?= $remail; ?>" name="remail" id="remail" placeholder="Email" autocomplete="false" required class="form-control input-lg" />
                         </div>
                         <div class="col-sm-6 endmail">
                            <p>@branchonline.nl</p>

@@ -24,7 +24,6 @@ if(isset($_POST['herstellen'])){
 		$succes = 'u heeft uw wachtwoord sucessvol veranderd u word nu naar de login pagina gestuurd';
 		userManager::wachtwoordHerstellen($email,$wachtwoord);
 		userManager::tokenVerwijderen($email);
-      userManager::verzendMail($email);
 		$message = "<div class=\"alert alert-success\" role=\"alert\">{$succes}</div>";
 		header('Location: ./succes.php?succes=1');
 	}
