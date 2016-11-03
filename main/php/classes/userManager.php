@@ -48,22 +48,6 @@ class userManager
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
 
-
-    public static function checkDisabled($email){
-        $conn     = database::connect();
-        $userInfo = $conn->prepare("SELECT state FROM medewerker WHERE email=? and state='disabled'");
-        $userInfo->bindParam(1, $email);
-        $userInfo->execute();
-        //fetch results
-        $user = $userInfo->fetch(PDO::FETCH_ASSOC);
-
-        
-        if (!empty($user)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     public static function nietIngelogd(){
         if(!isset($_SESSION['idMedewerker'])){
             header('Location: ../login');
@@ -175,7 +159,7 @@ class userManager
         $user = $userInfo->fetch(PDO::FETCH_ASSOC);
         //check if results are filled
         if(userManager::checkDisabled($email)){
-            return 'disabled';   
+            return 'disabled';
         }
         else if (isset($user) AND !empty($user)) {
             //if results are correct set SESSIONS
@@ -237,7 +221,7 @@ class userManager
         
         $conn = database::connect();
         
-        $encrypted_password = sha1($password);
+        $encrypted_password = sha1($password);  
         
         if (userManager::emailBestaatAl($email)) {
             return false;
@@ -330,6 +314,30 @@ class userManager
 
     public static function tokenHash($email){
         return sha1(sha1(rand()).$email);
+    }
+
+    public static function checkDisabled($email){
+        $conn     = database::connect();
+        $userInfo = $conn->prepare("SELECT validated FROM medewerker WHERE email=? and validated='pending'");
+        $userInfo->bindParam(1, $email);
+        $userInfo->execute();
+        //fetch results
+        $user = $userInfo->fetch(PDO::FETCH_ASSOC);
+
+        
+        if (!empty($user)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function accountBevestigen($email){
+            $conn = database::connect();
+            $herstellen = "UPDATE medewerker SET token='', validated='validated' where email=:email";
+            $stmt    = $conn->prepare($herstellen);
+            $stmt->bindParam("email", $email);
+            $stmt->execute();
     }
 
     function url(){

@@ -10,7 +10,10 @@ $achternaam = isset($_POST['achternaam']) ? $_POST['achternaam'] : '';
 $remail = isset($_POST['remail']) ? $_POST['remail'] : '';  
 
 //waarde voor checks
-$email = $remail."@branchonline.nl";
+
+//$email = 'm.belhaj_zakelijk@hotmail.com';
+
+$remail."@branchonline.nl";
 
 if(isset($_POST['registreren'])){
   if(userManager::emailBestaatAl($email) === true){
