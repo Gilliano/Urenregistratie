@@ -5,7 +5,7 @@
 
          if(isset($_POST['herstellen'])){
          	$message = '<div class="alert alert-success">
-            als dit email adres gebonden is aan een account in ons systeem, dan ontvang je een email.
+            als dit email adres gebonden is aan een account in ons systeem, dan ontvangt u een email.
             </div>';
          	if(userManager::emailBestaatAl($_POST['remail'])){
          		userManager::verzendMail($_POST['remail']);

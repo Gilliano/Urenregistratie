@@ -318,14 +318,23 @@ class userManager
     public static function tokenHash($email){
         return sha1(sha1(rand()).$email);
     }
+
+    function url(){
+      return sprintf(
+        "%s://%s%s",
+        isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+        $_SERVER['SERVER_NAME'],'/'
+      );
+    }
     public static function verzendMail($email){
         require('phpmailer/PHPMailerAutoload.php');
 
         $hash = userManager::tokenHash($email);
         $naam = userManager::getNaam($email);
         userManager::tokenAanmaken($email,$hash);
-        //
-        $herstelLink = $_SERVER['SERVER_NAME']."/herstellen?id={$hash}&email={$email}";
+
+        $url = userManager::url()."herstellen?id={$hash}&email={$email}";
+        $herstelLink = '<a href="'.$url.'">hier</a>';
 
         $mail = new PHPMailer(); // create a new object
         $mail->IsSMTP(); // enable SMTP
@@ -339,7 +348,7 @@ class userManager
         $mail->Password = "Mailserver88";
         $mail->SetFrom("smtpserver088@gmail.com");
         $mail->Subject = "Uw wachtwoord herstellen Branchonline";
-        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik op de link hieronder om uw wachtwoord te herstellen. <br/><br/> {$herstelLink} <br/><br/> Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
+        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik {$herstelLink} hieronder om uw wachtwoord te herstellen. <br/><br/>Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
 
         $mail->AddAddress($email);
 
