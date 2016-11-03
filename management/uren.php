@@ -6,8 +6,17 @@
         <input id="daterange_picker_hours" type="text" class="form-control" name="daterange"/>
     </div>
 
+<br><br><br><br><br>
+<div class="row">
+    <div class="col-sm-1" style="width: 25px">
+        <div style="width: 20px; height: 20px; background: #34b449;"></div>
+    </div>
+    <div class="col-sm-1">
+        <p>= innovatief</p>
+    </div>
+</div>
 
-
+<br>
 <div class="wijzigen div-1">
     <table id="allHours" class="gebruikers_wijzigen table">
 
