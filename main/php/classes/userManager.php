@@ -24,8 +24,7 @@ class userManager
                                 SET 
                                 voornaam=?, 
                                 tussenvoegsels=?, 
-                                achternaam=?, 
-                                email=?, 
+                                achternaam=?,
                                 rol=?,
                                 state=?
                                 WHERE idMedewerker=?";
@@ -33,10 +32,9 @@ class userManager
             $stmt->bindParam(1, $params['firstname']);
             $stmt->bindParam(2, $params['insertion']);
             $stmt->bindParam(3, $params['lastname']);
-            $stmt->bindParam(4, $params['email']);
-            $stmt->bindParam(5, $params['rol']);
-            $stmt->bindParam(6, $params['state']);
-            $stmt->bindParam(7, $params['id']);
+            $stmt->bindParam(4, $params['rol']);
+            $stmt->bindParam(5, $params['state']);
+            $stmt->bindParam(6, $params['id']);
             $stmt->execute();
             
             return self::getAllUsers();
@@ -85,7 +83,7 @@ class userManager
     {
         $records = [];
         $conn = database::connect();
-        $stmt = $conn->prepare("SELECT * FROM medewerker");
+        $stmt = $conn->prepare("SELECT * FROM medewerker ORDER BY voornaam");
         $stmt->execute();
         $records = $stmt->fetchAll();
         
@@ -226,7 +224,7 @@ class userManager
             return false;
         }
         
-        $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord) VALUES (?,?,?,?,?)";
+        $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord, disabled) VALUES (?,?,?,?,?,'disabled')";
         $stmt    = $conn->prepare($adduser);
         $stmt->bindParam(1, $voornaam);
         $stmt->bindParam(2, $tussenvoegsel);

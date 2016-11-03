@@ -70,11 +70,6 @@ registerOtherUser();
                   </div>
 
                   <div class="form-group">
-                     <label for="recipient-name" class="form-control-label">Email</label>
-                     <input type="text" name="email" placeholder="Email" class="form-control email">
-                  </div>
-
-                  <div class="form-group">
                      <label for="sel1">Rol</label>
                      <select class="form-control rol">
                         <option value="admin">admin</option>

@@ -70,6 +70,8 @@
 <script type="text/javascript" src="js/daterangepicker.js"></script>
 <script type="text/javascript" src="js/getHours.js"></script>
 <script type="text/javascript" src="js/deleteHour.js"></script>
+<script type="text/javascript" src="js/addProject.js"></script>
+<script type="text/javascript" src="js/getProjects.js"></script>
 <!-- Menu Toggle Script -->
 <script>
     $("#menu-toggle").click(function (e) {

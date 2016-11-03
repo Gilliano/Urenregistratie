@@ -35,7 +35,6 @@ $("#delete_hour").on("click", function (event) {
     $.getScript('../main/js/ajax.js', function () {
         //get id 'idHour' from the array
         var id = data[0].value;
-        console.log(id);
         //now delete the record where id is 'idHour'
         var ajaxobj = new AjaxObj('deleteHourByID', {
             'idHour': id

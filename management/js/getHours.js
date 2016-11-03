@@ -1,7 +1,6 @@
 $(function() {
     $.getScript('../main/js/ajax.js', function () {
         tableHoursBetweenData();
-        console.log('hello');
     });
 });
 
@@ -54,7 +53,12 @@ function tableHoursBetweenData() {
 
         //Now lets add the new items :)
         ajaxobj.result.forEach(function (item) {
-            htmlList += "<tr>";
+            if(item.innovatief == 1) {
+                htmlList += "<tr bgcolor='#34b449'>";
+            } else {
+                htmlList += "<tr>";
+            }
+
             htmlList += "<td style='display: none;'>" + item.idUur + "</td>";
             htmlList += "<td>" + item.voornaam + " " + item.tussenvoegsels + " " + item.achternaam +"</td>";
             htmlList += "<td>" + item.projectnaam + "</td>";

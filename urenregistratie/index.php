@@ -29,6 +29,9 @@
             <p class="ugly_fix_checkbox">
                 <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
             </p>
+            <div id="errorMessage">
+
+            </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default" id="mainFormulier">

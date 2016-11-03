@@ -148,7 +148,7 @@ function updateProject($params) {
 }
 
 function allProjects() {
-    echo json_encode(projectManager::getAllProjects());
+    echo json_encode(projectManager::getAllProjectsStatusSort());
 }
 
 function getAllHoursSimple($params) {
@@ -174,5 +174,12 @@ function deleteHourByID($params) {
     $conn = database::connect();
     $stmt = $conn->prepare("DELETE FROM uur WHERE idUur=?");
     $stmt->bindParam(1, $params['idHour']);
+    $stmt->execute();
+}
+
+function createProject($params) {
+    $conn = database::connect();
+    $stmt = $conn->prepare("INSERT INTO project (projectnaam)VALUES (?)");
+    $stmt->bindParam(1, $params['projectname']);
     $stmt->execute();
 }
