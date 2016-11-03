@@ -70,7 +70,7 @@ function registerOtherUser() {
             $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
         }
         else if($_POST['rpassword'] == $_POST['repassword']){
-            userManager::registreren($_POST['voornaam'],$_POST['tussenvoegsel'],$_POST['achternaam'],$_POST['remail'],$_POST['rpassword']);
+            userManager::registreren($_POST['voornaam'],$_POST['tussenvoegsel'],$_POST['achternaam'],$_POST['remail']."@branchonline.nl",$_POST['rpassword']);
             $voornaam = "";
             $tussenvoegsel = "";
             $achternaam = "";
@@ -78,7 +78,7 @@ function registerOtherUser() {
         }
 
         if(!empty($error)){
-            $error = userManager::errorMessage($error);
+            $error = userManager::Message($error,'danger');
 
         }
     }
