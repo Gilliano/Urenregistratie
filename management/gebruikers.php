@@ -1,37 +1,11 @@
 <?php
-//zorgt ervoor dat de waardes opgeslagen worden op de regisratie pagina 
+//zorgt ervoor dat de waardes opgeslagen worden op de regisratie pagina
 $voornaam = isset($_POST['voornaam']) ? $_POST['voornaam'] : '';
-$tussenvoegsel = isset($_POST['tussenvoegsel']) ? $_POST['tussenvoegsel'] : '';  
+$tussenvoegsel = isset($_POST['tussenvoegsel']) ? $_POST['tussenvoegsel'] : '';
 $achternaam = isset($_POST['achternaam']) ? $_POST['achternaam'] : '';
 $remail = isset($_POST['remail']) ? $_POST['remail'] : '';
-
-   if(isset($_POST['registreren'])){
-
-
-            if(userManager::emailBestaatAl($_POST['remail']."@branchonline.nl") === true){
-                $error = 'de ingevoerde email adress bestaat al';
-            }
-            else if($_POST['rpassword'] != $_POST['repassword']){
-                $error = 'uw wachtwoorden komen niet overeen';
-            }
-            else if(strlen($_POST['rpassword']) < 3 || strlen($_POST['repassword']) < 3){
-                $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
-            }
-            else if($_POST['rpassword'] == $_POST['repassword']){
-                userManager::registreren($_POST['voornaam'],$_POST['tussenvoegsel'],$_POST['achternaam'],$_POST['remail'],$_POST['rpassword']);
-                $voornaam = "";
-                $tussenvoegsel = "";
-                $achternaam = "";
-                $remail = "";
-            }
-            
-            if(!empty($error)){
-                $error = userManager::errorMessage($error);
-                
-            }
-    }
-
-   ?>
+registerOtherUser();
+?>
 <h1 style="font-family: 'Montserrat'">Gebruikers</h1>
 <td colspan="3" valign="top" class='tabbed-content-container ui-corner-all'>
 <tr>
@@ -76,27 +50,49 @@ $remail = isset($_POST['remail']) ? $_POST['remail'] : '';
       <div class="modal-content">
          <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">×</button>
-            <h4 class="modal-title">wijzig</h4>
+            <h4 class="modal-title">Wijzig</h4>
          </div>
          <div class="modal-body">
-            <form method="post" id="gebruiker_wijzig_form" style="margin: auto" role="login">
-               <h4 class="modal-title">Wijzigen</h4>
-               <input type="hidden" name="id" autocomplete="false" required class="form-control input-lg id"/>
-               <input type="text" name="firstname" placeholder="Voornaam" autocomplete="false" required
-                  class="form-control input-lg firstname"/>
-               <input type="text" name="insertion" placeholder="Tussenvoegsel" autocomplete="false"
-                  class="form-control input-lg tussenvoegsel"/>
-               <input type="text" name="lastname" placeholder="Achternaam" autocomplete="false" required
-                  class="form-control input-lg lastname"/>
-               <input type="text" name="email" placeholder="Email" autocomplete="false" required
-                  class="form-control input-lg email"/>
-               <input type="text" name="valid" placeholder="Valid" autocomplete="false" required
-                  class="form-control input-lg valid"/>
-               <input type="text" name="rol" placeholder="Rol" autocomplete="false" required
-                  class="form-control input-lg rol"/>
-               <input type="text" name="status" placeholder="status" autocomplete="false" required
-                  class="form-control input-lg status"/>
-            </form>
+            <div class="modal-body">
+               <form id="gebruiker_wijzig_form">
+                  <input type="hidden" name="id" autocomplete="false" required class="form-control input-lg id"/>
+
+                  <div class="form-group">
+                     <label for="recipient-name" class="form-control-label">Voornaam</label>
+                     <input type="text" name="firstname" placeholder="Voornaam" class="form-control firstname">
+                  </div>
+
+                  <div class="form-group">
+                     <label for="recipient-name" class="form-control-label">Tussenvoegsel</label>
+                     <input type="text" name="insertion" placeholder="Tussenvoegsel" class="form-control tussenvoegsel">
+                  </div>
+
+                  <div class="form-group">
+                     <label for="recipient-name" class="form-control-label">Achternaam</label>
+                     <input type="text" name="lastname" placeholder="Achternaam" class="form-control lastname">
+                  </div>
+
+                  <div class="form-group">
+                     <label for="recipient-name" class="form-control-label">Email</label>
+                     <input type="text" name="email" placeholder="Email" class="form-control email">
+                  </div>
+
+                  <div class="form-group">
+                     <label for="recipient-name" class="form-control-label">Valid</label>
+                     <input type="text" name="valid" placeholder="Email" class="form-control valid">
+                  </div>
+
+                  <div class="form-group">
+                     <label for="recipient-name" class="form-control-label">Valid</label>
+                     <input type="text" name="rol" placeholder="Rol" class="form-control rol">
+                  </div>
+
+                  <div class="form-group">
+                     <label for="recipient-name" class="form-control-label">Valid</label>
+                     <input type="text" name="status" placeholder="Status" class="form-control status">
+                  </div>
+               </form>
+            </div>
          </div>
          <div class="modal-footer">
             <input type="submit" id="save_button" class="btn btn-default" value="save">

@@ -4,6 +4,7 @@
         <?php
         //make sure everything we need in here
         require_once '../main/php/head.php';
+
         ?>
         <link href="css/urenregistratie.css" rel="stylesheet">
         <link href="css/bootstrap-switch.css" rel="stylesheet">
@@ -15,7 +16,7 @@
 
     $allUsers = userManager::getAllUsers();
     $alleMedewerkers = sizeof($allUsers);
-    //datum
+
     $date = date("Y-m-d");
     ?>
 
@@ -25,7 +26,7 @@
     ?>
     <div class="container">
         <div class="col-md-12 switch">
-            <p>
+            <p class="ugly_fix_checkbox">
                 <input type="checkbox" class="hidden" name="mode" id="mode" data-on-text="Advanced" data-off-text="Normal" data-toggle="modal" data-target="#modalFormulier">
             </p>
         </div>
@@ -83,7 +84,7 @@
                             <!--submit-->
                             <tr>
                                 <td class="submit"></td>
-                                <td><input type="submit" name="urenopslaan" class="opslaan btn btn-success" value="Bevestigen"></td>
+                                <td><input type="submit" name="urenopslaan" class="opslaan btn btn-success" value="Opslaan"></td>
                             </tr>
                         </table>
                     </form>
@@ -94,7 +95,6 @@
 
     <!-- Here comes the jQuery model output -->
     <div class="col-md-8 col-md-offset-2" id="modalContent">
-
     </div>
 
 
@@ -144,11 +144,11 @@
                                 </tr>
                                 <tr>
                                     <td class="description">Begintijd</td>
-                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde()" class="form-control" required/></td>
+                                    <td class="field"><input type="time" name="teamBegintijd" id="teamBegintijd" onblur="teamRealTimeWaarde(); teamUrenInnovatief()" class="form-control" required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Eindtijd</td>
-                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde()" class="form-control"  required/></td>
+                                    <td class="field"><input type="time" name="teamEindtijd" id="teamEindtijd" onblur="teamRealTimeWaarde(); teamUrenInnovatief()" class="form-control"  required/></td>
                                 </tr>
                                 <tr>
                                     <td class="description">Totaal aantal uren gewerkt</td>
@@ -170,12 +170,14 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" name="urenopslaan" class="opslaan btn btn-success" value="Bevestigen">
-                        <input type="submit" name="urenopslaan" class="opslaan btn btn-danger" data-dismiss="modal" value="Annuleren">
+                        <input type="submit" name="bevestigen" id="bevestigen" class="btn btn-success" data-dismiss="modal" value="Bevestigen">
+                        <input type="submit" name="annuleren" id="annuleren" class="btn btn-danger" data-dismiss="modal" value="Annuleren">
                     </div>
                 </div>
+
             </div>
         </div>
+
     </div>
     </body>
     <?php

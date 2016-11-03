@@ -36,16 +36,17 @@ function projecten()
     foreach ($projecten as $project) {
 
         $table .= "<tr>";
+        $table .= "<td style='display: none'>" . $project['idProject'] . "</td>";
 
         $table .= "<td>" . $project['projectnaam'] . "</td>";
+        $table .= "<td style='display: none'>" . $project['verwijderd'] . "</td>";
         if ($project['verwijderd'] == 0) {
-            $table .= '<td>Niet verwijderd</td>';
+            $table .= '<td>Niet afgerond</td>';
         } else {
-            $table .= '<td>Wel verwijderd</td>';
+            $table .= '<td>Afgerond</td>';
         }
-        //$table .= '<td><input type="hidden" value=\'" . $project[\'idProject\'] . "\'></td>';
+        $table .= "<td><button type='submit' name='project_wijzig' value='" . $project['idProject'] . "' class='btn btn-default' data-toggle='modal' data-target='#myProject'>Wijzig</button> </td>";
 
-        $table .= "<td><a href='php/toggleProject.php?projectid=" . $project['idProject'] . "&delete=". $project['verwijderd'] ."' type='submit' name='project_toggle' class='btn btn-default'>toggle status</a></td>";
         $table .= '</tr>';
 
 
@@ -54,9 +55,33 @@ function projecten()
     return $table;
 }
 
-function toggleProject() {
-    if(isset($_GET['projectid'])) {
-        echo $_GET['projectid'];
+
+
+function registerOtherUser() {
+    if(isset($_POST['registreren'])){
+
+
+        if(userManager::emailBestaatAl($_POST['remail']."@branchonline.nl") === true){
+            $error = 'de ingevoerde email adress bestaat al';
+        }
+        else if($_POST['rpassword'] != $_POST['repassword']){
+            $error = 'uw wachtwoorden komen niet overeen';
+        }
+        else if(strlen($_POST['rpassword']) < 3 || strlen($_POST['repassword']) < 3){
+            $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
+        }
+        else if($_POST['rpassword'] == $_POST['repassword']){
+            userManager::registreren($_POST['voornaam'],$_POST['tussenvoegsel'],$_POST['achternaam'],$_POST['remail'],$_POST['rpassword']);
+            $voornaam = "";
+            $tussenvoegsel = "";
+            $achternaam = "";
+            $remail = "";
+        }
+
+        if(!empty($error)){
+            $error = userManager::errorMessage($error);
+
+        }
     }
 }
 

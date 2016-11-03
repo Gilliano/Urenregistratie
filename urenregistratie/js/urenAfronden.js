@@ -244,5 +244,5 @@ function teamUrenInnovatief() {
     var ureninnovatief = totaaluren - urenregulier;
     ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
     document.getElementById("teamUreninnovatief").value = ureninnovatief;
-    ureninnovatief = ureninnovatief.replace(".", ",");
+    var ureninnovatief = ureninnovatief.replace(".", ",");
 }
