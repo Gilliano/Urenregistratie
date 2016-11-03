@@ -75,7 +75,7 @@
                             </tr>
                             <tr>
                                 <td class="description">Innovatieve uren</td>
-                                <td class="field"><input type="number" id="ureninnovatief" name="ureninnovatief" class="form-control" readonly/></td>
+                                <td class="field"><input type="number" step="any" id="ureninnovatief" name="ureninnovatief" class="form-control" readonly/></td>
                             </tr>
                             <tr>
                                 <td class="description">Omschrijving van de uren</td>
@@ -113,7 +113,7 @@
                         <h4 class="modal-title">Team uren invullen</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data">
+<!--                        <form method="post" action="" id="urenformulier" name="urenformulier" enctype="multipart/form-data">-->
                             <table>
                                 <tr>
                                     <td class="description">Medewerkers</td>
@@ -167,7 +167,7 @@
                                     <td class="field"><textarea name="teamOmschrijving" id="teamOmschrijving"  class="form-control" required/></textarea></td>
                                 </tr>
                             </table>
-                        </form>
+<!--                        </form>-->
                     </div>
                     <div class="modal-footer">
                         <input type="submit" name="bevestigen" id="bevestigen" class="btn btn-success" data-dismiss="modal" value="Bevestigen">
