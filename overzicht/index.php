@@ -10,7 +10,6 @@
         <?php require_once('../main/php/head.php'); ?>
         <!-- PHP code for overzicht page -->
         <?php require_once('php/overzicht.php');
-        userManager::nietIngelogd(); 
         ?>
 
         <!-- Date Range picker -->

@@ -1,8 +1,6 @@
 <?php session_start();
 require_once '../main/php/head.php';
 
-userManager::alIngelogd();
-
 //zorgt ervoor dat de waardes opgeslagen worden op de regisratie pagina 
 $voornaam = isset($_POST['voornaam']) ? $_POST['voornaam'] : '';
 $tussenvoegsel = isset($_POST['tussenvoegsel']) ? $_POST['tussenvoegsel'] : '';  
