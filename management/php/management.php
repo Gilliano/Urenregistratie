@@ -66,6 +66,9 @@ function registerOtherUser() {
         else if($_POST['rpassword'] != $_POST['repassword']){
             $error = 'uw wachtwoorden komen niet overeen';
         }
+        else if(!$_POST['voornaam'] || !$_POST['achternaam'] || !$_POST['remail']){
+            $error = 'onbekende error';
+        }
         else if(strlen($_POST['rpassword']) < 3 || strlen($_POST['repassword']) < 3){
             $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
         }

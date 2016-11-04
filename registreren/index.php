@@ -19,6 +19,9 @@ if(isset($_POST['registreren'])){
   if(userManager::emailBestaatAl($email) === true){
     $error = 'de ingevoerde email adress bestaat al';
   }
+  else if(!$_POST['voornaam'] || !$_POST['achternaam'] || !$_POST['remail']){
+    $error = 'onbekende error';
+  }
   else if($_POST['rpassword'] != $_POST['repassword']){
     $error = 'uw wachtwoorden komen niet overeen';
   }
