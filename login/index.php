@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require_once '../main/php/head.php';
-
+echo $_SESSION['idMedewerker'];
 if(isset($_POST['email'],$_POST['password'],$_POST['login'])){
    $email = !empty($_POST['email']) ? $_POST['email'] : '';
    $password = !empty($_POST['password']) ? $_POST['password'] : '';

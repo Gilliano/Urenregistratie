@@ -47,13 +47,13 @@ class userManager
     
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
-    public static function areYouLoggedIn($medewerker){
+    public static function areYouLoggedIn(){
+
         if (strpos($_SERVER['REQUEST_URI'], 'login') === false && strpos($_SERVER['REQUEST_URI'], 'registreren') === false && strpos($_SERVER['REQUEST_URI'], 'vergeten') === false && strpos($_SERVER['REQUEST_URI'], 'herstellen') === false && strpos($_SERVER['REQUEST_URI'], 'bevestigen') === false) {
             if (!isset($_SESSION['idMedewerker']) && empty($_SESSION['idMedewerker'] && $_SERVER['REQUEST_URI'])) {
                 header("location: ../login");
             }
-        }
-        if(!empty($medewerker) && strpos($_SERVER['REQUEST_URI'], 'login')){
+        }else if(!empty($_SESSION['idMedewerker']) && strpos($_SERVER['REQUEST_URI'], 'login')){
             header("location: ../urenregistratie");
         }
     }
