@@ -5,9 +5,8 @@ require_once '../main/php/head.php';
 userManager::alIngelogd();
 
 if(isset($_POST['herstellen'])){
-	$message = '<div class="alert alert-success">
-   als dit email adres gebonden is aan een account in ons systeem, dan ontvangt u een email.
-   </div>';
+	$message = 'als dit email adres gebonden is aan een account in ons systeem, dan ontvangt u een email.';
+   $message = userManager::Message($message,'success');
 
 	if(userManager::emailBestaatAl($_POST['remail'])){
 		userManager::verzendMail($_POST['remail']);

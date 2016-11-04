@@ -22,14 +22,16 @@ if(isset($_POST['herstellen'])){
 	    $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
 	}
 	else if($_POST['wachtwoord'] == $_POST['herwachtwoord']){
-		$succes = 'u heeft uw wachtwoord sucessvol veranderd u word nu naar de login pagina gestuurd';
+      
 		userManager::wachtwoordHerstellen($email,$wachtwoord);
 		userManager::tokenVerwijderen($email);
-		$message = "<div class=\"alert alert-success\" role=\"alert\">{$succes}</div>";
+
+      $succes = 'u heeft uw wachtwoord sucessvol veranderd u word nu naar de login pagina gestuurd';
+		$message = userManager::Message($succes,'danger');
 		header('Location: ./succes.php?succes=1');
 	}
 	if(!empty($error)){
-	    $error = userManager::errorMessage($error);
+	    $message = userManager::Message($error,'danger');
 	}
 }
 
@@ -52,7 +54,7 @@ if(isset($_POST['herstellen'])){
                      <input type="text" class="form-control input-lg" value="<?php echo isset($email) ? $email : ""; ?>" disabled>
                      <input type="password" name="wachtwoord" required class="form-control input-lg" placeholder="nieuwe wachtwoord" required/>
                      <input type="password" name="herwachtwoord" class="form-control input-lg" id="herwachtwoord" placeholder="herhaal nieuwe wachtwoord" required/>
-                     <?php echo isset($error) ? $error : ""; echo isset($message) ? $message : ""; ?>
+                     <?php echo isset($message) ? $message : ""; ?>
                      <input type="submit" name="herstellen" value="wachtwoord Herstellen" class="btn btn-lg btn-primary btn-block">
                   </form>
                </section>

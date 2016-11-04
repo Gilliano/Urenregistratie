@@ -48,22 +48,6 @@ class userManager
     //// Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
     //// This funtion is used in the main.php
 
-
-    public static function checkDisabled($email){
-        $conn     = database::connect();
-        $userInfo = $conn->prepare("SELECT state FROM medewerker WHERE email=? and state='disabled'");
-        $userInfo->bindParam(1, $email);
-        $userInfo->execute();
-        //fetch results
-        $user = $userInfo->fetch(PDO::FETCH_ASSOC);
-
-        
-        if (!empty($user)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     public static function nietIngelogd(){
         if(!isset($_SESSION['idMedewerker'])){
             header('Location: ../login');
@@ -175,7 +159,7 @@ class userManager
         $user = $userInfo->fetch(PDO::FETCH_ASSOC);
         //check if results are filled
         if(userManager::checkDisabled($email)){
-            return 'disabled';   
+            return 'disabled';
         }
         else if (isset($user) AND !empty($user)) {
             //if results are correct set SESSIONS
@@ -237,8 +221,7 @@ class userManager
         
         $conn = database::connect();
         
-        $encrypted_password = sha1($password);
-        $email              = $email . '@branchonline.nl';
+        $encrypted_password = sha1($password);  
         
         if (userManager::emailBestaatAl($email)) {
             return false;
@@ -333,6 +316,30 @@ class userManager
         return sha1(sha1(rand()).$email);
     }
 
+    public static function checkDisabled($email){
+        $conn     = database::connect();
+        $userInfo = $conn->prepare("SELECT validated FROM medewerker WHERE email=? and validated='pending'");
+        $userInfo->bindParam(1, $email);
+        $userInfo->execute();
+        //fetch results
+        $user = $userInfo->fetch(PDO::FETCH_ASSOC);
+
+        
+        if (!empty($user)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function accountBevestigen($email){
+            $conn = database::connect();
+            $herstellen = "UPDATE medewerker SET token='', validated='validated' where email=:email";
+            $stmt    = $conn->prepare($herstellen);
+            $stmt->bindParam("email", $email);
+            $stmt->execute();
+    }
+
     function url(){
       return sprintf(
         "%s://%s%s",
@@ -363,6 +370,38 @@ class userManager
         $mail->SetFrom("smtpserver088@gmail.com");
         $mail->Subject = "Uw wachtwoord herstellen Branchonline";
         $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> U heeft opgevraagd om uw wachtwoord te herstellen. Klik {$herstelLink} om uw wachtwoord te herstellen. <br/><br/>Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
+
+        $mail->AddAddress($email);
+
+        //dit moet erbij nders werkt het niet
+         if(!$mail->Send()) {
+         } else {
+         }
+
+    }
+    public static function verzendVerificatieMail($email){
+        require('phpmailer/PHPMailerAutoload.php');
+
+        $hash = userManager::tokenHash($email);
+        $naam = userManager::getNaam($email);
+        userManager::tokenAanmaken($email,$hash);
+
+        $url = userManager::url()."bevestigen?id={$hash}&email={$email}";
+        $herstelLink = '<a href="'.$url.'">hier</a>';
+
+        $mail = new PHPMailer(); // create a new object
+        $mail->IsSMTP(); // enable SMTP
+        $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->SMTPAuth = true; // authentication enabled
+        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 465; // or 587
+        $mail->IsHTML(true);
+        $mail->Username = "smtpserver088@gmail.com";
+        $mail->Password = "Mailserver88";
+        $mail->SetFrom("smtpserver088@gmail.com");
+        $mail->Subject = "Uw account bevestigen Branchonline";
+        $mail->Body = "<font face=\"verdana\">Geachte {$naam}, <br/><br/> Klik {$herstelLink} om uw account te bevestigen. <br/><br/>Met vriendelijke groet,<br/><br/> Branchonline team <br/><img src='http://imgur.com/OGCpbK4.jpg'></font>";
 
         $mail->AddAddress($email);
 
