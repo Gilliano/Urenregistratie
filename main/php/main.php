@@ -15,4 +15,5 @@ if(empty($_SESSION['idMedewerker'])){
 
 // Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
 userManager::areYouLoggedIn();
+userManager::areYouAdmin();
 ?>
