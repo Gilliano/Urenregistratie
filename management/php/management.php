@@ -69,7 +69,7 @@ function registerOtherUser() {
         }else if(!$_POST['remail']){
             $error = 'U bent vergeten om een e-mailadres in te vullen.';
         }
-        else if(!strpos($_POST['voornaam'], ' ') || !strpos($_POST['achternaam'], ' ') || !strpos($_POST['remail'], ' ')){
+        else if(strpos($_POST['voornaam'], ' ') || strpos($_POST['achternaam'], ' ') || strpos($_POST['remail'], ' ')){
             $error = 'U mag geen witte characters zetten bij voornaam,achternaam of email.';
         }
         else if(strlen($_POST['rpassword']) <= 5 || strlen($_POST['repassword']) <= 5){
