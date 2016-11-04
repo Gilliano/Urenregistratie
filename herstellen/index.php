@@ -1,8 +1,6 @@
 <?php
 require_once '../main/php/head.php';
 
-userManager::alIngelogd();
-
 $id = isset($_GET['id']) ? $_GET['id'] : "";
 $email = isset($_GET['email']) ? $_GET['email'] : "";
 if(userManager::tokenBestaatAl($id) && userManager::emailBestaatAl($email)){

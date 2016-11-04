@@ -11,5 +11,5 @@ include 'classes/projectManager.php';
 // TODO: include config.php (create config.php)
 
 // Check if SESSION['idMedewerkers'] isset and not empty, if so it will bring you back to login page
-
+userManager::areYouLoggedIn();
 ?>
