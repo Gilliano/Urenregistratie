@@ -47,14 +47,13 @@ function urenAfronden(tijd) {
 function time() {
     if(document.getElementById("begintijd").value != "" && document.getElementById("eindtijd") != "") {
         var begin = document.getElementById("begintijd").value;
-        console.log(begin);
         var begintijd = urenAfronden(begin);
         document.getElementById("begintijd").value = begintijd;
         var eind = document.getElementById("eindtijd").value;
         var eindtijd = urenAfronden(eind);
         document.getElementById("eindtijd").value = eindtijd;
     }
-    else if(document.getElementById("teamBegintijd").value != "" || document.getElementById("teamEindtijd").value != "") {
+    else if(document.getElementById("teamBegintijd").value != "" && document.getElementById("teamEindtijd").value != "") {
         var begin = document.getElementById("teamBegintijd").value;
         var begintijd = urenAfronden(begin);
         document.getElementById("teamBegintijd").value = begintijd;
@@ -116,7 +115,10 @@ function urenInnovatief() {
     totaaluren = totaaluren.replace(",",".");
     totaaluren = parseFloat(totaaluren);
     var urenregulier = document.getElementById("urenregulier").value;
+    var regulier = Math.round(urenregulier * 2).toFixed(1);
+    urenregulier = regulier / 2;
     var ureninnovatief = totaaluren - urenregulier;
+    document.getElementById("urenregulier").value = urenregulier;
     ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
     document.getElementById("ureninnovatief").value = ureninnovatief;
     ureninnovatief = ureninnovatief.replace(".", ",");
@@ -127,7 +129,10 @@ function teamUrenInnovatief() {
     totaaluren = totaaluren.replace(",",".");
     totaaluren = parseFloat(totaaluren);
     var urenregulier = document.getElementById("teamUrenregulier").value;
+    var regulier = Math.round(urenregulier * 2).toFixed(1);
+    urenregulier = regulier / 2;
     var ureninnovatief = totaaluren - urenregulier;
+    document.getElementById("teamUrenregulier").value = urenregulier;
     ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
     document.getElementById("teamUreninnovatief").value = ureninnovatief;
     ureninnovatief = ureninnovatief.replace(".",",");
