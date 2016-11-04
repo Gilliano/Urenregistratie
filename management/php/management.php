@@ -58,8 +58,6 @@ function projecten()
 
 function registerOtherUser() {
     if(isset($_POST['registreren'])){
-
-
         if(userManager::emailBestaatAl($_POST['remail']."@branchonline.nl") === true){
             $error = 'de ingevoerde email adress bestaat al';
         }
@@ -68,6 +66,9 @@ function registerOtherUser() {
         }
         else if(!$_POST['voornaam'] || !$_POST['achternaam'] || !$_POST['remail']){
             $error = 'onbekende error';
+        }
+        else if(!strpos($_POST['voornaam'], ' ') || !strpos($_POST['achternaam'], ' ') || !strpos($_POST['remail'], ' ')){
+            $error = 'u mag geen witte characters zetten bij voornaam,achternaam of email';
         }
         else if(strlen($_POST['rpassword']) < 3 || strlen($_POST['repassword']) < 3){
             $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
@@ -81,10 +82,10 @@ function registerOtherUser() {
             return  userManager::Message('de account is succesvol aangemaakt','success');
         }
 
-        if(!empty($error)){
-           return userManager::Message($error,'danger');
+    if(!empty($error)){
+       return userManager::Message($error,'danger');
 
-        }
     }
+}
 }
 
