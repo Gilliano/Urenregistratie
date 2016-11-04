@@ -20,7 +20,7 @@ if(isset($_POST['registreren'])){
   else if(!$_POST['voornaam'] || !$_POST['achternaam'] || !$_POST['remail']){
     $error = 'onbekende error';
   }
-  else if(!strpos($_POST['voornaam'], ' ') || !strpos($_POST['achternaam'], ' ') || !strpos($_POST['remail'], ' ')){
+  else if(strpos($_POST['voornaam'], ' ') || strpos($_POST['achternaam'], ' ') || strpos($_POST['remail'], ' ')){
     $error = 'u mag geen witte characters zetten bij voornaam,achternaam of email';
   }
   else if($_POST['rpassword'] != $_POST['repassword']){
