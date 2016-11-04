@@ -4,6 +4,7 @@
         <?php
         //make sure everything we need in here
         require_once '../main/php/head.php';
+        userManager::nietIngelogd();
 
         ?>
         <link href="css/urenregistratie.css" rel="stylesheet">
