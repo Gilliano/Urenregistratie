@@ -152,6 +152,9 @@ function allProjects() {
 }
 
 function getAllHoursSimple($params) {
+
+    $params['end'] = $params['end'] . ' ' . '23:59:59';
+
     $conn = database::connect();
     $stmt = $conn->prepare("SELECT 
       medewerker.voornaam,
@@ -161,7 +164,7 @@ function getAllHoursSimple($params) {
       uur.*
       FROM uur
       INNER JOIN project ON project.idProject = uur.idProject
-      INNER JOIN medewerker ON medewerker.idMedewerker = uur.idMedewerker WHERE uur.begintijd >=? AND uur.begintijd >=?");
+      INNER JOIN medewerker ON medewerker.idMedewerker = uur.idMedewerker WHERE (uur.begintijd BETWEEN ? AND ?)");
     $stmt->bindParam(1, $params['start']);
     $stmt->bindParam(2, $params['end']);
     $stmt->execute();

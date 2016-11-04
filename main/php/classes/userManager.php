@@ -57,7 +57,13 @@ class userManager
             header("location: ../urenregistratie");
         }
     }
-
+    public static function areYouAdmin(){
+        if (strpos($_SERVER['REQUEST_URI'], 'management') !== false){
+            if((!isset($_SESSION['rol']) ? $_SESSION['rol'] : "") == "admin"){
+                header("location: ../urenregistratie");
+            }
+        }
+    }
 
 
     public static function getNameFromID($idMedewerker)

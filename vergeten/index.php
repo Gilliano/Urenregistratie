@@ -3,7 +3,7 @@ session_start();
 require_once '../main/php/head.php';
 
 if(isset($_POST['herstellen'])){
-	$message = 'als dit email adres gebonden is aan een account in ons systeem, dan ontvangt u een email.';
+	$message = 'Een wachtwoord reset link is verzonden naar uw <strong>e-mailadres</strong>.';
    $message = userManager::Message($message,'success');
 
 	if(userManager::emailBestaatAl($_POST['remail'])){

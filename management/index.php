@@ -2,10 +2,13 @@
 <html>
 <head>
     <?php
+
+
     //make sure everything we need in here
     require_once '../main/php/head.php';
     //make sure everything we need in here
     require_once 'php/management.php';
+
 
     ?>
     <!-- Date Range picker -->
