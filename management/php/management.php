@@ -59,19 +59,21 @@ function projecten()
 function registerOtherUser() {
     if(isset($_POST['registreren'])){
         if(userManager::emailBestaatAl($_POST['remail']."@branchonline.nl") === true){
-            $error = 'de ingevoerde email adress bestaat al';
+            $error = 'De ingevoerde e-mailadres bestaat al.';
         }
         else if($_POST['rpassword'] != $_POST['repassword']){
-            $error = 'uw wachtwoorden komen niet overeen';
+            $error = 'Uw wachtwoorden komen niet overeen.';
         }
-        else if(!$_POST['voornaam'] || !$_POST['achternaam'] || !$_POST['remail']){
-            $error = 'onbekende error';
+        else if(!$_POST['voornaam'] || !$_POST['achternaam']){
+            $error = 'U bent vergeten uw voornaam en/of achternaam in te vullen.';
+        }else if(!$_POST['remail']){
+            $error = 'U bent vergeten om een e-mailadres in te vullen.';
         }
         else if(!strpos($_POST['voornaam'], ' ') || !strpos($_POST['achternaam'], ' ') || !strpos($_POST['remail'], ' ')){
-            $error = 'u mag geen witte characters zetten bij voornaam,achternaam of email';
+            $error = 'U mag geen witte characters zetten bij voornaam,achternaam of email.';
         }
-        else if(strlen($_POST['rpassword']) < 3 || strlen($_POST['repassword']) < 3){
-            $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
+        else if(strlen($_POST['rpassword']) <= 5 || strlen($_POST['repassword']) <= 5){
+            $error = 'Uw wachtwoord moet minimaal 5 tekens bevatten.';
         }
         else if($_POST['rpassword'] == $_POST['repassword']){
             userManager::registreren($_POST['voornaam'],$_POST['tussenvoegsel'],$_POST['achternaam'],$_POST['remail']."@branchonline.nl",$_POST['rpassword'],'validated');
