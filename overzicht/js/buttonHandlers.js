@@ -1,6 +1,3 @@
-/**
- * Created by JohnDoe on 1-10-2016.
- */
 // Global vars
 var cache_old_records;
 var cache_new_records;
@@ -57,7 +54,7 @@ $("#search_button").on("click", function(event){
                 regularHours += +item.urengewerkt;
         });
 
-        // TODO: Show summary
+        // Show summary
         // - Total number of inno hours
         $("#innoHours_value").html(innoHours);
         // - Total number of regular hours
@@ -127,7 +124,7 @@ $("#edit_modal_changeButton").on("click", function(event){
     var currentRecord = jQuery.grep(cache_new_records, function(element, index){ return (element.idUur == $("#edit_modal_idUur").val()); })[0];
 
     $("[id^='edit_modal_']").each(function(index, item){
-        if(!$(item).is("button") && $(item).attr('type') !== "hidden" && !$(item).is("[readonly]")){  // Ignore buttons, hidden inputs and readonly's
+        if(!$(item).is("button") && $(item).attr('type') !== "hidden"){  // Ignore buttons, hidden inputs and               !readonly's! (&& !$(item).is("[readonly]"))
             // Update local record
             var propertyName = $(item).attr('id').replace('edit_modal_', '');
             var value = $(item).val();
@@ -150,6 +147,20 @@ $("#edit_modal_changeButton").on("click", function(event){
         $(listItem_handle).addClass("validated");
     else
         $(listItem_handle).removeClass("validated");
+
+    // Update summary
+    var innoHours = 0;
+    var regularHours = 0;
+    cache_new_records.forEach(function(item){
+        if(item.innovatief === "1")
+            innoHours += +item.urengewerkt;
+        else
+            regularHours += +item.urengewerkt;
+    });
+    $("#innoHours_value").html(innoHours);
+    $("#regularHours_value").html(regularHours);
+    $("#totalHours_value").html(innoHours + regularHours);
+
     $("#edit_modal").modal('toggle');
 });
 
@@ -198,7 +209,7 @@ $("#csv_message_exportButton").on("click", function(){
 
 function createCSV(){
     $.getScript("../main/js/ajax.js", function(){
-        var exclude_list = ['idMedewerker', 'idProject', 'idUur'];
+        var exclude_list = ['idMedewerker', 'idProject', 'idUur', 'goedgekeurd', 'timestamp'];
         var records = $.extend(true, [], cache_old_records);
         var new_records = [];
         records.forEach(function(value, index){

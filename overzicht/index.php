@@ -35,11 +35,11 @@
             </div>
             <div id="recordSavedFailed" class="alert alert-danger">
                 <a href="#" class="close" aria-label="close">&times;</a>
-                <strong>Failed</strong> Sommigen records konden niet opgeslagen worden <!-- TODO: Make more detailed -->
+                <strong>Error</strong> Sommigen records konden niet opgeslagen worden <!-- TODO: Make more detailed -->
             </div>
             <div id="filtersNotSet" class="alert alert-danger">
                 <a href="#" class="close" aria-label="close">&times;</a>
-                <strong>Failed</strong> Zorg ervoor dat er bij alle filters info is ingevuld!
+                <strong>Error</strong> Zorg ervoor dat er bij alle filters info is ingevuld!
             </div>
         </header>
 
