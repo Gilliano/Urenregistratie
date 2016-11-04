@@ -212,7 +212,7 @@ function timeSplit() {
             var uren = "#urentotaal" + i;
             $(uren).val(totaal);
             var regulier = "#urenregulier" + i;
-            var ureninnovatief = innovatieveUren(totaal, $(regulier).val());
+            var ureninnovatief = innovatieveUren(totaal, $(regulier).val(), regulier);
             var innovatief = "#ureninnovatief" + i;
             $(innovatief).val(ureninnovatief);
         }
@@ -282,11 +282,14 @@ function urenBerekenen(begintijd, eindtijd) {
     }
 }
 
-function innovatieveUren(urentotaal, urenregulier) {
-    urentotaal = urentotaal.replace(",", ".");
-    urentotaal = parseFloat(urentotaal);
-    var ureninnovatief = urentotaal - urenregulier;
-    ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
-    return ureninnovatief;
-    ureninnovatief = ureninnovatief.replace(".", ",");
+function innovatieveUren(urentotaal, urenregulier, idRegulier) {
+        urentotaal = urentotaal.replace(",", ".");
+        urentotaal = parseFloat(urentotaal);
+        var regulier = Math.round(urenregulier * 2).toFixed(1);
+        urenregulier = regulier / 2;
+        $(idRegulier).val(urenregulier);
+        var ureninnovatief = urentotaal - urenregulier;
+        ureninnovatief = parseFloat(ureninnovatief.toFixed(1));
+        return ureninnovatief;
+        ureninnovatief = ureninnovatief.replace(".", ",");
 }

@@ -74,7 +74,7 @@
                             </tr>
                             <tr>
                                 <td class="description">Reguliere uren</td>
-                                <td class="field"><input type="number" onchange="urenInnovatief()" id="urenregulier" name="urenregulier" class="form-control" step="0.5" min="0" required/></td>
+                                <td class="field"><input type="number" onchange="urenInnovatief()" id="urenregulier" name="urenregulier" class="form-control" maxlength="3" step="0.5" min="0" required/></td>
                             </tr>
                             <tr>
                                 <td class="description">Innovatieve uren</td>
