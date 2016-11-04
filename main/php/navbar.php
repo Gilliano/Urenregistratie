@@ -38,7 +38,7 @@ function adminTab() {
                     <?php echo adminTab() ?>
                     <li><a href="../urenregistratie">Urenregistratie</a></li>
                     <li><a href="../overzicht">Overzicht</a></li>
-                    <li><div id="logout" data-toggle="modal" data-target="#logOut">Uitloggen</div></li>
+                    <li style="cursor: pointer;"><div id="logout" data-toggle="modal" data-target="#logOut">Uitloggen</div></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
