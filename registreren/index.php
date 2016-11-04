@@ -26,12 +26,12 @@ if(isset($_POST['registreren'])){
     $error = 'uw wachtwoord moet minimaal 3 tekens bevatten';
   }
   else if($_POST['rpassword'] == $_POST['repassword']){
-    userManager::registreren($_POST['voornaam'],$_POST['tussenvoegsel'],$_POST['achternaam'],$email,$_POST['rpassword']);
+    userManager::registreren($_POST['voornaam'],$_POST['tussenvoegsel'],$_POST['achternaam'],$email,$_POST['rpassword'],'pending');
     $voornaam = "";
     $tussenvoegsel = "";
     $achternaam = "";
     $remail = "";
-    $message = userManager::Message('uw account is succesvol aangemaakt. We hebben een email naar toe gestuurd om uw account te bevestigen','success');
+    $message = userManager::Message('uw account is succesvol aangemaakt. We hebben <strong>een email</strong> naar u toe gestuurd om uw account te bevestigen','success');
     userManager::verzendVerificatieMail($email);
   }
 

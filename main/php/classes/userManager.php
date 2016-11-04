@@ -216,7 +216,7 @@ class userManager
         }
     }
     
-    public static function registreren($voornaam, $tussenvoegsel, $achternaam, $email, $password)
+    public static function registreren($voornaam, $tussenvoegsel, $achternaam, $email, $password, $pending)
     {
         
         $conn = database::connect();
@@ -227,13 +227,14 @@ class userManager
             return false;
         }
         
-        $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord) VALUES (?,?,?,?,?)";
+        $adduser = "INSERT INTO medewerker (voornaam, tussenvoegsels, achternaam, email, wachtwoord,validated) VALUES (?,?,?,?,?,?)";
         $stmt    = $conn->prepare($adduser);
         $stmt->bindParam(1, $voornaam);
         $stmt->bindParam(2, $tussenvoegsel);
         $stmt->bindParam(3, $achternaam);
         $stmt->bindParam(4, $email);
         $stmt->bindParam(5, $encrypted_password);
+        $stmt->bindParam(6, $pending);
         $stmt->execute();
     }
     

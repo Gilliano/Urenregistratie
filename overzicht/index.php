@@ -9,7 +9,9 @@
         <!-- For PHP classes -->
         <?php require_once('../main/php/head.php'); ?>
         <!-- PHP code for overzicht page -->
-        <?php require_once('php/overzicht.php'); ?>
+        <?php require_once('php/overzicht.php');
+        userManager::nietIngelogd(); 
+        ?>
 
         <!-- Date Range picker -->
         <link rel="stylesheet" type="text/css" href="css/daterangepicker.css">
