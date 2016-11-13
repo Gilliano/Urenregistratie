@@ -17,8 +17,6 @@ function tableHoursBetweenData() {
     var start = datepickerData.startDate.format('YYYY-MM-DD');
     //get the end date
     var end = datepickerData.endDate.format('YYYY-MM-DD');
-    console.log(start);
-    console.log(end);
 
 
     //Get the new data
@@ -60,7 +58,11 @@ function tableHoursBetweenData() {
             }
 
             htmlList += "<td style='display: none;'>" + item.idUur + "</td>";
-            htmlList += "<td>" + item.voornaam + " " + item.tussenvoegsels + " " + item.achternaam +"</td>";
+            if(item.tussenvoegsels == null) {
+                htmlList += "<td>" + item.voornaam + " " + item.achternaam +"</td>";
+            } else {
+                htmlList += "<td>" + item.voornaam + " " + item.tussenvoegsels + " " + item.achternaam +"</td>";
+            }
             htmlList += "<td>" + item.projectnaam + "</td>";
             htmlList += "<td>" + item.urengewerkt + "</td>";
             htmlList += "<td>" + item.begintijd + "</td>";
